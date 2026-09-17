@@ -1,0 +1,11 @@
+JournalNevis v5.7 final review
+
+Done:
+- JournalNevis logo assets added for v5.7.
+- EA panel default moved to upper-left and slightly lower.
+- EA progress bar moved lower.
+- EA panel corner behavior normalized to upper-left or lower-left.
+- Google Sheet title no longer says MT5 in the main header.
+- Accounts, Settings, and Help sheets are visible.
+- Trades dropdown defaults prepared through Lists sheet.
+- Package assembled for a clean fresh start.
