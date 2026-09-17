@@ -13,7 +13,7 @@
 
 const JOURNALNEVIS = {
   name: 'JournalNevis',
-  version: '5.7.0',
+  version: '5.7.1',
   website: 'https://JournalNevis.ir',
   navy: '#0B1220',
   navy2: '#16243A',
@@ -101,9 +101,10 @@ const SETTINGS = {
 
 function onOpen() {
   SpreadsheetApp.getUi()
-    .createMenu('JournalNevis v5.7')
+    .createMenu('JournalNevis v5.7.1')
     .addItem('Initialize / Repair JournalNevis', 'setupJournalNevis')
     .addItem('Refresh Dashboard', 'refreshDashboard')
+    .addItem('Repair Screenshot Links', 'repairScreenshotLinks')
     .addItem('Relink Screenshots from Drive', 'relinkScreenshotsFromDrive')
     .addItem('Normalize / Resequence Trades', 'normalizeAndRefresh')
     .addSeparator()
@@ -228,7 +229,7 @@ function setupJournalNevis() {
   SpreadsheetApp.flush();
 
   SpreadsheetApp.getUi().alert(
-    'JournalNevis v5.7 setup completed.\\n\\n' +
+    'JournalNevis v5.7.1 setup completed.\\n\\n' +
     'Dashboard, Trades, account tracking and screenshot recovery are ready.\\n' +
     'For a clean installation, deploy the Web App and then run FULL SYNC once from MT5.\\n\\n' +
     'IMPORTANT: after changing Apps Script code, create a new Web App deployment version.'
@@ -561,7 +562,7 @@ function handleScreenshot_(ss, p) {
     return jsonResponse_({ ok: false, error: 'SCREENSHOT slot must be ENTRY or EXIT.' });
   }
 
-  let row = findRowByValue_(sheet, 'Trade Key', tradeKey);
+  let row = findTradeRowForScreenshot_(sheet, tradeKey, p.position_id);
   if (!row) {
     row = firstAvailableDataRow_(sheet, 'Trade Key');
     ensureRowExists_(sheet, row);
@@ -1617,10 +1618,19 @@ function applyReviewValidationsV5_(sheet) {
 function setScreenshotLink_(sheet,row,slot,url) {
   const header = slot === 'ENTRY' ? 'Entry Screenshot' : 'Exit Screenshot';
   const cell = getCellByHeader_(sheet,row,header);
-  if (!cell) return;
-  if (!url) { cell.clearContent(); return; }
+  if (!cell) return false;
+  if (!url) return false;
+
   const label = slot === 'ENTRY' ? '📷 Entry' : '📷 Exit';
-  cell.setFormula('=HYPERLINK("'+String(url).replace(/"/g,'""')+'","'+label+'")');
+
+  // Rich-text hyperlinks are locale-independent and survive native row sorting
+  // more reliably than HYPERLINK formulas.
+  const rich = SpreadsheetApp.newRichTextValue()
+    .setText(label)
+    .setLinkUrl(String(url))
+    .build();
+  cell.setRichTextValue(rich);
+  return true;
 }
 
 function screenshotExpectedNames_(row,map) {
@@ -1666,9 +1676,20 @@ function collectDriveFilesByName_(folder,out) {
 function screenshotCellHasLink_(sheet, row, header) {
   const cell = getCellByHeader_(sheet, row, header);
   if (!cell) return false;
+
+  try {
+    const rich = cell.getRichTextValue();
+    if (rich) {
+      if (rich.getLinkUrl()) return true;
+      const runs = rich.getRuns ? rich.getRuns() : [];
+      if (runs.some(r => r.getLinkUrl && r.getLinkUrl())) return true;
+    }
+  } catch (ignore) {}
+
   const formula = String(cell.getFormula() || '').trim();
-  const value = String(cell.getDisplayValue() || '').trim();
-  return Boolean(formula || value);
+  if (/^=HYPERLINK\(/i.test(formula)) return true;
+
+  return false;
 }
 
 function getExistingChildFolder_(parent, name) {
@@ -1761,11 +1782,176 @@ function relinkScreenshotsScoped_(ss, mode, fromMs) {
   return count;
 }
 
+
+function parseJournalNevisScreenshotName_(name) {
+  const clean = String(name || '').trim();
+  if (!/\.(png)$/i.test(clean)) return null;
+
+  const base = clean.replace(/\.png$/i,'');
+  const parts = base.split('_');
+  if (parts.length < 4) return null;
+
+  const prefix = String(parts[0] || '').toUpperCase();
+  if (!['JN57','JN56','TJ5'].includes(prefix)) return null;
+
+  const login = String(parts[1] || '').trim();
+  const slot = String(parts[parts.length-1] || '').toUpperCase();
+  const positionId = String(parts[parts.length-2] || '').trim();
+
+  if (!/^\d+$/.test(login) || !/^\d+$/.test(positionId)) return null;
+  if (slot !== 'ENTRY' && slot !== 'EXIT') return null;
+
+  return {prefix, login, positionId, slot};
+}
+
+function buildTradeScreenshotRowIndex_(sheet) {
+  ensureHeaders_(sheet, TRADE_HEADERS);
+  const map = headerMap_(sheet);
+  const lastRow = sheet.getLastRow();
+  const exact = {};
+  const byPosition = {};
+  if (lastRow < 2) return {map, exact, byPosition};
+
+  const rows = sheet.getRange(2,1,lastRow-1,sheet.getLastColumn()).getValues();
+  rows.forEach((r,i) => {
+    const rowNo = i + 2;
+    const login = String(r[map['Account Login']-1] || '').trim();
+    const positionId = String(r[map['Position ID']-1] || '').trim();
+    if (!positionId) return;
+
+    if (login) exact[login+'|'+positionId] = rowNo;
+    if (!byPosition[positionId]) byPosition[positionId] = [];
+    byPosition[positionId].push(rowNo);
+  });
+
+  return {map, exact, byPosition};
+}
+
+function findTradeRowForScreenshot_(sheet, tradeKey, positionId) {
+  if (tradeKey) {
+    const byKey = findRowByValue_(sheet, 'Trade Key', String(tradeKey));
+    if (byKey) return byKey;
+  }
+
+  const map = headerMap_(sheet);
+  if (!positionId || !map['Position ID'] || sheet.getLastRow() < 2) return 0;
+  const target = String(positionId).trim();
+  const vals = sheet.getRange(2,map['Position ID'],sheet.getLastRow()-1,1).getDisplayValues();
+  for (let i=0;i<vals.length;i++) {
+    if (String(vals[i][0] || '').trim() === target) return i+2;
+  }
+  return 0;
+}
+
+function collectScreenshotFilesParsed_(folder, out) {
+  const files = folder.getFiles();
+  while (files.hasNext()) {
+    const f = files.next();
+    const parsed = parseJournalNevisScreenshotName_(f.getName());
+    if (parsed) {
+      const key = parsed.login+'|'+parsed.positionId+'|'+parsed.slot;
+      // Keep the newest file if several legacy/current copies exist.
+      const prev = out[key];
+      if (!prev || f.getLastUpdated().getTime() > prev.getLastUpdated().getTime()) out[key] = f;
+    }
+  }
+  const folders = folder.getFolders();
+  while (folders.hasNext()) collectScreenshotFilesParsed_(folders.next(), out);
+}
+
+function repairScreenshotLinks() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss) throw new Error('Open the JournalNevis spreadsheet first.');
+
+  const props = PropertiesService.getScriptProperties();
+  const folderId = props.getProperty('DRIVE_FOLDER_ID');
+  if (!folderId) throw new Error('Screenshot folder is not configured. Run setupJournalNevis() first.');
+
+  const root = DriveApp.getFolderById(folderId);
+  const trades = getOrCreateSheet_(ss, SETTINGS.tradesSheet);
+  const idx = buildTradeScreenshotRowIndex_(trades);
+  const files = {};
+  collectScreenshotFilesParsed_(root, files);
+
+  let linked = 0;
+  let alreadyLinked = 0;
+  let unmatched = 0;
+
+  Object.keys(files).forEach(key => {
+    const parts = key.split('|');
+    const login = parts[0], positionId = parts[1], slot = parts[2];
+    let row = idx.exact[login+'|'+positionId] || 0;
+
+    if (!row) {
+      const candidates = idx.byPosition[positionId] || [];
+      if (candidates.length === 1) row = candidates[0];
+    }
+
+    if (!row) { unmatched++; return; }
+
+    const header = slot === 'ENTRY' ? 'Entry Screenshot' : 'Exit Screenshot';
+    if (screenshotCellHasLink_(trades,row,header)) {
+      alreadyLinked++;
+      return;
+    }
+
+    const f = files[key];
+    if (setScreenshotLink_(trades,row,slot,f.getUrl())) {
+      setByHeader_(trades,row,slot === 'ENTRY' ? 'Entry Screenshot Status' : 'Exit Screenshot Status',
+                   'Relinked from Drive by Position ID');
+      setByHeader_(trades,row,'Last Sync',new Date());
+      linked++;
+    }
+  });
+
+  SpreadsheetApp.flush();
+  SpreadsheetApp.getUi().alert(
+    'JournalNevis screenshot repair completed.\n\n' +
+    'Links restored: ' + linked + '\n' +
+    'Already linked: ' + alreadyLinked + '\n' +
+    'Unmatched image files: ' + unmatched
+  );
+
+  return {linked, alreadyLinked, unmatched};
+}
+
 function handleScreenshotReconcile_(ss, p) {
   const mode = String(p.sync_mode || 'TODAY').toUpperCase();
   const fromMs = Number(p.from_ms || 0);
-  const relinked = relinkScreenshotsScoped_(ss, mode, fromMs);
+  let relinked = relinkScreenshotsScoped_(ss, mode, fromMs);
 
+  // FULL sync gets an additional folder-independent repair pass. This handles
+  // legacy images that were uploaded into UNKNOWN or older symbol folders.
+  if (mode === 'FULL') {
+    const props = PropertiesService.getScriptProperties();
+    const folderId = props.getProperty('DRIVE_FOLDER_ID');
+    if (folderId) {
+      const root = DriveApp.getFolderById(folderId);
+      const trades = getOrCreateSheet_(ss, SETTINGS.tradesSheet);
+      const idx = buildTradeScreenshotRowIndex_(trades);
+      const files = {};
+      collectScreenshotFilesParsed_(root, files);
+      Object.keys(files).forEach(key => {
+        const parts = key.split('|');
+        const login = parts[0], positionId = parts[1], slot = parts[2];
+        let row = idx.exact[login+'|'+positionId] || 0;
+        if (!row) {
+          const candidates = idx.byPosition[positionId] || [];
+          if (candidates.length === 1) row = candidates[0];
+        }
+        if (!row) return;
+        const header = slot === 'ENTRY' ? 'Entry Screenshot' : 'Exit Screenshot';
+        if (screenshotCellHasLink_(trades,row,header)) return;
+        if (setScreenshotLink_(trades,row,slot,files[key].getUrl())) {
+          setByHeader_(trades,row,slot === 'ENTRY' ? 'Entry Screenshot Status' : 'Exit Screenshot Status',
+                       'Relinked from Drive by Position ID');
+          relinked++;
+        }
+      });
+    }
+  }
+
+  SpreadsheetApp.flush();
   return jsonResponse_({
     ok: true,
     action: 'SCREENSHOT_RECONCILE',
