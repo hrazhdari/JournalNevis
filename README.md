@@ -63,7 +63,6 @@ JournalNevis can help answer questions such as:
 
 - [Features](#features)
 - [How JournalNevis works](#how-journalnevis-works)
-- [Repository files](#repository-files)
 - [Installation](#installation)
 - [First setup](#first-setup)
 - [Using JournalNevis](#using-journalnevis)
@@ -127,28 +126,6 @@ The normal journaling workflow does **not** require a central JournalNevis trade
 
 ---
 
-## Repository files
-
-The public repository currently contains files such as:
-
-```text
-JournalNevis/
-├── README.md
-├── JournalNevis_v5_7.ex5
-├── JournalNevis_v5_7.gs
-├── JournalNevis_v5_7_Template.xlsx
-├── JournalNevis_Wordmark_Dark.svg
-├── JournalNevis_Wordmark_Light.svg
-├── JournalNevis_Icon.png
-└── JOURNALNEVIS_v5_7_FINAL_REVIEW.txt
-```
-
-> [!NOTE]
-> The project is free to use.  
-> The compiled Expert Advisor may be distributed without publishing the `.mq5` source in the current release.
-
----
-
 # Installation
 
 ## 1. Create your Google journal
@@ -181,11 +158,7 @@ Inside the Google Sheet, open:
 Extensions → Apps Script
 ```
 
-Remove the default code and paste the content of:
-
-```text
-JournalNevis_v5_7.gs
-```
+Remove the default code and paste the content of the current JournalNevis Apps Script file.
 
 Save the project.
 
@@ -222,13 +195,7 @@ The URL used by JournalNevis should end with:
 JournalNevis also uses an **API Secret** to protect requests between the Expert Advisor and the Google backend.
 
 > [!CAUTION]
-> Never publish your personal API Secret in:
->
-> - GitHub
-> - screenshots
-> - public `.set` files
-> - forum posts
-> - tutorials
+> Never publish your personal API Secret in GitHub, screenshots, public `.set` files, forum posts, or tutorials.
 
 ---
 
@@ -264,9 +231,7 @@ MQL5/Experts
 
 Restart the terminal or refresh **Navigator → Expert Advisors**.
 
-Attach JournalNevis to a dedicated chart.
-
-Enter:
+Attach JournalNevis to a dedicated chart and enter:
 
 - Web App `/exec` URL
 - API Secret
@@ -343,17 +308,15 @@ The trade can still be opened from another chart, another Expert Advisor, or ano
 
 Use **SYNC TODAY** for routine reconciliation.
 
-It is designed to work on the current trading day rather than repeatedly scanning the entire account history.
+It focuses on the current trading day rather than repeatedly scanning the entire account history.
 
 Typical use:
 
 ```text
 Trade normally
 → Live logging runs automatically
-→ Press SYNC TODAY only when you want a daily reconciliation
+→ Press SYNC TODAY when you want a daily reconciliation
 ```
-
----
 
 ## FULL SYNC
 
@@ -404,9 +367,9 @@ Version **5.7.1** addresses a specific situation discovered during testing:
 
 > Screenshots were successfully present in Google Drive, and the journal recognized that the trades had screenshots, but the screenshot links were not added to the Trades sheet.
 
-The repair improves the matching process by using multiple identifiers and by searching the Drive screenshot structure more reliably.
+The repair improves the matching process by using multiple identifiers and searching the Drive screenshot structure more reliably.
 
-### The repair can:
+It can:
 
 - match by **Trade Key**,
 - fall back to **Position ID**,
@@ -423,7 +386,7 @@ JournalNevis
 → Repair Screenshot Links
 ```
 
-A repair report can show values such as:
+A repair report can show:
 
 ```text
 Links restored: 7
@@ -431,23 +394,19 @@ Already linked: 12
 Unmatched image files: 0
 ```
 
-If the image already exists in Drive, repairing its link does not require the Expert Advisor to capture it again.
-
 ---
 
 # Dashboard
 
-The Dashboard is designed to give a quick account-level overview.
+The Dashboard is designed to provide a fast account-level overview.
 
-## Account snapshot
-
+### Account snapshot
 - Balance
 - Equity
 - Initial Capital
 - Floating P/L
 
-## Performance
-
+### Performance
 - Total Net Profit
 - Gross Profit
 - Gross Loss
@@ -457,30 +416,14 @@ The Dashboard is designed to give a quick account-level overview.
 - Win Rate
 - Total Trades
 
-## Drawdown
-
-- Balance Drawdown Absolute
-- Balance Drawdown Maximal
+### Drawdown
+- Absolute Drawdown
+- Maximal Drawdown
 - Maximum Drawdown %
 - Relative Drawdown
 - Minimum Balance
 
-## Trade statistics
-
-- Largest profit trade
-- Largest loss trade
-- Average profit trade
-- Average loss trade
-- Maximum consecutive wins
-- Maximum consecutive losses
-- Maximal consecutive profit
-- Maximal consecutive loss
-- Average consecutive wins/losses
-
-## Symbol performance
-
-For each symbol JournalNevis can show:
-
+### Symbol performance
 - Trades
 - Wins
 - Losses
@@ -493,17 +436,13 @@ For each symbol JournalNevis can show:
 - Worst Trade
 - Average Holding Time
 - Volume
-- Long trades
-- Short trades
+- Long / Short count
 
-## Charts
-
-Dashboard charts can include:
-
-- Balance curve
+### Charts
+- Balance Curve
 - Drawdown
-- Net P/L by symbol
-- Win rate by symbol
+- Net P/L by Symbol
+- Win Rate by Symbol
 - Monthly P/L
 - Wins vs Losses
 
@@ -511,62 +450,46 @@ Dashboard charts can include:
 
 # Trades sheet
 
-The Trades sheet combines automatic trade data with manual review fields.
+The Trades sheet combines automatically recorded trade information with manual review fields.
 
-Automatically recorded fields can include:
+Typical automatic fields include:
 
 - Symbol
 - Direction
 - Volume
-- Open time
-- Entry price
+- Open / Close Time
+- Entry / Exit Price
 - Stop Loss
 - Take Profit
-- Close time
-- Exit price
-- Exit reason
+- Exit Reason
 - Gross P/L
 - Commission
 - Swap
 - Fee
 - Net P/L
-- Holding time
+- Holding Time
 - Source
-- Entry screenshot
-- Exit screenshot
+- Entry Screenshot
+- Exit Screenshot
 - Status
 
 ---
 
 # Manual review fields
 
-Automation records **what happened**.
-
+Automation records **what happened**.  
 A good journal also records **why it happened**.
-
-JournalNevis therefore keeps manual review fields such as:
 
 | Field | Example |
 |---|---|
 | **Setup** | Pullback |
-| **Entry Reason** | Retest of support after breakout |
+| **Entry Reason** | Retest after breakout |
 | **Emotion** | Calm |
 | **Mistake** | Early Entry |
-| **Notes** | Entered before candle confirmation |
-| **Review Status** | Pending Review |
+| **Notes** | Entered before confirmation |
+| **Review Status** | Reviewed |
 
 Several fields include dropdown choices to make reviews faster and more consistent.
-
-Example:
-
-```text
-Setup: Pullback
-Emotion: FOMO
-Mistake: Early Entry
-Review Status: Reviewed
-```
-
-Over time, this information can help you identify behavioral patterns that pure P/L statistics do not show.
 
 ---
 
@@ -589,7 +512,7 @@ JournalNevis is currently provided **free of charge**.
 
 The project is being developed iteratively based on real usage and testing.
 
-The current public release can include compiled components without requiring the full source code of every component to be published.
+The public release can include compiled components without requiring the full source code of every component to be published.
 
 ---
 
@@ -631,138 +554,162 @@ It does not provide investment advice, trading signals, profit guarantees, or pr
 
 <a id="persian"></a>
 
-# فارسی
+<div dir="rtl" align="right">
 
-## معرفی JournalNevis
+<h1>فارسی</h1>
 
-**JournalNevis** یک پروژه رایگان برای **ژورنال‌نویسی خودکار معاملات** است.
+<h2>معرفی JournalNevis</h2>
 
-هدف پروژه این است که کارهای تکراری ثبت معامله کمتر شود و معامله‌گر بتواند زمان بیشتری را صرف **مرور معاملات، بررسی Setupها، شناخت اشتباهات و تحلیل عملکرد** کند.
+<p>
+<strong>JournalNevis</strong> یک پروژه رایگان برای <strong>ژورنال‌نویسی خودکار معاملات</strong> است.
+هدف پروژه این است که کارهای تکراری ثبت معامله کمتر شود و معامله‌گر بتواند زمان بیشتری را صرف مرور معاملات، بررسی روش‌های ورود، شناخت اشتباهات و تحلیل عملکرد کند.
+</p>
 
-در نسخه فعلی، JournalNevis اطلاعات معاملات را از ابزار سمت پلتفرم معاملاتی دریافت می‌کند، از طریق Google Apps Script به Google Sheets می‌فرستد و Screenshotهای ورود و خروج را در Google Drive ذخیره می‌کند.
+<p>
+در نسخه فعلی، اطلاعات معاملات از ابزار سمت پلتفرم معاملاتی دریافت می‌شود، از طریق <code>Google Apps Script</code> به <code>Google Sheets</code> فرستاده می‌شود و تصاویر ورود و خروج در <code>Google Drive</code> ذخیره می‌شوند.
+</p>
 
-به زبان ساده:
+<blockquote>
+<strong>کمتر اطلاعات را دستی وارد کن؛ بیشتر معاملاتت را بررسی کن.</strong>
+</blockquote>
 
-> **کمتر اطلاعات را دستی وارد کن؛ بیشتر معاملاتت را بررسی کن.**
+<p>
+<strong>نکته مهم:</strong> JournalNevis یک ابزار ژورنال و تحلیل است و خودش هیچ معامله‌ای را باز، بسته یا ویرایش نمی‌کند.
+</p>
 
-> [!IMPORTANT]
-> JournalNevis یک **ابزار ژورنال و تحلیل** است و خودش معامله‌ای را باز، بسته یا ویرایش نمی‌کند.
+<hr>
 
----
+<h2>قابلیت‌های اصلی</h2>
 
-## قابلیت‌های اصلی
+<ul>
+<li>ثبت خودکار معاملات زنده و تاریخچه حساب</li>
+<li>ذخیره تصویر ورود با عنوان <code>Entry Screenshot</code></li>
+<li>ذخیره تصویر خروج با عنوان <code>Exit Screenshot</code></li>
+<li>ذخیره تصاویر در <code>Google Drive</code> خود کاربر</li>
+<li>ثبت اطلاعات معاملات در <code>Google Sheets</code></li>
+<li>داشبورد عملکرد، افت سرمایه و آمار هر نماد</li>
+<li>ثبت و بررسی واریز، برداشت و رویدادهای مالی حساب</li>
+<li>بازیابی تصاویر قدیمی و برگرداندن لینک‌های از دست‌رفته</li>
+<li>همگام‌سازی روزانه با <code>SYNC TODAY</code></li>
+<li>بازسازی کامل با <code>FULL SYNC</code></li>
+<li>ثبت دستی روش ورود، دلیل ورود، احساس، اشتباه، یادداشت و وضعیت بررسی</li>
+</ul>
 
-| قابلیت | توضیح |
-|---|---|
-| **ثبت خودکار معاملات** | معاملات Live و History را ثبت و بازیابی می‌کند. |
-| **Entry Screenshot** | هنگام ورود تصویر چارت را ذخیره می‌کند. |
-| **Exit Screenshot** | هنگام خروج تصویر چارت را ذخیره می‌کند. |
-| **Google Drive** | تصاویر در Drive خود کاربر ذخیره می‌شوند. |
-| **Google Sheets** | اطلاعات معاملات در Journal ثبت می‌شوند. |
-| **Dashboard** | آمار عملکرد، Drawdown، Symbolها و نمودارها را نمایش می‌دهد. |
-| **Symbol Performance** | عملکرد هر نماد را جداگانه بررسی می‌کند. |
-| **Funding Tracking** | Deposit، Withdrawal و بعضی رویدادهای حساب را ثبت می‌کند. |
-| **Screenshot Recovery** | عکس‌های قبلی را دوباره پیدا و Link می‌کند. |
-| **SYNC TODAY** | فعالیت امروز را بررسی می‌کند. |
-| **FULL SYNC** | کل History را بررسی و بازسازی می‌کند. |
-| **Manual Review** | Setup، Emotion، Mistake، Notes و موارد دیگر را خودت ثبت می‌کنی. |
+<hr>
 
----
+<h2>ساختار کلی JournalNevis</h2>
 
-# آموزش نصب
-
-## مرحله ۱ — Google Sheet
-
-فایل:
+</div>
 
 ```text
-JournalNevis_v5_7_Template.xlsx
+حساب معاملاتی
+      │
+      ▼
+JournalNevis Expert
+      │
+      ▼
+Google Apps Script
+      │
+      ├──────────────► Google Sheets
+      │                 Trades / Dashboard / Accounts
+      │
+      └──────────────► Google Drive
+                        Entry / Exit Screenshots
 ```
 
-را داخل Google Drive آپلود کن و با Google Sheets باز کن.
+<div dir="rtl" align="right">
 
-Sheetهای اصلی:
+<h2>آموزش نصب</h2>
 
-- Dashboard
-- Trades
-- Accounts
-- Settings
-- Help
+<h3>مرحله ۱ — ساخت Google Sheet</h3>
 
----
+<p>
+فایل <code>JournalNevis_v5_7_Template.xlsx</code> را داخل <code>Google Drive</code> آپلود کن و با <code>Google Sheets</code> باز کن.
+</p>
 
-## مرحله ۲ — Apps Script
+<p>برگه‌های اصلی برای استفاده روزمره:</p>
 
-از داخل Google Sheet برو به:
+<ul>
+<li><code>Dashboard</code></li>
+<li><code>Trades</code></li>
+<li><code>Accounts</code></li>
+<li><code>Settings</code></li>
+<li><code>Help</code></li>
+</ul>
+
+<h3>مرحله ۲ — نصب Google Apps Script</h3>
+
+<p>داخل Google Sheet از مسیر زیر وارد شو:</p>
+
+</div>
 
 ```text
 Extensions → Apps Script
 ```
 
-کد JournalNevis را Paste و Save کن.
+<div dir="rtl" align="right">
 
-بعد یک بار اجرا کن:
+<p>
+کد JournalNevis را جای‌گذاری و ذخیره کن. سپس یک بار تابع زیر را اجرا کن:
+</p>
+
+</div>
 
 ```javascript
 setupJournalNevis()
 ```
 
----
+<div dir="rtl" align="right">
 
-## مرحله ۳ — Web App
+<p>
+در اولین اجرا ممکن است Google برای دسترسی‌های موردنیاز درخواست تأیید نمایش دهد.
+</p>
 
-در Apps Script:
+<h3>مرحله ۳ — ساخت Web App</h3>
+
+<p>در محیط Apps Script از مسیر زیر استفاده کن:</p>
+
+</div>
 
 ```text
 Deploy → New deployment → Web app
 ```
 
-Web App را Deploy کن و URL نهایی `/exec` را بردار.
+<div dir="rtl" align="right">
 
-همین URL در JournalNevis استفاده می‌شود.
+<p>
+پس از انتشار، آدرسی دریافت می‌کنی که برای JournalNevis باید به <code>/exec</code> ختم شود.
+</p>
 
----
+<h3>مرحله ۴ — API Secret</h3>
 
-## مرحله ۴ — API Secret
+<p>
+برای ارتباط بین Expert و Google Backend از یک <code>API Secret</code> استفاده می‌شود.
+</p>
 
-API Secret را از تنظیمات JournalNevis بردار و داخل Expert وارد کن.
+<p>
+<strong>هشدار:</strong> مقدار شخصی <code>API Secret</code> را داخل GitHub، تصویر عمومی، فایل تنظیمات عمومی یا آموزش منتشر نکن.
+</p>
 
-> [!CAUTION]
-> API Secret شخصی را داخل GitHub، Screenshot یا فایل عمومی منتشر نکن.
+<h3>مرحله ۵ — نصب Expert</h3>
 
----
+<p>
+فایل <code>JournalNevis_v5_7.ex5</code> را داخل پوشه Expert Advisors قرار بده.
+در ادغام فعلی MT5 مسیر معمول به شکل <code>MQL5/Experts</code> است.
+</p>
 
-## مرحله ۵ — نصب Expert
+<p>
+JournalNevis را روی یک چارت اختصاصی اجرا کن و آدرس Web App و API Secret را وارد کن.
+برای Journal اصلی حساب از نقش <code>MASTER</code> استفاده کن.
+</p>
 
-فایل:
+<hr>
 
-```text
-JournalNevis_v5_7.ex5
-```
+<h2>اولین راه‌اندازی</h2>
 
-را در پوشه Expert Advisors قرار بده.
+<p>اگر از صفر شروع می‌کنی، بعد از نصب اولیه یک بار <code>FULL SYNC</code> اجرا کن.</p>
 
-برای ادغام فعلی MT5:
-
-```text
-MQL5/Experts
-```
-
-JournalNevis را روی یک چارت اختصاصی اجرا کن و URL و API Secret را وارد کن.
-
----
-
-# اولین راه‌اندازی
-
-اگر از صفر شروع می‌کنی، بعد از نصب اولیه یک بار:
-
-```text
-FULL SYNC
-```
-
-اجرا کن.
-
-مراحل:
+</div>
 
 ```text
 Stage 1/4  Account / Funding
@@ -771,51 +718,61 @@ Stage 3/4  Screenshots
 Stage 4/4  Dashboard / Finalize
 ```
 
-بعد از آن برای کار روزانه معمولاً `SYNC TODAY` کافی است.
+<div dir="rtl" align="right">
 
----
+<p>
+بعد از بازسازی اولیه، برای استفاده روزمره معمولاً نیازی به اجرای دوباره <code>FULL SYNC</code> نیست.
+</p>
 
-# تفاوت SYNC TODAY و FULL SYNC
+<hr>
 
-## SYNC TODAY
+<h2>تفاوت SYNC TODAY و FULL SYNC</h2>
 
-برای استفاده عادی روزانه است و روی فعالیت امروز تمرکز می‌کند.
+<h3>SYNC TODAY</h3>
 
-## FULL SYNC
+<p>
+گزینه <code>SYNC TODAY</code> برای بررسی روزانه طراحی شده و روی فعالیت همان روز تمرکز می‌کند، بنابراین لازم نیست هر بار کل تاریخچه حساب دوباره بررسی شود.
+</p>
 
-برای موارد زیر است:
+<h3>FULL SYNC</h3>
 
-- نصب اولیه
-- Sheet جدید
-- بازسازی History
-- بازیابی Screenshot
-- Audit کامل حساب
+<p>از <code>FULL SYNC</code> در این موارد استفاده کن:</p>
 
-لازم نیست بعد از هر معامله FULL SYNC بزنی.
+<ul>
+<li>نصب اولیه</li>
+<li>ساخت Sheet جدید</li>
+<li>بازسازی اطلاعات حذف‌شده</li>
+<li>بازیابی تاریخچه قدیمی</li>
+<li>بازیابی تصاویر و لینک‌های قدیمی</li>
+<li>بررسی کامل حساب</li>
+</ul>
 
----
+<p>
+<strong>نکته:</strong> لازم نیست بعد از هر معامله <code>FULL SYNC</code> اجرا شود.
+</p>
 
-# Screenshot و بازیابی
+<hr>
 
-JournalNevis می‌تواند:
+<h2>تصاویر معاملات و بازیابی آنها</h2>
 
-```text
-Entry Screenshot
-Exit Screenshot
-```
+<p>JournalNevis می‌تواند برای هر معامله تصویر ورود و خروج را ذخیره کند.</p>
 
-را ذخیره کند.
-
-مسیر کلی:
+</div>
 
 ```text
 Chart
 → Local Screenshot
 → Google Drive
-→ Link داخل Trades
+→ Link inside Trades
 ```
 
-نسخه‌های جدید می‌توانند فایل‌هایی با Prefixهای زیر را شناسایی کنند:
+<div dir="rtl" align="right">
+
+<p>
+نسخه‌های جدید می‌توانند فایل‌های تصاویر قدیمی را نیز شناسایی کنند. Prefixهای پشتیبانی‌شده شامل موارد زیر هستند:
+</p>
+
+</div>
 
 ```text
 JN57_
@@ -823,127 +780,169 @@ JN56_
 TJ5_
 ```
 
----
+<div dir="rtl" align="right">
 
-# اصلاح مهم v5.7.1
+<h2>اصلاح مهم نسخه 5.7.1</h2>
 
-در تست واقعی یک مشکل مشخص شد:
+<p>
+در تست واقعی حالتی مشاهده شد که تصاویر با موفقیت داخل <code>Google Drive</code> قرار گرفته بودند، اما لینک آنها داخل ستون‌های <code>Entry Screenshot</code> و <code>Exit Screenshot</code> نوشته نمی‌شد.
+</p>
 
-**عکس‌ها داخل Google Drive بودند، اما Link آنها داخل Entry Screenshot یا Exit Screenshot قرار نمی‌گرفت.**
+<p>در نسخه <code>5.7.1</code> بخش بازیابی لینک تقویت شده است و می‌تواند:</p>
 
-در v5.7.1 این بخش اصلاح شد.
+<ul>
+<li>معامله را با <code>Trade Key</code> پیدا کند</li>
+<li>در صورت نیاز از <code>Position ID</code> استفاده کند</li>
+<li>پوشه‌های زیرمجموعه Drive را بررسی کند</li>
+<li>پوشه‌های <code>UNKNOWN</code> را نیز جست‌وجو کند</li>
+<li>فایل‌های <code>JN57_</code>، <code>JN56_</code> و <code>TJ5_</code> را تشخیص دهد</li>
+<li>لینک‌های سالم قبلی را حفظ کند</li>
+<li>بدون Upload مجدد تصویر، لینک فایل موجود در Drive را برگرداند</li>
+</ul>
 
-Repair جدید می‌تواند:
+<p>برای تعمیر لینک‌ها از منوی JournalNevis گزینه زیر را اجرا کن:</p>
 
-- Trade Key را بررسی کند،
-- در صورت نیاز Position ID را استفاده کند،
-- Folderهای زیرمجموعه را بگردد،
-- Folderهای `UNKNOWN` را هم بررسی کند،
-- فایل‌های `JN57_`، `JN56_` و `TJ5_` را شناسایی کند،
-- Link سالم قبلی را تغییر ندهد،
-- بدون Upload مجدد عکس، Link را برگرداند.
-
-از منوی JournalNevis اجرا کن:
+</div>
 
 ```text
 Repair Screenshot Links
 ```
 
----
+<div dir="rtl" align="right">
 
-# Dashboard
+<h2>Dashboard</h2>
 
-Dashboard می‌تواند اطلاعاتی مثل این را نمایش دهد:
+<p>Dashboard برای نمایش سریع وضعیت حساب و عملکرد معاملاتی طراحی شده است.</p>
 
-- Balance
-- Equity
-- Initial Capital
-- Floating P/L
-- Net Profit
-- Gross Profit
-- Gross Loss
-- Win Rate
-- Profit Factor
-- Expected Payoff
-- Recovery Factor
-- Drawdown
-- Largest Win
-- Largest Loss
-- Consecutive Wins/Losses
-- Symbol Performance
+<h3>اطلاعات حساب</h3>
 
-نمودارها نیز می‌توانند شامل:
+<ul>
+<li><code>Balance</code></li>
+<li><code>Equity</code></li>
+<li><code>Initial Capital</code></li>
+<li><code>Floating P/L</code></li>
+</ul>
 
-- Balance Curve
-- Drawdown
-- Net P/L by Symbol
-- Win Rate by Symbol
-- Monthly P/L
-- Wins vs Losses
+<h3>عملکرد</h3>
 
-باشند.
+<ul>
+<li><code>Net Profit</code></li>
+<li><code>Gross Profit</code></li>
+<li><code>Gross Loss</code></li>
+<li><code>Win Rate</code></li>
+<li><code>Profit Factor</code></li>
+<li><code>Expected Payoff</code></li>
+<li><code>Recovery Factor</code></li>
+</ul>
 
----
+<h3>افت سرمایه</h3>
 
-# بخش دستی Review
+<ul>
+<li>افت سرمایه مطلق</li>
+<li>بیشترین افت سرمایه</li>
+<li>درصد بیشترین افت سرمایه</li>
+<li>حداقل Balance</li>
+</ul>
 
-ثبت خودکار فقط می‌گوید **چه اتفاقی افتاده**.
+<h3>عملکرد هر Symbol</h3>
 
-اما برای یک Journal خوب باید **دلیل و رفتار معامله‌گر** هم ثبت شود.
+<ul>
+<li>تعداد معاملات</li>
+<li>تعداد برد و باخت</li>
+<li><code>Win Rate</code></li>
+<li><code>Net P/L</code></li>
+<li><code>Profit Factor</code></li>
+<li><code>Commission</code></li>
+<li>بهترین و بدترین معامله</li>
+<li>میانگین زمان نگهداری</li>
+<li>حجم معاملات</li>
+<li>تعداد معاملات Long و Short</li>
+</ul>
 
-فیلدهای دستی:
+<hr>
 
-| فیلد | مثال |
-|---|---|
-| Setup | Pullback |
-| Entry Reason | Retest after breakout |
-| Emotion | FOMO |
-| Mistake | Early Entry |
-| Notes | Entered before confirmation |
-| Review Status | Reviewed |
+<h2>Trades Sheet</h2>
 
-این داده‌ها می‌توانند در آینده برای پیدا کردن الگوهای رفتاری بسیار مفید باشند.
+<p>
+اطلاعاتی مانند Symbol، جهت، حجم، زمان ورود و خروج، قیمت‌ها، Stop Loss، Take Profit، سود و زیان، Commission، مدت معامله و لینک تصاویر می‌توانند به صورت خودکار ثبت شوند.
+</p>
 
----
+<hr>
 
-# حریم خصوصی
+<h2>بخش دستی Review</h2>
 
-در معماری فعلی:
+<p>
+ثبت خودکار نشان می‌دهد <strong>چه اتفاقی افتاده است</strong>؛ اما یک Journal خوب باید به بررسی <strong>دلیل تصمیم</strong> هم کمک کند.
+</p>
 
-- Apps Script را خودت Deploy می‌کنی،
-- Sheet متعلق به خودت است،
-- Screenshotها در Google Drive خودت قرار می‌گیرند،
-- API Secret تحت کنترل خودت است.
+<table>
+<tr><th>فیلد</th><th>مثال</th></tr>
+<tr><td>Setup</td><td><code>Pullback</code></td></tr>
+<tr><td>Entry Reason</td><td>ورود پس از Retest</td></tr>
+<tr><td>Emotion</td><td><code>FOMO</code></td></tr>
+<tr><td>Mistake</td><td><code>Early Entry</code></td></tr>
+<tr><td>Notes</td><td>ورود قبل از تأیید کندل</td></tr>
+<tr><td>Review Status</td><td><code>Reviewed</code></td></tr>
+</table>
 
-برای این Workflow نیازی نیست History معاملاتت داخل دیتابیس مرکزی JournalNevis ذخیره شود.
+<p>
+بعضی از این فیلدها Dropdown دارند تا ثبت اطلاعات سریع‌تر و یکدست‌تر باشد.
+</p>
 
----
+<hr>
 
-# رایگان
+<h2>حریم خصوصی</h2>
 
-JournalNevis فعلاً رایگان منتشر می‌شود.
+<ul>
+<li>Apps Script را خودت Deploy می‌کنی</li>
+<li>Google Sheet متعلق به خودت است</li>
+<li>تصاویر داخل Google Drive خودت قرار می‌گیرند</li>
+<li>API Secret تحت کنترل خودت است</li>
+</ul>
 
-ممکن است در آینده یک بخش حمایت داوطلبانه برای کمک به توسعه، مستندسازی و هزینه‌های پروژه اضافه شود.
+<p>
+در Workflow فعلی نیازی نیست تاریخچه معاملات داخل یک دیتابیس مرکزی JournalNevis ذخیره شود.
+</p>
 
----
+<hr>
 
-# Roadmap
+<h2>وضعیت پروژه</h2>
 
-مواردی که ممکن است در آینده بررسی شوند:
+<p>
+JournalNevis فعلاً <strong>رایگان</strong> منتشر می‌شود و مرحله‌به‌مرحله بر اساس تست واقعی و استفاده عملی توسعه پیدا می‌کند.
+</p>
 
-- نصب آسان‌تر
-- آموزش بهتر
-- Analytics بیشتر
-- Behavioral Analytics
-- Update ساده‌تر
-- سایت JournalNevis.ir
-- پشتیبانی از نسخه‌ها یا پلتفرم‌های معاملاتی دیگر
+<hr>
 
----
+<h2>Roadmap</h2>
 
-# سلب مسئولیت
+<ul>
+<li>نصب آسان‌تر</li>
+<li>آموزش بهتر</li>
+<li>تحلیل رفتاری بیشتر</li>
+<li>گزارش‌ها و نمودارهای بیشتر</li>
+<li>فرآیند Update ساده‌تر</li>
+<li>سایت <code>JournalNevis.ir</code></li>
+<li>بررسی پشتیبانی از نسخه‌ها یا پلتفرم‌های معاملاتی دیگر</li>
+</ul>
 
-JournalNevis یک ابزار ثبت و تحلیل معاملات است و توصیه سرمایه‌گذاری یا سیگنال معاملاتی ارائه نمی‌کند.
+<hr>
+
+<h2>حمایت از پروژه</h2>
+
+<p>
+JournalNevis رایگان است. در آینده ممکن است امکان حمایت داوطلبانه برای کمک به توسعه، تست، مستندسازی و هزینه‌های پروژه اضافه شود.
+</p>
+
+<hr>
+
+<h2>سلب مسئولیت</h2>
+
+<p>
+JournalNevis یک ابزار ثبت و تحلیل معاملات است و توصیه سرمایه‌گذاری، سیگنال معاملاتی یا تضمین سود ارائه نمی‌کند.
+</p>
+
+</div>
 
 ---
 
