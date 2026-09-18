@@ -14,7 +14,7 @@
 
 <br>
 
-![Version](https://img.shields.io/badge/version-v5.7.1-2DE0B6?style=for-the-badge&labelColor=0B1220)
+![Version](https://img.shields.io/badge/version-v5.8-2DE0B6?style=for-the-badge&labelColor=0B1220)
 ![Project](https://img.shields.io/badge/project-free-16A34A?style=for-the-badge&labelColor=0B1220)
 ![Current Integration](https://img.shields.io/badge/current_integration-MetaTrader_5-2563EB?style=for-the-badge&labelColor=0B1220)
 ![Backend](https://img.shields.io/badge/backend-Google_Apps_Script-F4B400?style=for-the-badge&labelColor=0B1220)
@@ -37,7 +37,9 @@
 
 **JournalNevis** is a free automated trading-journal project built to reduce the manual work involved in recording and reviewing trades.
 
-The current release connects a journal Expert Advisor to a Google Apps Script backend. Trade data is stored in Google Sheets, while entry and exit screenshots are stored in Google Drive and linked back to the corresponding trade.
+Version **5.8** adds proper **multi-account dashboard management**. Multiple trading accounts can write into the same Google Sheet, while the Dashboard calculates and displays **one selected account at a time**.
+
+The current release connects a JournalNevis Expert Advisor to a Google Apps Script backend. Trade data is stored in Google Sheets, while entry and exit screenshots are stored in Google Drive and linked back to the corresponding trade.
 
 The goal is simple:
 
@@ -68,7 +70,7 @@ JournalNevis can help answer questions such as:
 - [Using JournalNevis](#using-journalnevis)
 - [SYNC TODAY vs FULL SYNC](#sync-today-vs-full-sync)
 - [Screenshots and recovery](#screenshots-and-recovery)
-- [v5.7.1 screenshot-link repair](#v571-screenshot-link-repair)
+- [v5.8 screenshot-link repair](#v571-screenshot-link-repair)
 - [Dashboard](#dashboard)
 - [Trades sheet](#trades-sheet)
 - [Manual review fields](#manual-review-fields)
@@ -79,11 +81,67 @@ JournalNevis can help answer questions such as:
 
 ---
 
+## What's new in v5.8
+
+### Multi-account Dashboard
+
+The Dashboard now has an **ACCOUNT VIEW** selector. When you choose an account, JournalNevis recalculates the Dashboard only for that account.
+
+The selected account controls:
+
+- Balance and Equity
+- Initial Capital
+- Net P/L
+- Win Rate
+- Profit Factor
+- Drawdown
+- Commission
+- Winning and losing streaks
+- Symbol Performance
+- Monthly P/L
+- Dashboard charts
+
+Data from other connected accounts is not mixed into the selected account's Dashboard.
+
+### Shared Trades sheet
+
+All connected accounts continue to use the same **Trades** sheet. Account Login, Server and trade identifiers keep trades from different accounts separated.
+
+### Account-scoped cash flow
+
+Deposits, withdrawals, Initial Capital, Running Cash Flow and balance-curve calculations are separated by account.
+
+### Account removal
+
+An account can be removed from the spreadsheet through:
+
+```text
+JournalNevis v5.8
+→ Advanced
+→ Delete Selected Account Data...
+```
+
+Google Drive screenshots are intentionally **not** deleted by this command.
+
+### Better CPU portability
+
+For a public `.ex5` intended to run on different x64 computers, compile `JournalNevis_v5_8.mq5` using:
+
+```text
+X64 Regular
+```
+
+This avoids requiring AVX2 on older compatible x64 systems.
+
+---
+
 ## Features
 
 | Feature | What it does |
 |---|---|
 | **Automatic trade logging** | Records live transactions and can rebuild trade history from the account. |
+| **Multi-account journal** | Multiple accounts can write to one spreadsheet. |
+| **Account-selected Dashboard** | Dashboard statistics are scoped to one selected account at a time. |
 | **Entry screenshots** | Captures the chart around trade entry. |
 | **Exit screenshots** | Captures the chart around trade exit. |
 | **Google Drive storage** | Stores trade screenshots in the user's own Drive. |
@@ -102,27 +160,49 @@ JournalNevis can help answer questions such as:
 ## How JournalNevis works
 
 ```text
-        Trading account
-              │
-              ▼
-      JournalNevis Expert
-              │
-              │ HTTPS
-              ▼
-      Google Apps Script
-         Web App backend
-          │           │
-          │           │
-          ▼           ▼
-  Google Sheets   Google Drive
-  Trades          Entry images
-  Dashboard       Exit images
-  Accounts
+      Trading Account A ── JournalNevis ──┐
+                                          │
+      Trading Account B ── JournalNevis ──┼──► Google Apps Script
+                                          │            │
+      Trading Account C ── JournalNevis ──┘            │
+                                                       ├──► Google Sheets
+                                                       │    Trades
+                                                       │    Dashboard
+                                                       │    Accounts
+                                                       │
+                                                       └──► Google Drive
+                                                            Entry / Exit images
 ```
 
 The repository and future JournalNevis website are used for distribution and documentation.
 
 The normal journaling workflow does **not** require a central JournalNevis trade database.
+
+---
+
+# Multi-account design
+
+## Dashboard
+
+The Dashboard displays **one account at a time**.
+
+The selector uses an account key based on:
+
+```text
+Account Login | Server
+```
+
+Changing the account in **ACCOUNT VIEW** refreshes the Dashboard for that account only.
+
+A newly connected account is added to the selector without forcing a switch away from the account you are already viewing.
+
+## Trades
+
+All accounts share the same **Trades** sheet. JournalNevis keeps them separate internally using Account Login, Server, Position ID and Trade Key information.
+
+## Accounts
+
+The **Accounts** sheet stores the latest snapshot for each connected account, including items such as Balance, Equity, Currency, Floating P/L, Margin and Last Updated.
 
 ---
 
@@ -133,7 +213,7 @@ The normal journaling workflow does **not** require a central JournalNevis trade
 Upload:
 
 ```text
-JournalNevis_v5_7_Template.xlsx
+JournalNevis_v5_8_Template.xlsx
 ```
 
 to Google Drive and open it using **Google Sheets**.
@@ -218,7 +298,7 @@ Enable WebRequest and add the required Google Apps Script address/domain.
 Copy:
 
 ```text
-JournalNevis_v5_7.ex5
+JournalNevis_v5_8.ex5
 ```
 
 to the appropriate Expert Advisors folder.
@@ -252,7 +332,8 @@ For a completely new journal:
 5. Add the WebRequest address in the trading terminal.
 6. Attach JournalNevis.
 7. Confirm the connection.
-8. Run **FULL SYNC** once.
+8. Run **FULL SYNC** once for the currently connected account.
+9. Repeat the initial FULL SYNC from each additional account you want to add.
 
 The sync is processed in four stages:
 
@@ -320,7 +401,7 @@ Trade normally
 
 ## FULL SYNC
 
-Use **FULL SYNC** when you intentionally want a complete rebuild or audit.
+Use **FULL SYNC** when you intentionally want a complete rebuild or audit for the account currently connected to that MetaTrader terminal.
 
 Recommended situations:
 
@@ -352,6 +433,7 @@ The local cache is useful if the cloud journal is rebuilt later.
 Supported screenshot generations currently include names beginning with:
 
 ```text
+JN58_
 JN57_
 JN56_
 TJ5_
@@ -361,7 +443,7 @@ This allows newer releases to recover images created by older versions.
 
 ---
 
-# v5.7.1 screenshot-link repair
+# Screenshot-link repair carried into v5.8
 
 Version **5.7.1** addresses a specific situation discovered during testing:
 
@@ -379,7 +461,7 @@ It can:
 - preserve already-correct links,
 - restore missing Entry/Exit links without re-uploading images that already exist.
 
-After installing the v5.7.1 Apps Script, use:
+After installing the v5.8 Apps Script, use:
 
 ```text
 JournalNevis
@@ -493,6 +575,63 @@ Several fields include dropdown choices to make reviews faster and more consiste
 
 ---
 
+# Removing an account
+
+First select the account in the Dashboard **ACCOUNT VIEW** dropdown.
+
+Then use:
+
+```text
+JournalNevis v5.8
+→ Advanced
+→ Delete Selected Account Data...
+```
+
+After confirmation, JournalNevis removes that account from:
+
+- Trades
+- Executions
+- Cash Flow
+- Accounts
+- Equity History
+
+> [!IMPORTANT]
+> Google Drive screenshots are **not deleted**.
+
+---
+
+# CPU compatibility / X64 Regular
+
+If MetaTrader reports:
+
+```text
+your CPU architecture does not allow to run the file:
+AVX2 required, you have AVX only
+
+loading failed [568]
+```
+
+the `.ex5` was compiled for a CPU architecture that is not supported by that computer.
+
+For a portable public build:
+
+```text
+MetaEditor
+→ CPU architecture
+→ X64 Regular
+→ Compile
+```
+
+Verify that the build log reports:
+
+```text
+0 errors, 0 warnings
+```
+
+An EX5 already compiled for AVX2 cannot be made compatible with an AVX-only CPU by changing an EA input. It must be recompiled from the source using a compatible target.
+
+---
+
 # Privacy
 
 In the current architecture:
@@ -522,6 +661,8 @@ Ideas being considered include:
 
 - easier installation,
 - improved onboarding,
+- account aliases,
+- portfolio-level multi-account views,
 - more behavioral analytics,
 - more dashboard reports,
 - easier update workflow,
@@ -566,7 +707,11 @@ It does not provide investment advice, trading signals, profit guarantees, or pr
 </p>
 
 <p>
-در نسخه فعلی، اطلاعات معاملات از ابزار سمت پلتفرم معاملاتی دریافت می‌شود، از طریق <code>Google Apps Script</code> به <code>Google Sheets</code> فرستاده می‌شود و تصاویر ورود و خروج در <code>Google Drive</code> ذخیره می‌شوند.
+در نسخه <code>5.8</code>، پشتیبانی واقعی از چند حساب به Dashboard اضافه شده است. چند حساب می‌توانند اطلاعات خود را در یک Google Sheet مشترک نگهداری کنند، اما Dashboard در هر لحظه فقط اطلاعات <strong>یک حساب انتخاب‌شده</strong> را محاسبه و نمایش می‌دهد.
+</p>
+
+<p>
+اطلاعات معاملات از ابزار سمت پلتفرم معاملاتی دریافت می‌شود، از طریق <code>Google Apps Script</code> به <code>Google Sheets</code> فرستاده می‌شود و تصاویر ورود و خروج در <code>Google Drive</code> ذخیره می‌شوند.
 </p>
 
 <blockquote>
@@ -579,10 +724,58 @@ It does not provide investment advice, trading signals, profit guarantees, or pr
 
 <hr>
 
+<h2>تغییرات اصلی نسخه 5.8</h2>
+
+<h3>Dashboard چندحسابی</h3>
+
+<p>
+در بالای Dashboard بخش <code>ACCOUNT VIEW</code> اضافه شده است. با انتخاب هر Account، تمام محاسبات Dashboard فقط برای همان حساب انجام می‌شوند.
+</p>
+
+<ul>
+<li>Balance و Equity</li>
+<li>Initial Capital</li>
+<li>Net P/L</li>
+<li>Win Rate</li>
+<li>Profit Factor</li>
+<li>Drawdown</li>
+<li>Commission</li>
+<li>Streakها</li>
+<li>Symbol Performance</li>
+<li>Monthly P/L</li>
+<li>نمودارهای Dashboard</li>
+</ul>
+
+<p>
+اطلاعات Accountهای دیگر با Dashboard حساب انتخاب‌شده ترکیب نمی‌شوند.
+</p>
+
+<h3>Cash Flow مستقل برای هر Account</h3>
+
+<p>
+Deposit، Withdrawal، Initial Capital، Running Cash Flow و Balance Curve برای هر Account جداگانه محاسبه می‌شوند.
+</p>
+
+<h3>حذف Account از Spreadsheet</h3>
+
+<p>
+در بخش Advanced می‌توانی Account انتخاب‌شده را از Spreadsheet حذف کنی، بدون اینکه Screenshotهای موجود در Google Drive پاک شوند.
+</p>
+
+<h3>سازگاری بهتر با CPUهای مختلف</h3>
+
+<p>
+برای نسخه عمومی EX5 پیشنهاد می‌شود فایل با Target برابر <code>X64 Regular</code> Compile شود.
+</p>
+
+<hr>
+
 <h2>قابلیت‌های اصلی</h2>
 
 <ul>
 <li>ثبت خودکار معاملات زنده و تاریخچه حساب</li>
+<li>پشتیبانی از چند Account در یک Spreadsheet</li>
+<li>Dashboard مستقل برای Account انتخاب‌شده</li>
 <li>ذخیره تصویر ورود با عنوان <code>Entry Screenshot</code></li>
 <li>ذخیره تصویر خروج با عنوان <code>Exit Screenshot</code></li>
 <li>ذخیره تصاویر در <code>Google Drive</code> خود کاربر</li>
@@ -602,29 +795,54 @@ It does not provide investment advice, trading signals, profit guarantees, or pr
 </div>
 
 ```text
-حساب معاملاتی
-      │
-      ▼
-JournalNevis Expert
-      │
-      ▼
-Google Apps Script
-      │
-      ├──────────────► Google Sheets
-      │                 Trades / Dashboard / Accounts
-      │
-      └──────────────► Google Drive
-                        Entry / Exit Screenshots
+Account A → JournalNevis ─┐
+                          │
+Account B → JournalNevis ─┼──► Google Apps Script
+                          │            │
+Account C → JournalNevis ─┘            │
+                                       ├──► Google Sheets
+                                       │    Trades / Dashboard / Accounts
+                                       │
+                                       └──► Google Drive
+                                            Entry / Exit Screenshots
 ```
 
 <div dir="rtl" align="right">
+
+<h2>مدیریت چند Account</h2>
+
+<p>
+در Dashboard از بخش <code>ACCOUNT VIEW</code> می‌توانی Account موردنظر را انتخاب کنی.
+</p>
+
+<p>
+Account Key بر اساس ترکیب Login و Server ساخته می‌شود:
+</p>
+
+</div>
+
+```text
+Account Login | Server
+```
+
+<div dir="rtl" align="right">
+
+<p>
+تمام Accountها همچنان داخل یک <code>Trades</code> Sheet مشترک نگهداری می‌شوند. JournalNevis با Account Login، Server و شناسه‌های Trade/Position معاملات را از هم جدا نگه می‌دارد.
+</p>
+
+<p>
+Sheet با نام <code>Accounts</code> آخرین Snapshot هر Account را نگهداری می‌کند.
+</p>
+
+<hr>
 
 <h2>آموزش نصب</h2>
 
 <h3>مرحله ۱ — ساخت Google Sheet</h3>
 
 <p>
-فایل <code>JournalNevis_v5_7_Template.xlsx</code> را داخل <code>Google Drive</code> آپلود کن و با <code>Google Sheets</code> باز کن.
+فایل <code>JournalNevis_v5_8_Template.xlsx</code> را داخل <code>Google Drive</code> آپلود کن و با <code>Google Sheets</code> باز کن.
 </p>
 
 <p>برگه‌های اصلی برای استفاده روزمره:</p>
@@ -694,7 +912,7 @@ Deploy → New deployment → Web app
 <h3>مرحله ۵ — نصب Expert</h3>
 
 <p>
-فایل <code>JournalNevis_v5_7.ex5</code> را داخل پوشه Expert Advisors قرار بده.
+فایل <code>JournalNevis_v5_8.ex5</code> را داخل پوشه Expert Advisors قرار بده.
 در ادغام فعلی MT5 مسیر معمول به شکل <code>MQL5/Experts</code> است.
 </p>
 
@@ -707,7 +925,7 @@ JournalNevis را روی یک چارت اختصاصی اجرا کن و آدرس 
 
 <h2>اولین راه‌اندازی</h2>
 
-<p>اگر از صفر شروع می‌کنی، بعد از نصب اولیه یک بار <code>FULL SYNC</code> اجرا کن.</p>
+<p>اگر از صفر شروع می‌کنی، بعد از نصب اولیه برای Account اول یک بار <code>FULL SYNC</code> اجرا کن. برای هر Account دیگری که می‌خواهی اضافه کنی نیز FULL SYNC اولیه را از Terminal همان Account اجرا کن.</p>
 
 </div>
 
@@ -775,6 +993,7 @@ Chart
 </div>
 
 ```text
+JN58_
 JN57_
 JN56_
 TJ5_
@@ -891,6 +1110,65 @@ Repair Screenshot Links
 
 <hr>
 
+<h2>حذف اطلاعات یک Account</h2>
+
+<p>
+ابتدا Account موردنظر را در <code>ACCOUNT VIEW</code> انتخاب کن.
+</p>
+
+<p>سپس از مسیر زیر برو:</p>
+
+</div>
+
+```text
+JournalNevis v5.8
+→ Advanced
+→ Delete Selected Account Data...
+```
+
+<div dir="rtl" align="right">
+
+<p>
+بعد از تأیید، اطلاعات Account از Trades، Executions، Cash Flow، Accounts و Equity History حذف می‌شوند.
+</p>
+
+<p>
+<strong>مهم:</strong> Screenshotهای موجود در Google Drive حذف نمی‌شوند.
+</p>
+
+<hr>
+
+<h2>خطای AVX2 و X64 Regular</h2>
+
+<p>
+اگر روی یک کامپیوتر پیام زیر را دیدی:
+</p>
+
+</div>
+
+```text
+your CPU architecture does not allow to run the file:
+AVX2 required, you have AVX only
+
+loading failed [568]
+```
+
+<div dir="rtl" align="right">
+
+<p>
+مشکل از منطق JournalNevis نیست. فایل EX5 با معماری CPU ناسازگار Compile شده است.
+</p>
+
+<p>
+برای نسخه عمومی، در MetaEditor معماری CPU را روی <code>X64 Regular</code> قرار بده و دوباره Compile کن.
+</p>
+
+<p>
+فایل EX5 که قبلاً با AVX2 ساخته شده باشد، با تغییر Inputهای Expert روی CPU فاقد AVX2 قابل اجرا نمی‌شود.
+</p>
+
+<hr>
+
 <h2>حریم خصوصی</h2>
 
 <ul>
@@ -919,6 +1197,8 @@ JournalNevis فعلاً <strong>رایگان</strong> منتشر می‌شود �
 <ul>
 <li>نصب آسان‌تر</li>
 <li>آموزش بهتر</li>
+<li>Account Alias</li>
+<li>Portfolio View برای چند Account</li>
 <li>تحلیل رفتاری بیشتر</li>
 <li>گزارش‌ها و نمودارهای بیشتر</li>
 <li>فرآیند Update ساده‌تر</li>
@@ -952,6 +1232,6 @@ JournalNevis یک ابزار ثبت و تحلیل معاملات است و تو�
 
 **Trade automatically. Review intentionally.**
 
-`v5.7.1`
+`v5.8`
 
 </div>

@@ -1,7 +1,7 @@
 /**
- * JournalNevis v5.7 - Google Apps Script backend
+ * JournalNevis v5.8 - Google Apps Script backend
  * ------------------------------------------------------------
- * Works with JournalNevis_v5_7.mq5.
+ * Works with JournalNevis_v5_8.mq5.
  *
  * Main design:
  * - UPSERT_TRADE is small and contains trade data only.
@@ -13,7 +13,7 @@
 
 const JOURNALNEVIS = {
   name: 'JournalNevis',
-  version: '5.7.1',
+  version: '5.8.0',
   website: 'https://JournalNevis.ir',
   navy: '#0B1220',
   navy2: '#16243A',
@@ -96,12 +96,18 @@ const SETTINGS = {
   listsSheet: 'Lists',
   defaultFolderName: 'JournalNevis Screenshots',
   helpSheet: 'Help',
+  dashboardAccountCell: 'P4',
   systemSheets: ['Executions','Cash Flow','Equity History','Balance Curve','Symbol Performance','Analytics','Monthly','Breakdown','Lists']
 };
 
 function onOpen() {
-  SpreadsheetApp.getUi()
-    .createMenu('JournalNevis v5.7.1')
+  const ui = SpreadsheetApp.getUi();
+  const advanced = ui.createMenu('Advanced')
+    .addItem('Refresh Account Selector', 'refreshAccountSelector')
+    .addSeparator()
+    .addItem('Delete Selected Account Data...', 'deleteSelectedAccountData');
+
+  ui.createMenu('JournalNevis v5.8')
     .addItem('Initialize / Repair JournalNevis', 'setupJournalNevis')
     .addItem('Refresh Dashboard', 'refreshDashboard')
     .addItem('Repair Screenshot Links', 'repairScreenshotLinks')
@@ -110,6 +116,8 @@ function onOpen() {
     .addSeparator()
     .addItem('Show System Sheets', 'showSystemSheets')
     .addItem('Hide System Sheets', 'hideSystemSheets')
+    .addSubMenu(advanced)
+    .addSeparator()
     .addItem('Connection Info', 'showConnectionInfo')
     .addItem('About JournalNevis', 'showAboutJournalNevis')
     .addToUi();
@@ -223,13 +231,14 @@ function setupJournalNevis() {
   compactAndResequenceTrades_(ss);
   normalizeCashFlows_(ss);
   buildProfessionalLayout_(ss);
+  refreshDashboardAccountSelector_(ss);
   refreshAnalyticsAndDashboard_(ss);
   hideSystemSheets_(ss);
 
   SpreadsheetApp.flush();
 
   SpreadsheetApp.getUi().alert(
-    'JournalNevis v5.7.1 setup completed.\\n\\n' +
+    'JournalNevis v5.8 setup completed.\\n\\n' +
     'Dashboard, Trades, account tracking and screenshot recovery are ready.\\n' +
     'For a clean installation, deploy the Web App and then run FULL SYNC once from MT5.\\n\\n' +
     'IMPORTANT: after changing Apps Script code, create a new Web App deployment version.'
@@ -710,7 +719,7 @@ function handleCashFlow_(ss, p) {
 
   setManyByHeader_(sheet, row, values);
 
-  // JournalNevis v5.7: live writes stay fast. Dashboard/normalization is performed once
+  // JournalNevis v5.8: live writes stay fast. Dashboard/normalization is performed once
   // at the end of SYNC TODAY / FULL SYNC (or from the spreadsheet menu).
 
   return jsonResponse_({
@@ -781,14 +790,17 @@ function handleAccountSnapshot_(ss, p) {
     });
   }
 
-  if (!p._skip_refresh) refreshAnalyticsAndDashboard_(ss);
+  const selectedAccountKey = refreshDashboardAccountSelector_(ss);
+  // Only rebuild Dashboard if this snapshot belongs to the account currently being viewed.
+  // Snapshots from other connected accounts update Accounts/Equity History without disturbing the selected view.
+  if (!p._skip_refresh && selectedAccountKey === accountKey) refreshAnalyticsAndDashboard_(ss);
   return jsonResponse_({ ok: true, action: 'ACCOUNT_SNAPSHOT', row: row });
 }
 
 function handleSyncComplete_(ss, p) {
   repairMissingSymbols_(ss);
 
-  // JournalNevis v5.7: schema migration belongs to setupJournalNevis(), not every sync.
+  // JournalNevis v5.8: schema migration belongs to setupJournalNevis(), not every sync.
   // Screenshot relinking is its own Stage 3 action.
   compactAndResequenceTrades_(ss);
   normalizeCashFlows_(ss);
@@ -801,7 +813,7 @@ function handleSyncComplete_(ss, p) {
     mode: String(p.sync_mode || ''),
     trades: number_(p.trade_count),
     cash_flows: number_(p.cash_flow_count),
-    message: 'JournalNevis v5.7 Stage 4 completed; rows preserved and dashboard refreshed once.'
+    message: 'JournalNevis v5.8 Stage 4 completed; rows preserved and dashboard refreshed once.'
   });
 }
 
@@ -898,6 +910,172 @@ function repairReviewList_(ss) {
 }
 
 
+
+//==================================================================
+// Multi-account dashboard / account manager (v5.8)
+//==================================================================
+function accountKey_(login, server) {
+  return String(login || '').trim() + '|' + String(server || '').trim();
+}
+
+function dashboardAccountRange_(ss) {
+  const d = getOrCreateSheet_(ss, SETTINGS.dashboardSheet);
+  return d.getRange(SETTINGS.dashboardAccountCell);
+}
+
+function accountKeys_(ss) {
+  const sheet = getOrCreateSheet_(ss, SETTINGS.accountsSheet);
+  ensureHeaders_(sheet, ACCOUNT_HEADERS);
+  if (sheet.getLastRow() < 2) return [];
+  const map = headerMap_(sheet);
+  return sheet.getRange(2,1,sheet.getLastRow()-1,sheet.getLastColumn()).getValues()
+    .map(r => String(r[map['Account Key']-1] || '').trim())
+    .filter(Boolean)
+    .filter((v,i,a) => a.indexOf(v) === i);
+}
+
+function refreshDashboardAccountSelector_(ss) {
+  const range = dashboardAccountRange_(ss);
+  const keys = accountKeys_(ss);
+  const current = String(range.getValue() || '').trim();
+
+  range.clearDataValidations();
+
+  if (!keys.length) {
+    range.setValue('');
+    range.setNote('Connect an account to JournalNevis first.');
+    return '';
+  }
+
+  const rule = SpreadsheetApp.newDataValidation()
+    .requireValueInList(keys, true)
+    .setAllowInvalid(false)
+    .setHelpText('Select the account shown on the JournalNevis dashboard.')
+    .build();
+  range.setDataValidation(rule);
+  range.setNote('Dashboard calculations are scoped to this account only.');
+
+  const selected = keys.indexOf(current) >= 0 ? current : keys[0];
+  if (selected !== current) range.setValue(selected);
+  return selected;
+}
+
+function getDashboardSelectedAccountKey_(ss) {
+  const keys = accountKeys_(ss);
+  if (!keys.length) return '';
+  const range = dashboardAccountRange_(ss);
+  const current = String(range.getValue() || '').trim();
+  if (keys.indexOf(current) >= 0) return current;
+  return refreshDashboardAccountSelector_(ss);
+}
+
+function refreshAccountSelector() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const key = refreshDashboardAccountSelector_(ss);
+  refreshAnalyticsAndDashboard_(ss);
+  SpreadsheetApp.getUi().alert(key ? 'Dashboard account selector refreshed.\n\nSelected: ' + key : 'No JournalNevis accounts are available yet.');
+}
+
+function onEdit(e) {
+  if (!e || !e.range) return;
+  const sheet = e.range.getSheet();
+  if (sheet.getName() !== SETTINGS.dashboardSheet) return;
+  if (e.range.getA1Notation() !== SETTINGS.dashboardAccountCell) return;
+
+  try {
+    refreshAnalyticsAndDashboard_(e.source);
+  } catch (err) {
+    SpreadsheetApp.getActive().toast('Dashboard refresh failed: ' + err.message, 'JournalNevis', 8);
+  }
+}
+
+function deleteRowsForAccount_(sheet, login, server) {
+  if (!sheet || sheet.getLastRow() < 2) return 0;
+  const map = headerMap_(sheet);
+  const loginCol = map['Account Login'];
+  const serverCol = map['Server'];
+  const keyCol = map['Account Key'];
+  if ((!loginCol || !serverCol) && !keyCol) return 0;
+
+  const lastCol = sheet.getLastColumn();
+  const values = sheet.getRange(2,1,sheet.getLastRow()-1,lastCol).getValues();
+  const key = accountKey_(login,server);
+  let deleted = 0;
+
+  for (let i=values.length-1; i>=0; i--) {
+    let match = false;
+    if (keyCol) match = String(values[i][keyCol-1] || '').trim() === key;
+    else match = String(values[i][loginCol-1] || '').trim() === String(login) &&
+                 String(values[i][serverCol-1] || '').trim() === String(server);
+    if (match) {
+      sheet.deleteRow(i+2);
+      deleted++;
+    }
+  }
+  return deleted;
+}
+
+function deleteSelectedAccountData() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const selected = getDashboardSelectedAccountKey_(ss);
+  if (!selected) {
+    SpreadsheetApp.getUi().alert('No account is selected on Dashboard.');
+    return;
+  }
+
+  const accounts = getOrCreateSheet_(ss, SETTINGS.accountsSheet);
+  ensureHeaders_(accounts, ACCOUNT_HEADERS);
+  const amap = headerMap_(accounts);
+  let login = '';
+  let server = '';
+  if (accounts.getLastRow() >= 2) {
+    const rows = accounts.getRange(2,1,accounts.getLastRow()-1,accounts.getLastColumn()).getValues();
+    const hit = rows.find(r => String(r[amap['Account Key']-1] || '').trim() === selected);
+    if (hit) {
+      login = String(hit[amap['Account Login']-1] || '').trim();
+      server = String(hit[amap['Server']-1] || '').trim();
+    }
+  }
+
+  if (!login) {
+    const p = selected.indexOf('|');
+    login = p >= 0 ? selected.substring(0,p) : selected;
+    server = p >= 0 ? selected.substring(p+1) : '';
+  }
+
+  const ui = SpreadsheetApp.getUi();
+  const response = ui.alert(
+    'Delete account data?',
+    'Selected account:\n' + selected + '\n\n' +
+    'This permanently removes this account from Trades, Executions, Cash Flow, Accounts and Equity History in THIS spreadsheet.\n\n' +
+    'Google Drive screenshots are NOT deleted.\n\nContinue?',
+    ui.ButtonSet.YES_NO
+  );
+  if (response !== ui.Button.YES) return;
+
+  const counts = {};
+  counts.trades = deleteRowsForAccount_(getOrCreateSheet_(ss,SETTINGS.tradesSheet),login,server);
+  counts.executions = deleteRowsForAccount_(getOrCreateSheet_(ss,SETTINGS.executionsSheet),login,server);
+  counts.cash = deleteRowsForAccount_(getOrCreateSheet_(ss,SETTINGS.cashFlowSheet),login,server);
+  counts.accounts = deleteRowsForAccount_(getOrCreateSheet_(ss,SETTINGS.accountsSheet),login,server);
+  counts.equity = deleteRowsForAccount_(getOrCreateSheet_(ss,SETTINGS.equityHistorySheet),login,server);
+
+  compactAndResequenceTrades_(ss);
+  normalizeCashFlows_(ss);
+  refreshDashboardAccountSelector_(ss);
+  refreshAnalyticsAndDashboard_(ss);
+
+  ui.alert(
+    'Account removed from this spreadsheet.\n\n' +
+    'Trades: ' + counts.trades + '\n' +
+    'Executions: ' + counts.executions + '\n' +
+    'Cash Flow: ' + counts.cash + '\n' +
+    'Account rows: ' + counts.accounts + '\n' +
+    'Equity History: ' + counts.equity + '\n\n' +
+    'Drive screenshots were preserved.'
+  );
+}
+
 function normalizeAndRefresh() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   compactAndResequenceTrades_(ss);
@@ -973,62 +1151,67 @@ function normalizeCashFlows_(ss) {
   if (lastRow < 2) return;
 
   const map = headerMap_(sheet);
-  const values = sheet.getRange(2, 1, lastRow - 1, lastCol).getValues();
-  const dealCol = map['Deal ID'] - 1;
-  const timeCol = map['Time'] - 1;
-  const rawCol = map['Raw Type'] - 1;
-  const catCol = map['Category'] - 1;
-  const amountCol = map['Amount'] - 1;
-  const runningCol = map['Running Cash Flow'] - 1;
-  const eventCol = map['Event #'] - 1;
+  const values = sheet.getRange(2,1,lastRow-1,lastCol).getValues();
+  const dealCol = map['Deal ID']-1;
+  const loginCol = map['Account Login']-1;
+  const serverCol = map['Server']-1;
+  const timeCol = map['Time']-1;
+  const rawCol = map['Raw Type']-1;
+  const catCol = map['Category']-1;
+  const amountCol = map['Amount']-1;
+  const runningCol = map['Running Cash Flow']-1;
+  const eventCol = map['Event #']-1;
 
   const rows = values.filter(r => String(r[dealCol] || '').trim());
-  rows.sort((a, b) => toMillis_(a[timeCol]) - toMillis_(b[timeCol]));
+  rows.sort((a,b) => toMillis_(a[timeCol]) - toMillis_(b[timeCol]));
 
+  // First trade time is calculated independently for every account.
   const trades = getOrCreateSheet_(ss, SETTINGS.tradesSheet);
   ensureHeaders_(trades, TRADE_HEADERS);
   const tmap = headerMap_(trades);
-  let firstTradeMs = 0;
-  if (trades.getLastRow() >= 2 && tmap['Open Time']) {
-    const opens = trades
-      .getRange(2, tmap['Open Time'], trades.getLastRow() - 1, 1)
-      .getValues()
-      .map(r => toMillis_(r[0]))
-      .filter(v => v > 0);
-    if (opens.length) firstTradeMs = Math.min.apply(null, opens);
+  const firstTradeByAccount = {};
+  if (trades.getLastRow() >= 2) {
+    trades.getRange(2,1,trades.getLastRow()-1,trades.getLastColumn()).getValues().forEach(r => {
+      const key = accountKey_(r[tmap['Account Login']-1], r[tmap['Server']-1]);
+      const ms = toMillis_(r[tmap['Open Time']-1]);
+      if (!key || !ms) return;
+      if (!firstTradeByAccount[key] || ms < firstTradeByAccount[key]) firstTradeByAccount[key] = ms;
+    });
   }
 
-  let running = 0;
-  let initialAssigned = false;
+  const runningByAccount = {};
+  const initialAssigned = {};
 
-  rows.forEach((r, i) => {
+  rows.forEach((r,i) => {
+    const key = accountKey_(r[loginCol], r[serverCol]);
     const raw = String(r[rawCol] || '');
     const amount = Number(r[amountCol] || 0);
     const eventMs = toMillis_(r[timeCol]);
     let category = classifyCashFlow_(raw, amount);
 
     if (raw === 'Balance' && amount > 0) {
+      const firstTradeMs = Number(firstTradeByAccount[key] || 0);
       if ((firstTradeMs > 0 && eventMs <= firstTradeMs) ||
-          (firstTradeMs === 0 && !initialAssigned)) {
+          (firstTradeMs === 0 && !initialAssigned[key])) {
         category = 'Initial Capital';
-        initialAssigned = true;
+        initialAssigned[key] = true;
       } else {
         category = 'Deposit';
       }
     }
 
-    if (category === 'Initial Capital') initialAssigned = true;
+    if (category === 'Initial Capital') initialAssigned[key] = true;
+    runningByAccount[key] = Number(runningByAccount[key] || 0) + amount;
 
-    running += amount;
     r[eventCol] = i + 1;
     r[catCol] = category;
-    r[runningCol] = running;
+    r[runningCol] = runningByAccount[key];
   });
 
-  sheet.getRange(2, 1, lastRow - 1, lastCol).clearContent();
+  sheet.getRange(2,1,lastRow-1,lastCol).clearContent();
   if (rows.length) {
-    ensureRowExists_(sheet, rows.length + 1);
-    sheet.getRange(2, 1, rows.length, lastCol).setValues(rows);
+    ensureRowExists_(sheet, rows.length+1);
+    sheet.getRange(2,1,rows.length,lastCol).setValues(rows);
   }
 }
 
@@ -1311,17 +1494,19 @@ function ensureHelpLayoutV57_(sheet) {
   sheet.clear();
   sheet.setHiddenGridlines(true);
   sheet.getRange('A1:F1').merge().setValue('JournalNevis Help').setBackground('#101827').setFontColor('#FFFFFF').setFontWeight('bold').setFontSize(16);
-  sheet.getRange('A3:B10').setValues([
-    ['1. Setup','Open Extensions > Apps Script, paste the new JournalNevis_v5_7.gs code, save, deploy Web App, then run setupJournalNevis once.'],
-    ['2. MT5 EA','Place JournalNevis_v5_7.mq5 in MQL5/Experts, compile it, add it to one chart, then paste the Web App URL and API secret.'],
+  sheet.getRange('A3:B12').setValues([
+    ['1. Setup','Open Extensions > Apps Script, paste the new JournalNevis_v5_8.gs code, save, deploy Web App, then run setupJournalNevis once.'],
+    ['2. MT5 EA','Place JournalNevis_v5_8.mq5 in MQL5/Experts, compile it, add it to one chart, then paste the Web App URL and API secret.'],
     ['3. Full Sync','Use FULL SYNC only when you want a complete rebuild from account history and screenshot reconciliation.'],
     ['4. Sync Today','Use SYNC TODAY for normal daily work. It focuses on today and avoids heavy full-history processing.'],
     ['5. Screenshots','Entry and exit screenshots are sent separately so a screenshot issue does not block trade data.'],
     ['6. Trades sheet','Setup, Entry Reason, Emotion, Mistake, Notes and Review Status stay editable by you.'],
     ['7. Visible sheets','Dashboard, Trades, Accounts, Settings and Help stay visible by default.'],
-    ['8. Website','Branding: JournalNevis • JournalNevis.ir']
+    ['8. Multi-account','Use the Account View dropdown on Dashboard to switch between connected accounts. The dashboard always calculates one account at a time.'],
+    ['9. Remove account','JournalNevis menu → Advanced → Delete Selected Account Data removes the selected account from this spreadsheet. Drive screenshots are preserved.'],
+    ['10. Website','Branding: JournalNevis • JournalNevis.ir']
   ]);
-  sheet.getRange('A3:A10').setFontWeight('bold');
+  sheet.getRange('A3:A12').setFontWeight('bold');
   sheet.setColumnWidth(1,140);
   sheet.setColumnWidth(2,720);
 }
@@ -1639,10 +1824,12 @@ function screenshotExpectedNames_(row,map) {
   const pos=String(row[map['Position ID']-1]||'');
   const safeServer=server.substring(0,18);
 
-  const current='JN57_'+login+'_'+safeServer+'_'+pos+'_';
-  const currentFallback='JN57_'+login+'_'+pos+'_';
-  const previous='JN56_'+login+'_'+safeServer+'_'+pos+'_';
-  const previousFallback='JN56_'+login+'_'+pos+'_';
+  const current='JN58_'+login+'_'+safeServer+'_'+pos+'_';
+  const currentFallback='JN58_'+login+'_'+pos+'_';
+  const previous='JN57_'+login+'_'+safeServer+'_'+pos+'_';
+  const previousFallback='JN57_'+login+'_'+pos+'_';
+  const previous2='JN56_'+login+'_'+safeServer+'_'+pos+'_';
+  const previousFallback2='JN56_'+login+'_'+pos+'_';
 
   // Legacy v5.x local/Drive screenshots are intentionally supported.
   const legacy='TJ5_'+login+'_'+safeServer+'_'+pos+'_';
@@ -1652,11 +1839,13 @@ function screenshotExpectedNames_(row,map) {
     entry:[
       current+'ENTRY.png',currentFallback+'ENTRY.png',
       previous+'ENTRY.png',previousFallback+'ENTRY.png',
+      previous2+'ENTRY.png',previousFallback2+'ENTRY.png',
       legacy+'ENTRY.png',legacyFallback+'ENTRY.png'
     ],
     exit:[
       current+'EXIT.png',currentFallback+'EXIT.png',
       previous+'EXIT.png',previousFallback+'EXIT.png',
+      previous2+'EXIT.png',previousFallback2+'EXIT.png',
       legacy+'EXIT.png',legacyFallback+'EXIT.png'
     ]
   };
@@ -2030,7 +2219,8 @@ function mt5DirectionFromEntry_(dealType) {
          String(dealType||'').toUpperCase()==='SELL' ? 'Short' : '';
 }
 
-function buildStatementDataV5_(ss) {
+function buildStatementDataV5_(ss, accountKey) {
+  const selectedAccountKey = String(accountKey || getDashboardSelectedAccountKey_(ss) || '').trim();
   const executions=getOrCreateSheet_(ss,SETTINGS.executionsSheet);
   ensureHeaders_(executions,EXECUTION_HEADERS);
   const cash=getOrCreateSheet_(ss,SETTINGS.cashFlowSheet);
@@ -2047,6 +2237,7 @@ function buildStatementDataV5_(ss) {
     deals=rows.map((r,i)=>({
       dealId:String(r[emap['Deal ID']-1]||''),
       tradeKey:String(r[emap['Trade Key']-1]||''),
+      accountKey:accountKey_(r[emap['Account Login']-1],r[emap['Server']-1]),
       pos:String(r[emap['Position ID']-1]||''),
       symbol:String(r[emap['Symbol']-1]||'').trim()||'UNKNOWN',
       time:toMillis_(r[emap['Time']-1]),
@@ -2061,7 +2252,7 @@ function buildStatementDataV5_(ss) {
       reason:String(r[emap['Reason']-1]||''),
       comment:String(r[emap['Comment']-1]||''),
       order:i
-    })).filter(x=>x.time>0 && (x.type==='BUY'||x.type==='SELL'))
+    })).filter(x=>x.accountKey===selectedAccountKey && x.time>0 && (x.type==='BUY'||x.type==='SELL'))
       .sort((a,b)=>a.time-b.time || a.order-b.order);
   }
 
@@ -2083,9 +2274,10 @@ function buildStatementDataV5_(ss) {
   let cashEvents=[];
   if(cash.getLastRow()>=2){
     cashEvents=cash.getRange(2,1,cash.getLastRow()-1,cash.getLastColumn()).getValues().map((r,i)=>({
+      accountKey:accountKey_(r[cmap['Account Login']-1],r[cmap['Server']-1]),
       time:toMillis_(r[cmap['Time']-1]), category:String(r[cmap['Category']-1]||''),
       raw:String(r[cmap['Raw Type']-1]||''), amount:Number(r[cmap['Amount']-1]||0), order:-100000+i
-    })).filter(x=>x.time>0).sort((a,b)=>a.time-b.time);
+    })).filter(x=>x.accountKey===selectedAccountKey && x.time>0).sort((a,b)=>a.time-b.time);
   }
 
   const initialCapital=cashEvents.filter(x=>x.category==='Initial Capital').reduce((s,x)=>s+x.amount,0);
@@ -2121,7 +2313,8 @@ function buildStatementDataV5_(ss) {
     let currentBalance=0;
     if(accounts.getLastRow()>=2){
       const amap=headerMap_(accounts);
-      const arows=accounts.getRange(2,1,accounts.getLastRow()-1,accounts.getLastColumn()).getValues();
+      const arows=accounts.getRange(2,1,accounts.getLastRow()-1,accounts.getLastColumn()).getValues()
+        .filter(r=>String(r[amap['Account Key']-1]||'').trim()===selectedAccountKey);
       if(arows.length)currentBalance=Number(arows[arows.length-1][amap['Balance']-1]||0);
     }
     const totalChange=timeline.reduce((s,x)=>s+x.change,0);
@@ -2223,6 +2416,7 @@ function buildStatementDataV5_(ss) {
   if(accounts.getLastRow()>=2){
     const amap=headerMap_(accounts);
     const ar=accounts.getRange(2,1,accounts.getLastRow()-1,accounts.getLastColumn()).getValues()
+      .filter(r=>String(r[amap['Account Key']-1]||'').trim()===selectedAccountKey)
       .sort((a,b)=>toMillis_(a[amap['Last Updated']-1])-toMillis_(b[amap['Last Updated']-1]));
     if(ar.length){
       const a=ar[ar.length-1];
@@ -2256,7 +2450,7 @@ function buildStatementDataV5_(ss) {
   });
   const monthlyRows=Object.keys(monthMap).sort().map(k=>{const q=monthMap[k];return [k,q.trades,q.wins,q.losses,q.trades?q.wins/q.trades:0,q.net,q.comm,q.trades?q.net/q.trades:0,q.best,q.worst];});
 
-  return {deals,closeTrades,balanceRows,symbolRows,monthlyRows,
+  return {selectedAccountKey,deals,closeTrades,balanceRows,symbolRows,monthlyRows,
     totalNet,grossProfit,grossLoss,profitFactor:pf,expectedPayoff:expected,recoveryFactor:recovery,sharpe,
     balanceDDAbsolute:absoluteDD,balanceDDMaximal:maxDD,balanceDDMaximalPct:maxDDPctAtMaxMoney,
     balanceDDRelativePct:relPct,balanceDDRelativeMoney:relMoney,minBalance:Number.isFinite(minBalance)?minBalance:0,
@@ -2280,12 +2474,22 @@ function buildProfessionalLayout_(ss) {
     .setFontWeight('bold').setFontSize(22)
     .setHorizontalAlignment('center').setVerticalAlignment('middle');
 
-  d.getRange('C1:Q2').merge().setValue('JournalNevis v5.7  •  MT5 PERFORMANCE DESK')
+  d.getRange('C1:Q2').merge().setValue('JournalNevis v5.8  •  MT5 PERFORMANCE DESK')
     .setBackground(JOURNALNEVIS.navy).setFontColor('#FFFFFF')
     .setFontWeight('bold').setFontSize(19).setVerticalAlignment('middle');
 
   d.getRange('A3:Q3').merge().setValue('Automated Trading Journal  •  JournalNevis.ir')
     .setBackground(JOURNALNEVIS.navy2).setFontColor('#B9D5FF').setFontSize(10);
+
+  d.getRange('A4:M4').merge().setValue('No account connected')
+    .setFontColor('#64748B').setFontSize(9).setBackground('#F4F7FB');
+
+  d.getRange('N4:O4').merge().setValue('ACCOUNT VIEW')
+    .setBackground('#E2E8F0').setFontColor('#334155').setFontWeight('bold')
+    .setHorizontalAlignment('right');
+  d.getRange('P4:Q4').merge().setValue('')
+    .setBackground('#FFFFFF').setFontColor('#0F172A').setFontWeight('bold')
+    .setHorizontalAlignment('center');
 
   const sec=(row,title)=>d.getRange(row,1,1,17).merge().setValue(title).setBackground('#1E293B').setFontColor('#FFFFFF').setFontWeight('bold');
   sec(5,'ACCOUNT SNAPSHOT');sec(10,'MT5 STATEMENT — PROFITABILITY & DRAWDOWN');sec(20,'MT5 STATEMENT — TRADE STATISTICS');sec(34,'SYMBOL PERFORMANCE');sec(52,'CHARTS');
@@ -2335,9 +2539,11 @@ function buildProfessionalLayout_(ss) {
 }
 
 function refreshAnalyticsAndDashboard_(ss) {
-  const data=buildStatementDataV5_(ss);
   const d=getOrCreateSheet_(ss,SETTINGS.dashboardSheet);
-  if(String(d.getRange('A1').getValue()||'').indexOf('JournalNevis v5.7')<0)buildProfessionalLayout_(ss);
+  if(String(d.getRange('C1').getValue()||'').indexOf('JournalNevis v5.8')<0)buildProfessionalLayout_(ss);
+  const selectedAccountKey=refreshDashboardAccountSelector_(ss);
+  const data=buildStatementDataV5_(ss,selectedAccountKey);
+  d.getRange('A4').setValue(selectedAccountKey ? ('Selected account: '+selectedAccountKey) : 'No account connected');
 
   const balanceCurve=getOrCreateSheet_(ss,SETTINGS.balanceCurveSheet);
   balanceCurve.clearContents();
@@ -2375,7 +2581,7 @@ function refreshAnalyticsAndDashboard_(ss) {
     if((ri===2&&ci>=2))cell.setNumberFormat('0.00%');else if(ci===3&&ri<2)cell.setNumberFormat('0.00');else cell.setNumberFormat('#,##0.00;[Red]-#,##0.00');
   }
 
-  const pending=(()=>{const t=getOrCreateSheet_(ss,SETTINGS.tradesSheet);if(t.getLastRow()<2)return 0;const m=headerMap_(t);return t.getRange(2,1,t.getLastRow()-1,t.getLastColumn()).getValues().filter(r=>String(r[m['Status']-1]||'')==='Closed'&&String(r[m['Review Status']-1]||'')!=='Reviewed').length;})();
+  const pending=(()=>{const t=getOrCreateSheet_(ss,SETTINGS.tradesSheet);if(t.getLastRow()<2)return 0;const m=headerMap_(t);return t.getRange(2,1,t.getLastRow()-1,t.getLastColumn()).getValues().filter(r=>accountKey_(r[m['Account Login']-1],r[m['Server']-1])===selectedAccountKey&&String(r[m['Status']-1]||'')==='Closed'&&String(r[m['Review Status']-1]||'')!=='Reviewed').length;})();
   const tradeVals=[
     String(data.totalTrades),data.shorts+' ('+(data.shortWinPct*100).toFixed(2)+'%)',data.longs+' ('+(data.longWinPct*100).toFixed(2)+'%)',
     data.wins+' ('+(data.winPct*100).toFixed(2)+'%)',data.losses+' ('+(data.lossPct*100).toFixed(2)+'%)',data.avgWin.toFixed(2)+' / '+data.avgLoss.toFixed(2),
