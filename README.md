@@ -703,15 +703,22 @@ It does not provide investment advice, trading signals, profit guarantees, or pr
 
 <p>
 <strong>JournalNevis</strong> یک پروژه رایگان برای <strong>ژورنال‌نویسی خودکار معاملات</strong> است.
-هدف پروژه این است که کارهای تکراری ثبت معامله کمتر شود و معامله‌گر بتواند زمان بیشتری را صرف مرور معاملات، بررسی روش‌های ورود، شناخت اشتباهات و تحلیل عملکرد کند.
+هدف پروژه این است که کارهای تکراری ثبت معامله کمتر شود و معامله‌گر زمان بیشتری را صرف مرور معاملات، بررسی روش‌های ورود، شناخت اشتباهات و تحلیل عملکرد کند.
 </p>
 
 <p>
-در نسخه <code>5.8</code>، پشتیبانی واقعی از چند حساب به Dashboard اضافه شده است. چند حساب می‌توانند اطلاعات خود را در یک Google Sheet مشترک نگهداری کنند، اما Dashboard در هر لحظه فقط اطلاعات <strong>یک حساب انتخاب‌شده</strong> را محاسبه و نمایش می‌دهد.
+در نسخه <span dir="ltr"><code>5.8</code></span>، پشتیبانی واقعی از چند حساب به داشبورد اضافه شده است.
+چند حساب می‌توانند اطلاعات خود را در یک فایل مشترک نگهداری کنند، اما داشبورد در هر لحظه فقط اطلاعات <strong>یک حساب انتخاب‌شده</strong> را محاسبه و نمایش می‌دهد.
 </p>
 
 <p>
-اطلاعات معاملات از ابزار سمت پلتفرم معاملاتی دریافت می‌شود، از طریق <code>Google Apps Script</code> به <code>Google Sheets</code> فرستاده می‌شود و تصاویر ورود و خروج در <code>Google Drive</code> ذخیره می‌شوند.
+اطلاعات معاملات از ابزار سمت پلتفرم معاملاتی دریافت می‌شود، از طریق
+<span dir="ltr"><code>Google Apps Script</code></span>
+به
+<span dir="ltr"><code>Google Sheets</code></span>
+فرستاده می‌شود و تصاویر ورود و خروج در
+<span dir="ltr"><code>Google Drive</code></span>
+ذخیره می‌شوند.
 </p>
 
 <blockquote>
@@ -719,53 +726,61 @@ It does not provide investment advice, trading signals, profit guarantees, or pr
 </blockquote>
 
 <p>
-<strong>نکته مهم:</strong> JournalNevis یک ابزار ژورنال و تحلیل است و خودش هیچ معامله‌ای را باز، بسته یا ویرایش نمی‌کند.
+<strong>نکته مهم:</strong>
+JournalNevis یک ابزار ژورنال و تحلیل است و خودش هیچ معامله‌ای را باز، بسته یا ویرایش نمی‌کند.
 </p>
 
 <hr>
 
 <h2>تغییرات اصلی نسخه 5.8</h2>
 
-<h3>Dashboard چندحسابی</h3>
+<h3>داشبورد چندحسابی</h3>
 
 <p>
-در بالای Dashboard بخش <code>ACCOUNT VIEW</code> اضافه شده است. با انتخاب هر Account، تمام محاسبات Dashboard فقط برای همان حساب انجام می‌شوند.
+در بالای داشبورد بخش
+<span dir="ltr"><code>ACCOUNT VIEW</code></span>
+قرار دارد.
+با انتخاب هر حساب، تمام محاسبات داشبورد فقط برای همان حساب انجام می‌شوند.
 </p>
 
 <ul>
-<li>Balance و Equity</li>
-<li>Initial Capital</li>
-<li>Net P/L</li>
-<li>Win Rate</li>
-<li>Profit Factor</li>
-<li>Drawdown</li>
-<li>Commission</li>
-<li>Streakها</li>
-<li>Symbol Performance</li>
-<li>Monthly P/L</li>
-<li>نمودارهای Dashboard</li>
+<li><span dir="ltr"><code>Balance</code></span> و <span dir="ltr"><code>Equity</code></span></li>
+<li><span dir="ltr"><code>Initial Capital</code></span></li>
+<li><span dir="ltr"><code>Net P/L</code></span></li>
+<li><span dir="ltr"><code>Win Rate</code></span></li>
+<li><span dir="ltr"><code>Profit Factor</code></span></li>
+<li><span dir="ltr"><code>Drawdown</code></span></li>
+<li><span dir="ltr"><code>Commission</code></span></li>
+<li>روندهای برد و باخت متوالی</li>
+<li>عملکرد هر نماد</li>
+<li>سود و زیان ماهانه</li>
+<li>تمام نمودارهای داشبورد</li>
 </ul>
 
 <p>
-اطلاعات Accountهای دیگر با Dashboard حساب انتخاب‌شده ترکیب نمی‌شوند.
+اطلاعات حساب‌های دیگر با داشبورد حساب انتخاب‌شده ترکیب نمی‌شوند.
 </p>
 
-<h3>Cash Flow مستقل برای هر Account</h3>
+<h3>جریان مالی مستقل برای هر حساب</h3>
 
 <p>
-Deposit، Withdrawal، Initial Capital، Running Cash Flow و Balance Curve برای هر Account جداگانه محاسبه می‌شوند.
+واریز، برداشت، سرمایه اولیه، جریان نقدی تجمعی و منحنی موجودی برای هر حساب جداگانه محاسبه می‌شوند.
 </p>
 
-<h3>حذف Account از Spreadsheet</h3>
+<h3>حذف حساب از فایل</h3>
 
 <p>
-در بخش Advanced می‌توانی Account انتخاب‌شده را از Spreadsheet حذف کنی، بدون اینکه Screenshotهای موجود در Google Drive پاک شوند.
+در بخش پیشرفته می‌توانی حساب انتخاب‌شده را از فایل حذف کنی، بدون اینکه تصاویر موجود در
+<span dir="ltr"><code>Google Drive</code></span>
+پاک شوند.
 </p>
 
-<h3>سازگاری بهتر با CPUهای مختلف</h3>
+<h3>سازگاری بهتر با پردازنده‌های مختلف</h3>
 
 <p>
-برای نسخه عمومی EX5 پیشنهاد می‌شود فایل با Target برابر <code>X64 Regular</code> Compile شود.
+برای نسخه عمومی فایل اجرایی پیشنهاد می‌شود فایل با هدف
+<span dir="ltr"><code>X64 Regular</code></span>
+کامپایل شود.
 </p>
 
 <hr>
@@ -774,28 +789,26 @@ Deposit، Withdrawal، Initial Capital، Running Cash Flow و Balance Curve بر
 
 <ul>
 <li>ثبت خودکار معاملات زنده و تاریخچه حساب</li>
-<li>پشتیبانی از چند Account در یک Spreadsheet</li>
-<li>Dashboard مستقل برای Account انتخاب‌شده</li>
-<li>ذخیره تصویر ورود با عنوان <code>Entry Screenshot</code></li>
-<li>ذخیره تصویر خروج با عنوان <code>Exit Screenshot</code></li>
-<li>ذخیره تصاویر در <code>Google Drive</code> خود کاربر</li>
-<li>ثبت اطلاعات معاملات در <code>Google Sheets</code></li>
-<li>داشبورد عملکرد، افت سرمایه و آمار هر نماد</li>
-<li>ثبت و بررسی واریز، برداشت و رویدادهای مالی حساب</li>
-<li>بازیابی تصاویر قدیمی و برگرداندن لینک‌های از دست‌رفته</li>
-<li>همگام‌سازی روزانه با <code>SYNC TODAY</code></li>
-<li>بازسازی کامل با <code>FULL SYNC</code></li>
+<li>پشتیبانی از چند حساب در یک فایل مشترک</li>
+<li>داشبورد مستقل برای حساب انتخاب‌شده</li>
+<li>ذخیره تصویر ورود با عنوان <span dir="ltr"><code>Entry Screenshot</code></span></li>
+<li>ذخیره تصویر خروج با عنوان <span dir="ltr"><code>Exit Screenshot</code></span></li>
+<li>ذخیره تصاویر در <span dir="ltr"><code>Google Drive</code></span> خود کاربر</li>
+<li>ثبت اطلاعات معاملات در <span dir="ltr"><code>Google Sheets</code></span></li>
+<li>تحلیل عملکرد هر نماد</li>
+<li>محاسبه افت سرمایه برای حساب انتخاب‌شده</li>
+<li>ثبت واریز و برداشت برای هر حساب</li>
+<li>بازیابی تصاویر و لینک‌های قدیمی</li>
+<li>همگام‌سازی روزانه با <span dir="ltr"><code>SYNC TODAY</code></span></li>
+<li>بازسازی کامل با <span dir="ltr"><code>FULL SYNC</code></span></li>
 <li>ثبت دستی روش ورود، دلیل ورود، احساس، اشتباه، یادداشت و وضعیت بررسی</li>
 </ul>
 
 <hr>
 
-<h2>ساختار کلی JournalNevis</h2>
+<h2>ساختار چندحسابی</h2>
 
-</div>
-
-```text
-Account A → JournalNevis ─┐
+<pre dir="ltr"><code>Account A → JournalNevis ─┐
                           │
 Account B → JournalNevis ─┼──► Google Apps Script
                           │            │
@@ -804,80 +817,87 @@ Account C → JournalNevis ─┘            │
                                        │    Trades / Dashboard / Accounts
                                        │
                                        └──► Google Drive
-                                            Entry / Exit Screenshots
-```
-
-<div dir="rtl" align="right">
-
-<h2>مدیریت چند Account</h2>
+                                            Entry / Exit Screenshots</code></pre>
 
 <p>
-در Dashboard از بخش <code>ACCOUNT VIEW</code> می‌توانی Account موردنظر را انتخاب کنی.
-</p>
-
-<p>
-Account Key بر اساس ترکیب Login و Server ساخته می‌شود:
-</p>
-
-</div>
-
-```text
-Account Login | Server
-```
-
-<div dir="rtl" align="right">
-
-<p>
-تمام Accountها همچنان داخل یک <code>Trades</code> Sheet مشترک نگهداری می‌شوند. JournalNevis با Account Login، Server و شناسه‌های Trade/Position معاملات را از هم جدا نگه می‌دارد.
-</p>
-
-<p>
-Sheet با نام <code>Accounts</code> آخرین Snapshot هر Account را نگهداری می‌کند.
+هر ترمینال فقط تاریخچه حسابی را می‌خواند که در همان لحظه به آن متصل است.
+فایل Google Sheet محل جمع‌شدن اطلاعات حساب‌های مختلف است.
 </p>
 
 <hr>
 
-<h2>آموزش نصب</h2>
-
-<h3>مرحله ۱ — ساخت Google Sheet</h3>
+<h2>مدیریت چند حساب</h2>
 
 <p>
-فایل <code>JournalNevis_v5_8_Template.xlsx</code> را داخل <code>Google Drive</code> آپلود کن و با <code>Google Sheets</code> باز کن.
+در داشبورد از بخش
+<span dir="ltr"><code>ACCOUNT VIEW</code></span>
+می‌توانی حساب موردنظر را انتخاب کنی.
 </p>
 
-<p>برگه‌های اصلی برای استفاده روزمره:</p>
+<p>
+کلید هر حساب بر اساس ترکیب شماره ورود و سرور ساخته می‌شود:
+</p>
+
+<pre dir="ltr"><code>Account Login | Server</code></pre>
+
+<p>برای مثال:</p>
+
+<pre dir="ltr"><code>20279432 | WMMarkets-Demo
+58423981 | WMMarkets-Demo</code></pre>
+
+<p>
+تمام حساب‌ها همچنان داخل یک برگه مشترک با نام
+<span dir="ltr"><code>Trades</code></span>
+نگهداری می‌شوند.
+JournalNevis با استفاده از اطلاعات حساب، سرور و شناسه‌های معامله، معاملات حساب‌های مختلف را از هم جدا نگه می‌دارد.
+</p>
+
+<p>
+برگه
+<span dir="ltr"><code>Accounts</code></span>
+آخرین وضعیت هر حساب متصل را نگهداری می‌کند.
+</p>
+
+<hr>
+
+<h2>آموزش نصب نسخه 5.8</h2>
+
+<h3>مرحله ۱ — ساخت فایل Google Sheet</h3>
+
+<p>
+فایل
+<span dir="ltr"><code>JournalNevis_v5_8_Template.xlsx</code></span>
+را داخل
+<span dir="ltr"><code>Google Drive</code></span>
+آپلود کن و با
+<span dir="ltr"><code>Google Sheets</code></span>
+باز کن.
+</p>
+
+<p>برگه‌های اصلی:</p>
 
 <ul>
-<li><code>Dashboard</code></li>
-<li><code>Trades</code></li>
-<li><code>Accounts</code></li>
-<li><code>Settings</code></li>
-<li><code>Help</code></li>
+<li><span dir="ltr"><code>Dashboard</code></span></li>
+<li><span dir="ltr"><code>Trades</code></span></li>
+<li><span dir="ltr"><code>Accounts</code></span></li>
+<li><span dir="ltr"><code>Settings</code></span></li>
+<li><span dir="ltr"><code>Help</code></span></li>
 </ul>
 
 <h3>مرحله ۲ — نصب Google Apps Script</h3>
 
-<p>داخل Google Sheet از مسیر زیر وارد شو:</p>
+<p>از داخل فایل Google Sheet وارد مسیر زیر شو:</p>
 
-</div>
-
-```text
-Extensions → Apps Script
-```
-
-<div dir="rtl" align="right">
+<pre dir="ltr"><code>Extensions → Apps Script</code></pre>
 
 <p>
-کد JournalNevis را جای‌گذاری و ذخیره کن. سپس یک بار تابع زیر را اجرا کن:
+محتوای فایل
+<span dir="ltr"><code>JournalNevis_v5_8.gs</code></span>
+را جای‌گذاری و ذخیره کن.
+سپس یک بار تابع زیر را اجرا کن:
 </p>
 
-</div>
-
-```javascript
-setupJournalNevis()
-```
-
-<div dir="rtl" align="right">
+<pre dir="ltr"><code>setupJournalNevis()</code></pre>
 
 <p>
 در اولین اجرا ممکن است Google برای دسترسی‌های موردنیاز درخواست تأیید نمایش دهد.
@@ -885,173 +905,234 @@ setupJournalNevis()
 
 <h3>مرحله ۳ — ساخت Web App</h3>
 
-<p>در محیط Apps Script از مسیر زیر استفاده کن:</p>
+<p>از مسیر زیر استفاده کن:</p>
 
-</div>
-
-```text
-Deploy → New deployment → Web app
-```
-
-<div dir="rtl" align="right">
+<pre dir="ltr"><code>Deploy
+→ New deployment
+→ Web app</code></pre>
 
 <p>
-پس از انتشار، آدرسی دریافت می‌کنی که برای JournalNevis باید به <code>/exec</code> ختم شود.
-</p>
-
-<h3>مرحله ۴ — API Secret</h3>
-
-<p>
-برای ارتباط بین Expert و Google Backend از یک <code>API Secret</code> استفاده می‌شود.
+آدرس نهایی مورد استفاده JournalNevis باید به
+<span dir="ltr"><code>/exec</code></span>
+ختم شود.
 </p>
 
 <p>
-<strong>هشدار:</strong> مقدار شخصی <code>API Secret</code> را داخل GitHub، تصویر عمومی، فایل تنظیمات عمومی یا آموزش منتشر نکن.
+مقدار شخصی
+<span dir="ltr"><code>API Secret</code></span>
+را در GitHub یا تصاویر و فایل‌های عمومی منتشر نکن.
 </p>
 
-<h3>مرحله ۵ — نصب Expert</h3>
+<h3>مرحله ۴ — فعال‌کردن WebRequest</h3>
+
+<p>داخل MetaTrader از مسیر زیر برو:</p>
+
+<pre dir="ltr"><code>Tools
+→ Options
+→ Expert Advisors</code></pre>
 
 <p>
-فایل <code>JournalNevis_v5_8.ex5</code> را داخل پوشه Expert Advisors قرار بده.
-در ادغام فعلی MT5 مسیر معمول به شکل <code>MQL5/Experts</code> است.
+دسترسی
+<span dir="ltr"><code>WebRequest</code></span>
+را فعال کن و آدرس موردنیاز Google Apps Script را اضافه کن.
+</p>
+
+<h3>مرحله ۵ — کامپایل Expert</h3>
+
+<p>
+فایل
+<span dir="ltr"><code>JournalNevis_v5_8.mq5</code></span>
+را در MetaEditor باز کن.
 </p>
 
 <p>
-JournalNevis را روی یک چارت اختصاصی اجرا کن و آدرس Web App و API Secret را وارد کن.
-برای Journal اصلی حساب از نقش <code>MASTER</code> استفاده کن.
+برای نسخه‌ای که قرار است روی کامپیوترهای مختلف اجرا شود، معماری پردازنده را روی گزینه زیر قرار بده:
+</p>
+
+<pre dir="ltr"><code>X64 Regular</code></pre>
+
+<p>بعد کامپایل کن و بررسی کن که گزارش ساخت مقدار زیر را نشان دهد:</p>
+
+<pre dir="ltr"><code>0 errors, 0 warnings</code></pre>
+
+<p>
+برای انتشار عمومی فقط فایل اجرایی ساخته‌شده با
+<span dir="ltr"><code>X64 Regular</code></span>
+را منتشر کن.
 </p>
 
 <hr>
 
 <h2>اولین راه‌اندازی</h2>
 
-<p>اگر از صفر شروع می‌کنی، بعد از نصب اولیه برای Account اول یک بار <code>FULL SYNC</code> اجرا کن. برای هر Account دیگری که می‌خواهی اضافه کنی نیز FULL SYNC اولیه را از Terminal همان Account اجرا کن.</p>
+<ol>
+<li>قالب نسخه 5.8 را وارد کن.</li>
+<li>اسکریپت نسخه 5.8 را نصب کن.</li>
+<li>تابع <span dir="ltr"><code>setupJournalNevis()</code></span> را اجرا کن.</li>
+<li>وب‌اپ را منتشر کن.</li>
+<li>Expert را با <span dir="ltr"><code>X64 Regular</code></span> کامپایل کن.</li>
+<li>JournalNevis را به حساب اول متصل کن.</li>
+<li>اتصال را بررسی کن.</li>
+<li>برای حساب اول یک بار <span dir="ltr"><code>FULL SYNC</code></span> اجرا کن.</li>
+<li>برای هر حساب دیگری که می‌خواهی اضافه کنی، همگام‌سازی کامل اولیه را از ترمینال همان حساب اجرا کن.</li>
+</ol>
 
-</div>
+<p>مراحل همگام‌سازی:</p>
 
-```text
-Stage 1/4  Account / Funding
+<pre dir="ltr"><code>Stage 1/4  Account / Funding
 Stage 2/4  Trades / Executions
 Stage 3/4  Screenshots
-Stage 4/4  Dashboard / Finalize
-```
-
-<div dir="rtl" align="right">
-
-<p>
-بعد از بازسازی اولیه، برای استفاده روزمره معمولاً نیازی به اجرای دوباره <code>FULL SYNC</code> نیست.
-</p>
+Stage 4/4  Dashboard / Finalize</code></pre>
 
 <hr>
 
 <h2>تفاوت SYNC TODAY و FULL SYNC</h2>
 
-<h3>SYNC TODAY</h3>
+<h3><span dir="ltr"><code>SYNC TODAY</code></span></h3>
 
 <p>
-گزینه <code>SYNC TODAY</code> برای بررسی روزانه طراحی شده و روی فعالیت همان روز تمرکز می‌کند، بنابراین لازم نیست هر بار کل تاریخچه حساب دوباره بررسی شود.
+برای استفاده روزانه است و روی فعالیت همان روز تمرکز می‌کند.
 </p>
 
-<h3>FULL SYNC</h3>
+<h3><span dir="ltr"><code>FULL SYNC</code></span></h3>
 
-<p>از <code>FULL SYNC</code> در این موارد استفاده کن:</p>
+<p>
+برای بازسازی کامل تاریخچه حسابی است که ترمینال در همان لحظه به آن متصل است.
+</p>
+
+<p>مناسب برای:</p>
 
 <ul>
 <li>نصب اولیه</li>
-<li>ساخت Sheet جدید</li>
+<li>اضافه‌کردن حساب به Journal جدید</li>
 <li>بازسازی اطلاعات حذف‌شده</li>
 <li>بازیابی تاریخچه قدیمی</li>
-<li>بازیابی تصاویر و لینک‌های قدیمی</li>
+<li>بازیابی تصاویر</li>
 <li>بررسی کامل حساب</li>
 </ul>
 
 <p>
-<strong>نکته:</strong> لازم نیست بعد از هر معامله <code>FULL SYNC</code> اجرا شود.
+لازم نیست بعد از هر معامله
+<span dir="ltr"><code>FULL SYNC</code></span>
+اجرا شود.
 </p>
 
 <hr>
 
-<h2>تصاویر معاملات و بازیابی آنها</h2>
-
-<p>JournalNevis می‌تواند برای هر معامله تصویر ورود و خروج را ذخیره کند.</p>
-
-</div>
-
-```text
-Chart
-→ Local Screenshot
-→ Google Drive
-→ Link inside Trades
-```
-
-<div dir="rtl" align="right">
+<h2>تصاویر و بازیابی آنها</h2>
 
 <p>
-نسخه‌های جدید می‌توانند فایل‌های تصاویر قدیمی را نیز شناسایی کنند. Prefixهای پشتیبانی‌شده شامل موارد زیر هستند:
+JournalNevis تصاویر ورود و خروج را ابتدا به‌صورت محلی ذخیره می‌کند و سپس آنها را به Google Drive می‌فرستد و به معامله مربوطه متصل می‌کند.
 </p>
 
-</div>
+<p>نسخه 5.8 برای سازگاری با نسل‌های قبلی این نام‌ها را شناسایی می‌کند:</p>
 
-```text
-JN58_
+<pre dir="ltr"><code>JN58_
 JN57_
 JN56_
-TJ5_
-```
-
-<div dir="rtl" align="right">
-
-<h2>اصلاح مهم نسخه 5.7.1</h2>
+TJ5_</code></pre>
 
 <p>
-در تست واقعی حالتی مشاهده شد که تصاویر با موفقیت داخل <code>Google Drive</code> قرار گرفته بودند، اما لینک آنها داخل ستون‌های <code>Entry Screenshot</code> و <code>Exit Screenshot</code> نوشته نمی‌شد.
+قابلیت تعمیر لینک تصاویر نسخه قبلی نیز در Backend نسخه 5.8 ادامه پیدا کرده است.
 </p>
 
-<p>در نسخه <code>5.7.1</code> بخش بازیابی لینک تقویت شده است و می‌تواند:</p>
+<p>برای تعمیر لینک تصاویر:</p>
+
+<pre dir="ltr"><code>JournalNevis v5.8
+→ Repair Screenshot Links</code></pre>
+
+<hr>
+
+<h2>حذف اطلاعات یک حساب</h2>
+
+<p>
+ابتدا حساب موردنظر را در
+<span dir="ltr"><code>ACCOUNT VIEW</code></span>
+انتخاب کن.
+</p>
+
+<p>سپس از مسیر زیر برو:</p>
+
+<pre dir="ltr"><code>JournalNevis v5.8
+→ Advanced
+→ Delete Selected Account Data...</code></pre>
+
+<p>
+بعد از تأیید، اطلاعات همان حساب از بخش‌های زیر حذف می‌شوند:
+</p>
 
 <ul>
-<li>معامله را با <code>Trade Key</code> پیدا کند</li>
-<li>در صورت نیاز از <code>Position ID</code> استفاده کند</li>
-<li>پوشه‌های زیرمجموعه Drive را بررسی کند</li>
-<li>پوشه‌های <code>UNKNOWN</code> را نیز جست‌وجو کند</li>
-<li>فایل‌های <code>JN57_</code>، <code>JN56_</code> و <code>TJ5_</code> را تشخیص دهد</li>
-<li>لینک‌های سالم قبلی را حفظ کند</li>
-<li>بدون Upload مجدد تصویر، لینک فایل موجود در Drive را برگرداند</li>
+<li><span dir="ltr"><code>Trades</code></span></li>
+<li><span dir="ltr"><code>Executions</code></span></li>
+<li><span dir="ltr"><code>Cash Flow</code></span></li>
+<li><span dir="ltr"><code>Accounts</code></span></li>
+<li><span dir="ltr"><code>Equity History</code></span></li>
 </ul>
 
-<p>برای تعمیر لینک‌ها از منوی JournalNevis گزینه زیر را اجرا کن:</p>
+<p>
+<strong>مهم:</strong>
+تصاویر موجود در
+<span dir="ltr"><code>Google Drive</code></span>
+با این دستور حذف نمی‌شوند.
+</p>
 
-</div>
+<hr>
 
-```text
-Repair Screenshot Links
-```
+<h2>خطای AVX2 و سازگاری با کامپیوترهای دیگر</h2>
 
-<div dir="rtl" align="right">
+<p>
+اگر MetaTrader پیامی مشابه زیر نمایش داد:
+</p>
+
+<pre dir="ltr"><code>your CPU architecture does not allow to run the file:
+AVX2 required, you have AVX only
+
+loading failed [568]</code></pre>
+
+<p>
+مشکل از منطق JournalNevis نیست؛ فایل اجرایی با معماری پردازنده ناسازگار کامپایل شده است.
+</p>
+
+<p>
+برای نسخه عمومی در MetaEditor معماری پردازنده را روی
+<span dir="ltr"><code>X64 Regular</code></span>
+قرار بده و دوباره کامپایل کن.
+</p>
+
+<p>
+فایل اجرایی که قبلاً با
+<span dir="ltr"><code>AVX2</code></span>
+ساخته شده باشد، با تغییر تنظیمات Expert روی پردازنده فاقد AVX2 قابل اجرا نمی‌شود.
+</p>
+
+<hr>
 
 <h2>Dashboard</h2>
 
-<p>Dashboard برای نمایش سریع وضعیت حساب و عملکرد معاملاتی طراحی شده است.</p>
+<p>
+تمام آمار Dashboard فقط برای حساب انتخاب‌شده محاسبه می‌شوند.
+</p>
 
 <h3>اطلاعات حساب</h3>
 
 <ul>
-<li><code>Balance</code></li>
-<li><code>Equity</code></li>
-<li><code>Initial Capital</code></li>
-<li><code>Floating P/L</code></li>
+<li><span dir="ltr"><code>Balance</code></span></li>
+<li><span dir="ltr"><code>Equity</code></span></li>
+<li><span dir="ltr"><code>Initial Capital</code></span></li>
+<li><span dir="ltr"><code>Floating P/L</code></span></li>
 </ul>
 
 <h3>عملکرد</h3>
 
 <ul>
-<li><code>Net Profit</code></li>
-<li><code>Gross Profit</code></li>
-<li><code>Gross Loss</code></li>
-<li><code>Win Rate</code></li>
-<li><code>Profit Factor</code></li>
-<li><code>Expected Payoff</code></li>
-<li><code>Recovery Factor</code></li>
+<li><span dir="ltr"><code>Net Profit</code></span></li>
+<li><span dir="ltr"><code>Gross Profit</code></span></li>
+<li><span dir="ltr"><code>Gross Loss</code></span></li>
+<li><span dir="ltr"><code>Win Rate</code></span></li>
+<li><span dir="ltr"><code>Profit Factor</code></span></li>
+<li><span dir="ltr"><code>Expected Payoff</code></span></li>
+<li><span dir="ltr"><code>Recovery Factor</code></span></li>
+<li><span dir="ltr"><code>Total Trades</code></span></li>
 </ul>
 
 <h3>افت سرمایه</h3>
@@ -1060,22 +1141,26 @@ Repair Screenshot Links
 <li>افت سرمایه مطلق</li>
 <li>بیشترین افت سرمایه</li>
 <li>درصد بیشترین افت سرمایه</li>
-<li>حداقل Balance</li>
+<li><span dir="ltr"><code>Relative Drawdown</code></span></li>
+<li>کمترین موجودی</li>
 </ul>
 
-<h3>عملکرد هر Symbol</h3>
+<h3>عملکرد هر نماد</h3>
 
 <ul>
 <li>تعداد معاملات</li>
-<li>تعداد برد و باخت</li>
-<li><code>Win Rate</code></li>
-<li><code>Net P/L</code></li>
-<li><code>Profit Factor</code></li>
-<li><code>Commission</code></li>
-<li>بهترین و بدترین معامله</li>
+<li>تعداد برد</li>
+<li>تعداد باخت</li>
+<li><span dir="ltr"><code>Win Rate</code></span></li>
+<li><span dir="ltr"><code>Net P/L</code></span></li>
+<li><span dir="ltr"><code>Profit Factor</code></span></li>
+<li><span dir="ltr"><code>Commission</code></span></li>
+<li>میانگین معامله</li>
+<li>بهترین معامله</li>
+<li>بدترین معامله</li>
 <li>میانگین زمان نگهداری</li>
 <li>حجم معاملات</li>
-<li>تعداد معاملات Long و Short</li>
+<li>تعداد معاملات خرید و فروش</li>
 </ul>
 
 <hr>
@@ -1083,7 +1168,14 @@ Repair Screenshot Links
 <h2>Trades Sheet</h2>
 
 <p>
-اطلاعاتی مانند Symbol، جهت، حجم، زمان ورود و خروج، قیمت‌ها، Stop Loss، Take Profit، سود و زیان، Commission، مدت معامله و لینک تصاویر می‌توانند به صورت خودکار ثبت شوند.
+برگه
+<span dir="ltr"><code>Trades</code></span>
+بین همه حساب‌ها مشترک است.
+اطلاعات حساب و کلید معامله باعث می‌شوند معاملات حساب‌های مختلف از هم تفکیک شوند.
+</p>
+
+<p>
+اطلاعات خودکار می‌توانند شامل نماد، جهت، حجم، زمان ورود و خروج، قیمت‌ها، حد ضرر، حد سود، سود و زیان، کمیسیون، مدت معامله، منبع و لینک تصاویر باشند.
 </p>
 
 <hr>
@@ -1091,95 +1183,32 @@ Repair Screenshot Links
 <h2>بخش دستی Review</h2>
 
 <p>
-ثبت خودکار نشان می‌دهد <strong>چه اتفاقی افتاده است</strong>؛ اما یک Journal خوب باید به بررسی <strong>دلیل تصمیم</strong> هم کمک کند.
+ثبت خودکار نشان می‌دهد چه اتفاقی افتاده است؛ اما Review دستی به بررسی دلیل تصمیم کمک می‌کند.
 </p>
 
 <table>
 <tr><th>فیلد</th><th>مثال</th></tr>
-<tr><td>Setup</td><td><code>Pullback</code></td></tr>
-<tr><td>Entry Reason</td><td>ورود پس از Retest</td></tr>
-<tr><td>Emotion</td><td><code>FOMO</code></td></tr>
-<tr><td>Mistake</td><td><code>Early Entry</code></td></tr>
-<tr><td>Notes</td><td>ورود قبل از تأیید کندل</td></tr>
-<tr><td>Review Status</td><td><code>Reviewed</code></td></tr>
+<tr><td><span dir="ltr"><code>Setup</code></span></td><td><span dir="ltr"><code>Pullback</code></span></td></tr>
+<tr><td><span dir="ltr"><code>Entry Reason</code></span></td><td>ورود پس از برگشت به سطح شکسته‌شده</td></tr>
+<tr><td><span dir="ltr"><code>Emotion</code></span></td><td><span dir="ltr"><code>FOMO</code></span></td></tr>
+<tr><td><span dir="ltr"><code>Mistake</code></span></td><td><span dir="ltr"><code>Early Entry</code></span></td></tr>
+<tr><td><span dir="ltr"><code>Notes</code></span></td><td>ورود قبل از تأیید</td></tr>
+<tr><td><span dir="ltr"><code>Review Status</code></span></td><td><span dir="ltr"><code>Reviewed</code></span></td></tr>
 </table>
-
-<p>
-بعضی از این فیلدها Dropdown دارند تا ثبت اطلاعات سریع‌تر و یکدست‌تر باشد.
-</p>
-
-<hr>
-
-<h2>حذف اطلاعات یک Account</h2>
-
-<p>
-ابتدا Account موردنظر را در <code>ACCOUNT VIEW</code> انتخاب کن.
-</p>
-
-<p>سپس از مسیر زیر برو:</p>
-
-</div>
-
-```text
-JournalNevis v5.8
-→ Advanced
-→ Delete Selected Account Data...
-```
-
-<div dir="rtl" align="right">
-
-<p>
-بعد از تأیید، اطلاعات Account از Trades، Executions، Cash Flow، Accounts و Equity History حذف می‌شوند.
-</p>
-
-<p>
-<strong>مهم:</strong> Screenshotهای موجود در Google Drive حذف نمی‌شوند.
-</p>
-
-<hr>
-
-<h2>خطای AVX2 و X64 Regular</h2>
-
-<p>
-اگر روی یک کامپیوتر پیام زیر را دیدی:
-</p>
-
-</div>
-
-```text
-your CPU architecture does not allow to run the file:
-AVX2 required, you have AVX only
-
-loading failed [568]
-```
-
-<div dir="rtl" align="right">
-
-<p>
-مشکل از منطق JournalNevis نیست. فایل EX5 با معماری CPU ناسازگار Compile شده است.
-</p>
-
-<p>
-برای نسخه عمومی، در MetaEditor معماری CPU را روی <code>X64 Regular</code> قرار بده و دوباره Compile کن.
-</p>
-
-<p>
-فایل EX5 که قبلاً با AVX2 ساخته شده باشد، با تغییر Inputهای Expert روی CPU فاقد AVX2 قابل اجرا نمی‌شود.
-</p>
 
 <hr>
 
 <h2>حریم خصوصی</h2>
 
 <ul>
-<li>Apps Script را خودت Deploy می‌کنی</li>
-<li>Google Sheet متعلق به خودت است</li>
-<li>تصاویر داخل Google Drive خودت قرار می‌گیرند</li>
-<li>API Secret تحت کنترل خودت است</li>
+<li>اسکریپت را خودت منتشر می‌کنی.</li>
+<li>فایل Google Sheet متعلق به خودت است.</li>
+<li>تصاویر داخل Google Drive خودت قرار می‌گیرند.</li>
+<li>API Secret تحت کنترل خودت است.</li>
 </ul>
 
 <p>
-در Workflow فعلی نیازی نیست تاریخچه معاملات داخل یک دیتابیس مرکزی JournalNevis ذخیره شود.
+در Workflow فعلی نیازی به ذخیره تاریخچه معاملات روی یک دیتابیس مرکزی JournalNevis وجود ندارد.
 </p>
 
 <hr>
@@ -1187,7 +1216,7 @@ loading failed [568]
 <h2>وضعیت پروژه</h2>
 
 <p>
-JournalNevis فعلاً <strong>رایگان</strong> منتشر می‌شود و مرحله‌به‌مرحله بر اساس تست واقعی و استفاده عملی توسعه پیدا می‌کند.
+JournalNevis فعلاً رایگان منتشر می‌شود و مرحله‌به‌مرحله بر اساس تست واقعی و استفاده عملی توسعه پیدا می‌کند.
 </p>
 
 <hr>
@@ -1196,14 +1225,14 @@ JournalNevis فعلاً <strong>رایگان</strong> منتشر می‌شود �
 
 <ul>
 <li>نصب آسان‌تر</li>
-<li>آموزش بهتر</li>
-<li>Account Alias</li>
-<li>Portfolio View برای چند Account</li>
+<li>نام مستعار برای حساب‌ها</li>
+<li>نمای کلی چندحسابی</li>
 <li>تحلیل رفتاری بیشتر</li>
 <li>گزارش‌ها و نمودارهای بیشتر</li>
-<li>فرآیند Update ساده‌تر</li>
-<li>سایت <code>JournalNevis.ir</code></li>
-<li>بررسی پشتیبانی از نسخه‌ها یا پلتفرم‌های معاملاتی دیگر</li>
+<li>فرآیند به‌روزرسانی ساده‌تر</li>
+<li>مستندات کامل‌تر</li>
+<li>سایت <span dir="ltr"><code>JournalNevis.ir</code></span></li>
+<li>بررسی پشتیبانی از پلتفرم‌ها یا نسخه‌های معاملاتی دیگر</li>
 </ul>
 
 <hr>
@@ -1211,7 +1240,8 @@ JournalNevis فعلاً <strong>رایگان</strong> منتشر می‌شود �
 <h2>حمایت از پروژه</h2>
 
 <p>
-JournalNevis رایگان است. در آینده ممکن است امکان حمایت داوطلبانه برای کمک به توسعه، تست، مستندسازی و هزینه‌های پروژه اضافه شود.
+JournalNevis رایگان است.
+در آینده ممکن است امکان حمایت داوطلبانه برای کمک به توسعه، تست، مستندسازی و هزینه‌های پروژه اضافه شود.
 </p>
 
 <hr>
