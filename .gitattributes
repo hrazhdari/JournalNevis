@@ -1,0 +1,27 @@
+# Documentation
+*.md linguist-documentation=true
+*.txt linguist-documentation=true
+
+# Images and binary assets
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.xlsx binary
+*.ex5 binary
+*.ex4 binary
+*.zip binary
+
+# Google Apps Script
+*.gs linguist-language=JavaScript
+
+# MetaTrader source files
+*.mq5 text
+*.mq4 text
+*.mqh text
+*.mqproj text
+
+# Keep repo stats cleaner
+JournalNevis_Icon.svg linguist-generated=true
+JournalNevis_Wordmark_Dark.svg linguist-generated=true
+JournalNevis_Wordmark_Light.svg linguist-generated=true

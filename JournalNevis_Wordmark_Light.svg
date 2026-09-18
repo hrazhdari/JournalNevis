@@ -1,0 +1,25 @@
+<svg width="1400" height="320" viewBox="0 0 1400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="jnWordGradLight" x1="70" y1="70" x2="250" y2="250" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0891B2"></stop>
+      <stop offset="1" stop-color="#059669"></stop>
+    </linearGradient>
+  </defs>
+
+  <rect x="20" y="40" width="220" height="220" rx="52" fill="#F8FAFC"></rect>
+  <rect x="20" y="40" width="220" height="220" rx="52" stroke="url(#jnWordGradLight)" stroke-width="10"></rect>
+
+  <text x="70" y="180" font-family="Segoe UI, Arial, sans-serif" font-size="96" font-weight="700" fill="#0891B2">JN</text>
+
+  <text x="290" y="140" font-family="Segoe UI, Arial, sans-serif" font-size="78" font-weight="700" fill="#0F172A">JournalNevis</text>
+  <text x="292" y="195" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="500" fill="#475569">Automated Trading Journal</text>
+
+  <rect x="292" y="220" width="210" height="34" rx="17" fill="#E2E8F0"></rect>
+  <text x="316" y="244" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" fill="#0891B2">Google Sheets</text>
+
+  <rect x="516" y="220" width="160" height="34" rx="17" fill="#E2E8F0"></rect>
+  <text x="543" y="244" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" fill="#059669">Journal</text>
+
+  <rect x="690" y="220" width="145" height="34" rx="17" fill="#E2E8F0"></rect>
+  <text x="717" y="244" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700" fill="#D97706">Drive</text>
+</svg>

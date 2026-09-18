@@ -1,0 +1,14 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="jnGrad" x1="80" y1="80" x2="432" y2="432" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22D3EE"></stop>
+      <stop offset="1" stop-color="#34D399"></stop>
+    </linearGradient>
+  </defs>
+
+  <rect x="36" y="36" width="440" height="440" rx="96" fill="#0B1220"></rect>
+  <rect x="36" y="36" width="440" height="440" rx="96" stroke="url(#jnGrad)" stroke-width="18"></rect>
+
+  <path d="M168 150H214V292C214 356 180 388 118 388C102 388 86 386 72 382V338C83 341 94 343 104 343C147 343 168 325 168 285V150Z" fill="#67E8F9"></path>
+  <path d="M266 150H308L396 286V150H440V362H398L310 226V362H266V150Z" fill="#6EE7B7"></path>
+</svg>
