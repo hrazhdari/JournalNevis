@@ -892,7 +892,7 @@ JournalNevis با استفاده از اطلاعات حساب، سرور و شن
 
 <p>
 محتوای فایل
-<span dir="ltr"><code>JournalNevis_v5_8.gs</code></span>
+<span dir="ltr"><code>JournalNevis_v5_8_1_LinkPersistenceFix.gs</code></span>
 را جای‌گذاری و ذخیره کن.
 سپس یک بار تابع زیر را اجرا کن:
 </p>
