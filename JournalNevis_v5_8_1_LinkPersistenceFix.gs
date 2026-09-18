@@ -1,5 +1,5 @@
 /**
- * JournalNevis v5.8 - Google Apps Script backend
+ * JournalNevis v5.8.1 - Google Apps Script backend
  * ------------------------------------------------------------
  * Works with JournalNevis_v5_8.mq5.
  *
@@ -13,7 +13,7 @@
 
 const JOURNALNEVIS = {
   name: 'JournalNevis',
-  version: '5.8.0',
+  version: '5.8.1',
   website: 'https://JournalNevis.ir',
   navy: '#0B1220',
   navy2: '#16243A',
@@ -107,10 +107,11 @@ function onOpen() {
     .addSeparator()
     .addItem('Delete Selected Account Data...', 'deleteSelectedAccountData');
 
-  ui.createMenu('JournalNevis v5.8')
+  ui.createMenu('JournalNevis v5.8.1')
     .addItem('Initialize / Repair JournalNevis', 'setupJournalNevis')
     .addItem('Refresh Dashboard', 'refreshDashboard')
     .addItem('Repair Screenshot Links', 'repairScreenshotLinks')
+    .addItem('Verify Screenshot Link Persistence', 'verifyScreenshotLinkPersistence')
     .addItem('Relink Screenshots from Drive', 'relinkScreenshotsFromDrive')
     .addItem('Normalize / Resequence Trades', 'normalizeAndRefresh')
     .addSeparator()
@@ -238,7 +239,7 @@ function setupJournalNevis() {
   SpreadsheetApp.flush();
 
   SpreadsheetApp.getUi().alert(
-    'JournalNevis v5.8 setup completed.\\n\\n' +
+    'JournalNevis v5.8.1 setup completed.\\n\\n' +
     'Dashboard, Trades, account tracking and screenshot recovery are ready.\\n' +
     'For a clean installation, deploy the Web App and then run FULL SYNC once from MT5.\\n\\n' +
     'IMPORTANT: after changing Apps Script code, create a new Web App deployment version.'
@@ -719,7 +720,7 @@ function handleCashFlow_(ss, p) {
 
   setManyByHeader_(sheet, row, values);
 
-  // JournalNevis v5.8: live writes stay fast. Dashboard/normalization is performed once
+  // JournalNevis v5.8.1: live writes stay fast. Dashboard/normalization is performed once
   // at the end of SYNC TODAY / FULL SYNC (or from the spreadsheet menu).
 
   return jsonResponse_({
@@ -800,7 +801,7 @@ function handleAccountSnapshot_(ss, p) {
 function handleSyncComplete_(ss, p) {
   repairMissingSymbols_(ss);
 
-  // JournalNevis v5.8: schema migration belongs to setupJournalNevis(), not every sync.
+  // JournalNevis v5.8.1: schema migration belongs to setupJournalNevis(), not every sync.
   // Screenshot relinking is its own Stage 3 action.
   compactAndResequenceTrades_(ss);
   normalizeCashFlows_(ss);
@@ -813,7 +814,7 @@ function handleSyncComplete_(ss, p) {
     mode: String(p.sync_mode || ''),
     trades: number_(p.trade_count),
     cash_flows: number_(p.cash_flow_count),
-    message: 'JournalNevis v5.8 Stage 4 completed; rows preserved and dashboard refreshed once.'
+    message: 'JournalNevis v5.8.1 Stage 4 completed; rows preserved and dashboard refreshed once.'
   });
 }
 
@@ -1290,23 +1291,22 @@ function repairMissingSymbols_(ss) {
     if (pos) byPos[pos] = sym;
   });
 
-  const range = trades.getRange(2,1,trades.getLastRow()-1,trades.getLastColumn());
-  const rows = range.getValues();
-  let changed = false;
+  const lastRow = trades.getLastRow();
+  const rows = trades.getRange(2,1,lastRow-1,trades.getLastColumn()).getValues();
+  const symbolCol = tmap['Symbol'];
 
-  rows.forEach(r => {
-    const col = tmap['Symbol']-1;
-    if (String(r[col] || '').trim()) return;
+  // v5.8.1: write ONLY missing Symbol cells.
+  // Do not rewrite the entire Trades range because setValues() converts
+  // RichText screenshot hyperlinks into plain display text.
+  rows.forEach((r, i) => {
+    if (String(r[symbolCol-1] || '').trim()) return;
+
     const key = String(r[tmap['Trade Key']-1] || '');
     const pos = String(r[tmap['Position ID']-1] || '');
     const sym = byKey[key] || byPos[pos] || '';
-    if (sym) {
-      r[col] = sym;
-      changed = true;
-    }
-  });
 
-  if (changed) range.setValues(rows);
+    if (sym) trades.getRange(i + 2, symbolCol).setValue(sym);
+  });
 }
 
 function mt5DrawdownStats_(events, initialCapital) {
@@ -1706,12 +1706,16 @@ function normalizeTradeSchemaV5_(sheet) {
   const formulas = lastRow >= 2
     ? sheet.getRange(2,1,lastRow-1,lastCol).getFormulas()
     : [];
+  const richValues = lastRow >= 2
+    ? sheet.getRange(2,1,lastRow-1,lastCol).getRichTextValues()
+    : [];
 
   const oldMap = {};
   oldHeaders.forEach((h,i)=>{ if(h) oldMap[h]=i; });
 
   const out = rows.map(r => desired.map(h => oldMap[h] !== undefined ? r[oldMap[h]] : ''));
   const outFormulas = formulas.map(r => desired.map(h => oldMap[h] !== undefined ? r[oldMap[h]] : ''));
+  const outRich = richValues.map(r => desired.map(h => oldMap[h] !== undefined ? r[oldMap[h]] : null));
 
   sheet.clearContents();
   sheet.getRange(1,1,1,desired.length).setValues([desired]);
@@ -1721,6 +1725,14 @@ function normalizeTradeSchemaV5_(sheet) {
       for (let cc=0; cc<outFormulas[rr].length; cc++) {
         if (outFormulas[rr][cc]) sheet.getRange(rr+2,cc+1).setFormula(outFormulas[rr][cc]);
       }
+
+      // v5.8.1: also restore RichText screenshot URLs after schema repair.
+      ['Entry Screenshot','Exit Screenshot'].forEach(header => {
+        const cc = desired.indexOf(header);
+        if (cc < 0) return;
+        const rich = outRich[rr] ? outRich[rr][cc] : null;
+        if (richTextHasAnyLink_(rich)) sheet.getRange(rr+2,cc+1).setRichTextValue(rich);
+      });
     }
   }
   formatTradeSheetV5_(sheet);
@@ -2046,6 +2058,44 @@ function collectScreenshotFilesParsed_(folder, out) {
   }
   const folders = folder.getFolders();
   while (folders.hasNext()) collectScreenshotFilesParsed_(folders.next(), out);
+}
+
+
+function verifyScreenshotLinkPersistence() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = getOrCreateSheet_(ss, SETTINGS.tradesSheet);
+  ensureHeaders_(sheet, TRADE_HEADERS);
+
+  const map = headerMap_(sheet);
+  if (sheet.getLastRow() < 2) {
+    SpreadsheetApp.getUi().alert('No trades found.');
+    return;
+  }
+
+  let linked = 0;
+  let textOnly = 0;
+  let blank = 0;
+
+  for (let row = 2; row <= sheet.getLastRow(); row++) {
+    ['Entry Screenshot','Exit Screenshot'].forEach(header => {
+      const cell = sheet.getRange(row, map[header]);
+      const display = String(cell.getDisplayValue() || '').trim();
+
+      if (screenshotCellHasLink_(sheet,row,header)) linked++;
+      else if (display) textOnly++;
+      else blank++;
+    });
+  }
+
+  SpreadsheetApp.getUi().alert(
+    'JournalNevis v5.8.1 screenshot link check\\n\\n' +
+    'Clickable links: ' + linked + '\\n' +
+    'Text without URL: ' + textOnly + '\\n' +
+    'Blank screenshot cells: ' + blank + '\\n\\n' +
+    (textOnly > 0
+      ? 'Run Repair Screenshot Links once to restore the missing URLs.'
+      : 'No stripped screenshot URLs were detected.')
+  );
 }
 
 function repairScreenshotLinks() {
@@ -2682,6 +2732,33 @@ function refreshDashboard(){
   repairMissingSymbols_(ss);compactAndResequenceTrades_(ss);normalizeCashFlows_(ss);refreshAnalyticsAndDashboard_(ss);hideSystemSheets_(ss);
 }
 
+
+function richTextHasAnyLink_(rich) {
+  if (!rich) return false;
+  try {
+    if (rich.getLinkUrl && rich.getLinkUrl()) return true;
+    const runs = rich.getRuns ? rich.getRuns() : [];
+    return runs.some(r => r.getLinkUrl && r.getLinkUrl());
+  } catch (ignore) {
+    return false;
+  }
+}
+
+function restoreScreenshotRichTextLinks_(sheet, row, map, richValues) {
+  if (!richValues) return;
+
+  ['Entry Screenshot','Exit Screenshot'].forEach(header => {
+    const col = map[header];
+    if (!col) return;
+
+    const rich = richValues[col - 1];
+    if (!richTextHasAnyLink_(rich)) return;
+
+    // Restore the exact RichTextValue after any row-wide setValues().
+    sheet.getRange(row, col).setRichTextValue(rich);
+  });
+}
+
 // v5 fast batch overrides -----------------------------------------------------
 function fastUpsertTradeBatchV5_(ss, trades) {
   const sheet=getOrCreateSheet_(ss,SETTINGS.tradesSheet);
@@ -2702,6 +2779,7 @@ function fastUpsertTradeBatchV5_(ss, trades) {
     const range=sheet.getRange(row,1,1,lastCol);
     const vals=isNew?Array(lastCol).fill(''):range.getValues()[0];
     const formulas=isNew?Array(lastCol).fill(''):range.getFormulas()[0];
+    const richValues=isNew?Array(lastCol).fill(null):range.getRichTextValues()[0];
     const put=(h,v,blankOK=true)=>{const c=map[h];if(!c)return;if(blankOK||v!==''&&v!==null&&v!==undefined)vals[c-1]=v;};
     const openDate=dateFromMillis_(p.open_time_ms), closeDate=dateFromMillis_(p.close_time_ms), status=String(p.status||'');
     put('Trade Key',key);put('Position ID',text_(p.position_id));put('Account Login',text_(p.account_login));put('Server',p.server||'');put('Broker',p.broker||'');
@@ -2719,8 +2797,13 @@ function fastUpsertTradeBatchV5_(ss, trades) {
       const hasLink=linkCol && (formulas[linkCol-1]||String(vals[linkCol-1]||'').trim()); if(!hasLink && !String(vals[statusCol-1]||'').includes('Captured'))vals[statusCol-1]=x[3];
     });
     range.setValues([vals]);
-    // restore all formulas (primarily screenshot hyperlinks) that existed before the batch write
+
+    // Preserve both legacy HYPERLINK formulas and the newer RichText screenshot links.
+    // Without this, a later SYNC_BATCH can leave the visible text "📷 Entry/Exit"
+    // in the cell while silently removing the clickable URL.
     formulas.forEach((f,i)=>{if(f)sheet.getRange(row,i+1).setFormula(f);});
+    restoreScreenshotRichTextLinks_(sheet,row,map,richValues);
+
     count++;
   });
   return count;
