@@ -1,10 +1,12 @@
 <div align="center">
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="JournalNevis_Wordmark_Dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="JournalNevis_Wordmark_Light.svg">
-  <img src="JournalNevis_Wordmark_Dark.svg" alt="JournalNevis" width="620">
-</picture>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="JournalNevis_Wordmark_Dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="JournalNevis_Wordmark_Light.svg">
+    <img src="JournalNevis_Wordmark_Dark.svg" alt="JournalNevis" width="620">
+  </picture>
+</p>
 
 <br>
 
@@ -16,10 +18,11 @@
 
 ![Version](https://img.shields.io/badge/version-v5.8.2-2DE0B6?style=for-the-badge&labelColor=0B1220)
 ![Project](https://img.shields.io/badge/project-free-16A34A?style=for-the-badge&labelColor=0B1220)
-![Current Integration](https://img.shields.io/badge/current_integration-MetaTrader_5-2563EB?style=for-the-badge&labelColor=0B1220)
+![Multi Account](https://img.shields.io/badge/dashboard-multi--account-7C3AED?style=for-the-badge&labelColor=0B1220)
+![Platform](https://img.shields.io/badge/platform-MetaTrader_5-2563EB?style=for-the-badge&labelColor=0B1220)
 ![Backend](https://img.shields.io/badge/backend-Google_Apps_Script-F4B400?style=for-the-badge&labelColor=0B1220)
 ![Dashboard](https://img.shields.io/badge/dashboard-Google_Sheets-0F9D58?style=for-the-badge&labelColor=0B1220)
-![Screenshots](https://img.shields.io/badge/screenshots-Google_Drive-4285F4?style=for-the-badge&labelColor=0B1220)
+![Storage](https://img.shields.io/badge/storage-Google_Drive-4285F4?style=for-the-badge&labelColor=0B1220)
 
 <br>
 
@@ -33,727 +36,37 @@
 
 <div dir="rtl" align="right">
 
-<h1>فارسی</h1>
+# فارسی
 
-<h2>معرفی JournalNevis</h2>
+## JournalNevis چیست؟
 
-<p>
-<strong>JournalNevis</strong> یک پروژه رایگان برای <strong>ژورنال‌نویسی خودکار معاملات</strong> است.
-هدف پروژه این است که کارهای تکراری ثبت معامله کمتر شود و معامله‌گر زمان بیشتری را صرف مرور معاملات، بررسی روش‌های ورود، شناخت اشتباهات و تحلیل عملکرد کند.
-</p>
+**JournalNevis** یک پروژه رایگان برای ژورنال‌نویسی خودکار معاملات است.
 
-<p>
-در نسخه <span dir="ltr"><code>5.8.2</code></span>، پشتیبانی واقعی از چند حساب به داشبورد اضافه شده است.
-چند حساب می‌توانند اطلاعات خود را در یک فایل مشترک نگهداری کنند، اما داشبورد در هر لحظه فقط اطلاعات <strong>یک حساب انتخاب‌شده</strong> را محاسبه و نمایش می‌دهد.
-</p>
+هدف پروژه این است که کارهای تکراری ثبت معامله کمتر شود و معامله‌گر زمان بیشتری را صرف مرور عملکرد، روش ورود، اشتباهات، احساسات و تصمیم‌های معاملاتی کند.
 
-<p>
-اطلاعات معاملات از ابزار سمت پلتفرم معاملاتی دریافت می‌شود، از طریق
-<span dir="ltr"><code>Google Apps Script</code></span>
-به
-<span dir="ltr"><code>Google Sheets</code></span>
-فرستاده می‌شود و تصاویر ورود و خروج در
-<span dir="ltr"><code>Google Drive</code></span>
-ذخیره می‌شوند.
-</p>
+در نسخه فعلی:
 
-<blockquote>
-<strong>کمتر اطلاعات را دستی وارد کن؛ بیشتر معاملاتت را بررسی کن.</strong>
-</blockquote>
+- اطلاعات معامله داخل فایل Google Sheets ثبت می‌شود.
+- تصاویر ورود و خروج داخل Google Drive ذخیره می‌شوند.
+- چند حساب می‌توانند از یک فایل مشترک استفاده کنند.
+- داشبورد فقط اطلاعات حساب انتخاب‌شده را نشان می‌دهد.
+- معاملات زنده می‌توانند داشبورد را بدون Sync دستی به‌روزرسانی کنند.
 
-<p>
-<strong>نکته مهم:</strong>
-JournalNevis یک ابزار ژورنال و تحلیل است و خودش هیچ معامله‌ای را باز، بسته یا ویرایش نمی‌کند.
-</p>
+> **نکته مهم:** JournalNevis فقط ابزار ژورنال و تحلیل است و خودش هیچ معامله‌ای را باز، بسته یا ویرایش نمی‌کند.
 
-<hr>
+---
 
-<h2>تغییرات اصلی نسخه 5.8.2</h2>
+## تغییرات نسخه 5.8.2
 
-<h3>تصاویر استانداردتر و خواناتر</h3>
+### تصویرهای استانداردتر و خواناتر
 
-<p>
-در نسخه <span dir="ltr"><code>5.8.2</code></span> تنظیمات پیش‌فرض Screenshot تغییر کرده تا تصویر روی مانیتورهای عریض بیش از حد کشیده نشود و کندل‌ها خواناتر باقی بمانند.
-</p>
+در نسخه 5.8.2، اندازه پیش‌فرض تصویر تغییر کرده تا روی مانیتورهای عریض، عکس بیش از حد کشیده نشود و کندل‌ها واضح‌تر باقی بمانند.
 
-<pre dir="ltr"><code>InpUseActualChartSize = false
-InpScreenshotMaxWidth = 1440
-InpScreenshotMaxHeight = 960
-InpScreenshotFallbackWidth = 1440
-InpScreenshotFallbackHeight = 900</code></pre>
-
-<p>
-این تنظیمات تعادل مناسبی بین کیفیت تصویر و حجم فایل ایجاد می‌کنند.
-اگر بخواهی دقیقاً ابعاد پنجره فعلی چارت گرفته شود، می‌توانی
-<span dir="ltr"><code>InpUseActualChartSize = true</code></span>
-را فعال کنی.
-</p>
-
-<h3>به‌روزرسانی خودکار Dashboard</h3>
-
-<p>
-قبلاً ممکن بود معامله در
-<span dir="ltr"><code>Trades</code></span>
-ثبت شده باشد اما Dashboard تا زمان Sync یا Refresh دستی تغییر نکند.
-</p>
-
-<p>
-در نسخه <span dir="ltr"><code>5.8.2</code></span>، بعد از رسیدن Live trade/account update، Dashboard برای حسابی که در
-<span dir="ltr"><code>ACCOUNT VIEW</code></span>
-انتخاب شده است به‌صورت خودکار Refresh می‌شود.
-اگر فقط یک حساب در فایل باقی مانده باشد، همان حساب به‌صورت خودکار استفاده می‌شود.
-</p>
-
-<h3>حفظ اصلاح لینک Screenshotها</h3>
-
-<p>
-اصلاح نسخه <span dir="ltr"><code>5.8.1</code></span> همچنان داخل نسخه جدید وجود دارد.
-بنابراین لینک‌های
-<span dir="ltr"><code>📷 Entry</code></span>
-و
-<span dir="ltr"><code>📷 Exit</code></span>
-بعد از مراحل بعدی Sync نباید به متن بدون لینک تبدیل شوند.
-</p>
-
-<h3>داشبورد چندحسابی</h3>
-
-<p>
-در بالای داشبورد بخش
-<span dir="ltr"><code>ACCOUNT VIEW</code></span>
-قرار دارد.
-با انتخاب هر حساب، تمام محاسبات داشبورد فقط برای همان حساب انجام می‌شوند.
-</p>
-
-<ul>
-<li><span dir="ltr"><code>Balance</code></span> و <span dir="ltr"><code>Equity</code></span></li>
-<li><span dir="ltr"><code>Initial Capital</code></span></li>
-<li><span dir="ltr"><code>Net P/L</code></span></li>
-<li><span dir="ltr"><code>Win Rate</code></span></li>
-<li><span dir="ltr"><code>Profit Factor</code></span></li>
-<li><span dir="ltr"><code>Drawdown</code></span></li>
-<li><span dir="ltr"><code>Commission</code></span></li>
-<li>روندهای برد و باخت متوالی</li>
-<li>عملکرد هر نماد</li>
-<li>سود و زیان ماهانه</li>
-<li>تمام نمودارهای داشبورد</li>
-</ul>
-
-<p>
-اطلاعات حساب‌های دیگر با داشبورد حساب انتخاب‌شده ترکیب نمی‌شوند.
-</p>
-
-<h3>جریان مالی مستقل برای هر حساب</h3>
-
-<p>
-واریز، برداشت، سرمایه اولیه، جریان نقدی تجمعی و منحنی موجودی برای هر حساب جداگانه محاسبه می‌شوند.
-</p>
-
-<h3>حذف حساب از فایل</h3>
-
-<p>
-در بخش پیشرفته می‌توانی حساب انتخاب‌شده را از فایل حذف کنی، بدون اینکه تصاویر موجود در
-<span dir="ltr"><code>Google Drive</code></span>
-پاک شوند.
-</p>
-
-<h3>سازگاری بهتر با پردازنده‌های مختلف</h3>
-
-<p>
-برای نسخه عمومی فایل اجرایی پیشنهاد می‌شود فایل با هدف
-<span dir="ltr"><code>X64 Regular</code></span>
-کامپایل شود.
-</p>
-
-<hr>
-
-<h2>قابلیت‌های اصلی</h2>
-
-<ul>
-<li>ثبت خودکار معاملات زنده و تاریخچه حساب</li>
-<li>پشتیبانی از چند حساب در یک فایل مشترک</li>
-<li>داشبورد مستقل برای حساب انتخاب‌شده</li>
-<li>ذخیره تصویر ورود با عنوان <span dir="ltr"><code>Entry Screenshot</code></span></li>
-<li>ذخیره تصویر خروج با عنوان <span dir="ltr"><code>Exit Screenshot</code></span></li>
-<li>ذخیره تصاویر در <span dir="ltr"><code>Google Drive</code></span> خود کاربر</li>
-<li>ثبت اطلاعات معاملات در <span dir="ltr"><code>Google Sheets</code></span></li>
-<li>تحلیل عملکرد هر نماد</li>
-<li>محاسبه افت سرمایه برای حساب انتخاب‌شده</li>
-<li>ثبت واریز و برداشت برای هر حساب</li>
-<li>بازیابی تصاویر و لینک‌های قدیمی</li>
-<li>همگام‌سازی روزانه با <span dir="ltr"><code>SYNC TODAY</code></span></li>
-<li>بازسازی کامل با <span dir="ltr"><code>FULL SYNC</code></span></li>
-<li>ثبت دستی روش ورود، دلیل ورود، احساس، اشتباه، یادداشت و وضعیت بررسی</li>
-</ul>
-
-<hr>
-
-<h2>ساختار چندحسابی</h2>
-
-<pre dir="ltr"><code>Account A → JournalNevis ─┐
-                          │
-Account B → JournalNevis ─┼──► Google Apps Script
-                          │            │
-Account C → JournalNevis ─┘            │
-                                       ├──► Google Sheets
-                                       │    Trades / Dashboard / Accounts
-                                       │
-                                       └──► Google Drive
-                                            Entry / Exit Screenshots</code></pre>
-
-<p>
-هر ترمینال فقط تاریخچه حسابی را می‌خواند که در همان لحظه به آن متصل است.
-فایل Google Sheet محل جمع‌شدن اطلاعات حساب‌های مختلف است.
-</p>
-
-<hr>
-
-<h2>مدیریت چند حساب</h2>
-
-<p>
-در داشبورد از بخش
-<span dir="ltr"><code>ACCOUNT VIEW</code></span>
-می‌توانی حساب موردنظر را انتخاب کنی.
-</p>
-
-<p>
-کلید هر حساب بر اساس ترکیب شماره ورود و سرور ساخته می‌شود:
-</p>
-
-<pre dir="ltr"><code>Account Login | Server</code></pre>
-
-<p>برای مثال:</p>
-
-<pre dir="ltr"><code>20279432 | WMMarkets-Demo
-58423981 | WMMarkets-Demo</code></pre>
-
-<p>
-تمام حساب‌ها همچنان داخل یک برگه مشترک با نام
-<span dir="ltr"><code>Trades</code></span>
-نگهداری می‌شوند.
-JournalNevis با استفاده از اطلاعات حساب، سرور و شناسه‌های معامله، معاملات حساب‌های مختلف را از هم جدا نگه می‌دارد.
-</p>
-
-<p>
-برگه
-<span dir="ltr"><code>Accounts</code></span>
-آخرین وضعیت هر حساب متصل را نگهداری می‌کند.
-</p>
-
-<hr>
-
-<h2>آموزش نصب نسخه 5.8.2</h2>
-
-<h3>مرحله ۱ — ساخت فایل Google Sheet</h3>
-
-<p>
-فایل
-<span dir="ltr"><code>JournalNevis_v5_8_2_Template.xlsx</code></span>
-را داخل
-<span dir="ltr"><code>Google Drive</code></span>
-آپلود کن و با
-<span dir="ltr"><code>Google Sheets</code></span>
-باز کن.
-</p>
-
-<p>برگه‌های اصلی:</p>
-
-<ul>
-<li><span dir="ltr"><code>Dashboard</code></span></li>
-<li><span dir="ltr"><code>Trades</code></span></li>
-<li><span dir="ltr"><code>Accounts</code></span></li>
-<li><span dir="ltr"><code>Settings</code></span></li>
-<li><span dir="ltr"><code>Help</code></span></li>
-</ul>
-
-<h3>مرحله ۲ — نصب Google Apps Script</h3>
-
-<p>از داخل فایل Google Sheet وارد مسیر زیر شو:</p>
-
-<pre dir="ltr"><code>Extensions → Apps Script</code></pre>
-
-<p>
-محتوای فایل
-<span dir="ltr"><code>JournalNevis_v5_8_2.gs</code></span>
-را جای‌گذاری و ذخیره کن.
-سپس یک بار تابع زیر را اجرا کن:
-</p>
-
-<pre dir="ltr"><code>setupJournalNevis()</code></pre>
-
-<p>
-در اولین اجرا ممکن است Google برای دسترسی‌های موردنیاز درخواست تأیید نمایش دهد.
-</p>
-
-<h3>مرحله ۳ — ساخت Web App</h3>
-
-<p>از مسیر زیر استفاده کن:</p>
-
-<pre dir="ltr"><code>Deploy
-→ New deployment
-→ Web app</code></pre>
-
-<p>
-آدرس نهایی مورد استفاده JournalNevis باید به
-<span dir="ltr"><code>/exec</code></span>
-ختم شود.
-</p>
-
-<p>
-مقدار شخصی
-<span dir="ltr"><code>API Secret</code></span>
-را در GitHub یا تصاویر و فایل‌های عمومی منتشر نکن.
-</p>
-
-<h3>مرحله ۴ — فعال‌کردن WebRequest</h3>
-
-<p>داخل MetaTrader از مسیر زیر برو:</p>
-
-<pre dir="ltr"><code>Tools
-→ Options
-→ Expert Advisors</code></pre>
-
-<p>
-گزینه
-<span dir="ltr"><code>Allow WebRequest for listed URL</code></span>
-را فعال کن.
-</p>
-
-<p>
-بعد <strong>هر دو آدرس زیر</strong> را به لیست اضافه کن:
-</p>
-
-<pre dir="ltr"><code>https://script.google.com
-https://script.googleusercontent.com</code></pre>
-
-<p>
-وجود هر دو آدرس توصیه می‌شود، چون ارتباط
-<span dir="ltr"><code>Google Apps Script</code></span>
-می‌تواند از دامنه اصلی و دامنه محتوای Google استفاده کند.
-</p>
-
-<p>در نهایت این قسمت باید تقریباً شبیه این باشد:</p>
-
-<pre dir="ltr"><code>Experts
-☑ Allow algorithmic trading
-☑ Allow WebRequest for listed URL:
-
-https://script.google.com
-https://script.googleusercontent.com</code></pre>
-
-
-<hr>
-
-<h2>اولین راه‌اندازی</h2>
-
-<ol>
-<li>قالب نسخه 5.8.2 را وارد کن.</li>
-<li>اسکریپت نسخه 5.8.2 را نصب کن.</li>
-<li>تابع <span dir="ltr"><code>setupJournalNevis()</code></span> را اجرا کن.</li>
-<li>وب‌اپ را منتشر کن.</li>
-<li>Expert را با <span dir="ltr"><code>X64 Regular</code></span> کامپایل کن.</li>
-<li>JournalNevis را به حساب اول متصل کن.</li>
-<li>اتصال را بررسی کن.</li>
-<li>برای حساب اول یک بار <span dir="ltr"><code>FULL SYNC</code></span> اجرا کن.</li>
-<li>برای هر حساب دیگری که می‌خواهی اضافه کنی، همگام‌سازی کامل اولیه را از ترمینال همان حساب اجرا کن.</li>
-</ol>
-
-<p>مراحل همگام‌سازی:</p>
-
-<pre dir="ltr"><code>Stage 1/4  Account / Funding
-Stage 2/4  Trades / Executions
-Stage 3/4  Screenshots
-Stage 4/4  Dashboard / Finalize</code></pre>
-
-<hr>
-
-<h2>تفاوت SYNC TODAY و FULL SYNC</h2>
-
-<h3><span dir="ltr"><code>SYNC TODAY</code></span></h3>
-
-<p>
-برای استفاده روزانه است و روی فعالیت همان روز تمرکز می‌کند.
-</p>
-
-<h3><span dir="ltr"><code>FULL SYNC</code></span></h3>
-
-<p>
-برای بازسازی کامل تاریخچه حسابی است که ترمینال در همان لحظه به آن متصل است.
-</p>
-
-<p>مناسب برای:</p>
-
-<ul>
-<li>نصب اولیه</li>
-<li>اضافه‌کردن حساب به Journal جدید</li>
-<li>بازسازی اطلاعات حذف‌شده</li>
-<li>بازیابی تاریخچه قدیمی</li>
-<li>بازیابی تصاویر</li>
-<li>بررسی کامل حساب</li>
-</ul>
-
-<p>
-لازم نیست بعد از هر معامله
-<span dir="ltr"><code>FULL SYNC</code></span>
-اجرا شود.
-</p>
-
-<hr>
-
-<h2>تصاویر و بازیابی آنها</h2>
-
-<p>
-JournalNevis تصاویر ورود و خروج را ابتدا به‌صورت محلی ذخیره می‌کند و سپس آنها را به Google Drive می‌فرستد و به معامله مربوطه متصل می‌کند.
-</p>
-
-<p>نسخه 5.8.2 برای سازگاری با نسل‌های قبلی این نام‌ها را شناسایی می‌کند:</p>
-
-<pre dir="ltr"><code>JN58_
-JN57_
-JN56_
-TJ5_</code></pre>
-
-<p>
-قابلیت تعمیر لینک تصاویر نسخه قبلی نیز در Backend نسخه 5.8.2 ادامه پیدا کرده است.
-</p>
-
-<p>برای تعمیر لینک تصاویر:</p>
-
-<pre dir="ltr"><code>JournalNevis v5.8.2
-→ Repair Screenshot Links</code></pre>
-
-<hr>
-
-<h2>حذف اطلاعات یک حساب</h2>
-
-<p>
-ابتدا حساب موردنظر را در
-<span dir="ltr"><code>ACCOUNT VIEW</code></span>
-انتخاب کن.
-</p>
-
-<p>سپس از مسیر زیر برو:</p>
-
-<pre dir="ltr"><code>JournalNevis v5.8.2
-→ Advanced
-→ Delete Selected Account Data...</code></pre>
-
-<p>
-بعد از تأیید، اطلاعات همان حساب از بخش‌های زیر حذف می‌شوند:
-</p>
-
-<ul>
-<li><span dir="ltr"><code>Trades</code></span></li>
-<li><span dir="ltr"><code>Executions</code></span></li>
-<li><span dir="ltr"><code>Cash Flow</code></span></li>
-<li><span dir="ltr"><code>Accounts</code></span></li>
-<li><span dir="ltr"><code>Equity History</code></span></li>
-</ul>
-
-<p>
-<strong>مهم:</strong>
-تصاویر موجود در
-<span dir="ltr"><code>Google Drive</code></span>
-با این دستور حذف نمی‌شوند.
-</p>
-
-<hr>
-
-<h2>خطای AVX2 و سازگاری با کامپیوترهای دیگر</h2>
-
-<p>
-اگر MetaTrader پیامی مشابه زیر نمایش داد:
-</p>
-
-<pre dir="ltr"><code>your CPU architecture does not allow to run the file:
-AVX2 required, you have AVX only
-
-loading failed [568]</code></pre>
-
-<p>
-مشکل از منطق JournalNevis نیست؛ فایل اجرایی با معماری پردازنده ناسازگار کامپایل شده است.
-</p>
-
-<p>
-برای نسخه عمومی در MetaEditor معماری پردازنده را روی
-<span dir="ltr"><code>X64 Regular</code></span>
-قرار بده و دوباره کامپایل کن.
-</p>
-
-<p>
-فایل اجرایی که قبلاً با
-<span dir="ltr"><code>AVX2</code></span>
-ساخته شده باشد، با تغییر تنظیمات Expert روی پردازنده فاقد AVX2 قابل اجرا نمی‌شود.
-</p>
-
-<hr>
-
-<h2>Dashboard</h2>
-
-<p>
-تمام آمار Dashboard فقط برای حساب انتخاب‌شده محاسبه می‌شوند.
-</p>
-
-<h3>اطلاعات حساب</h3>
-
-<ul>
-<li><span dir="ltr"><code>Balance</code></span></li>
-<li><span dir="ltr"><code>Equity</code></span></li>
-<li><span dir="ltr"><code>Initial Capital</code></span></li>
-<li><span dir="ltr"><code>Floating P/L</code></span></li>
-</ul>
-
-<h3>عملکرد</h3>
-
-<ul>
-<li><span dir="ltr"><code>Net Profit</code></span></li>
-<li><span dir="ltr"><code>Gross Profit</code></span></li>
-<li><span dir="ltr"><code>Gross Loss</code></span></li>
-<li><span dir="ltr"><code>Win Rate</code></span></li>
-<li><span dir="ltr"><code>Profit Factor</code></span></li>
-<li><span dir="ltr"><code>Expected Payoff</code></span></li>
-<li><span dir="ltr"><code>Recovery Factor</code></span></li>
-<li><span dir="ltr"><code>Total Trades</code></span></li>
-</ul>
-
-<h3>افت سرمایه</h3>
-
-<ul>
-<li>افت سرمایه مطلق</li>
-<li>بیشترین افت سرمایه</li>
-<li>درصد بیشترین افت سرمایه</li>
-<li><span dir="ltr"><code>Relative Drawdown</code></span></li>
-<li>کمترین موجودی</li>
-</ul>
-
-<h3>عملکرد هر نماد</h3>
-
-<ul>
-<li>تعداد معاملات</li>
-<li>تعداد برد</li>
-<li>تعداد باخت</li>
-<li><span dir="ltr"><code>Win Rate</code></span></li>
-<li><span dir="ltr"><code>Net P/L</code></span></li>
-<li><span dir="ltr"><code>Profit Factor</code></span></li>
-<li><span dir="ltr"><code>Commission</code></span></li>
-<li>میانگین معامله</li>
-<li>بهترین معامله</li>
-<li>بدترین معامله</li>
-<li>میانگین زمان نگهداری</li>
-<li>حجم معاملات</li>
-<li>تعداد معاملات خرید و فروش</li>
-</ul>
-
-<hr>
-
-<h2>Trades Sheet</h2>
-
-<p>
-برگه
-<span dir="ltr"><code>Trades</code></span>
-بین همه حساب‌ها مشترک است.
-اطلاعات حساب و کلید معامله باعث می‌شوند معاملات حساب‌های مختلف از هم تفکیک شوند.
-</p>
-
-<p>
-اطلاعات خودکار می‌توانند شامل نماد، جهت، حجم، زمان ورود و خروج، قیمت‌ها، حد ضرر، حد سود، سود و زیان، کمیسیون، مدت معامله، منبع و لینک تصاویر باشند.
-</p>
-
-<hr>
-
-<h2>بخش دستی Review</h2>
-
-<p>
-ثبت خودکار نشان می‌دهد چه اتفاقی افتاده است؛ اما Review دستی به بررسی دلیل تصمیم کمک می‌کند.
-</p>
-
-<table>
-<tr><th>فیلد</th><th>مثال</th></tr>
-<tr><td><span dir="ltr"><code>Setup</code></span></td><td><span dir="ltr"><code>Pullback</code></span></td></tr>
-<tr><td><span dir="ltr"><code>Entry Reason</code></span></td><td>ورود پس از برگشت به سطح شکسته‌شده</td></tr>
-<tr><td><span dir="ltr"><code>Emotion</code></span></td><td><span dir="ltr"><code>FOMO</code></span></td></tr>
-<tr><td><span dir="ltr"><code>Mistake</code></span></td><td><span dir="ltr"><code>Early Entry</code></span></td></tr>
-<tr><td><span dir="ltr"><code>Notes</code></span></td><td>ورود قبل از تأیید</td></tr>
-<tr><td><span dir="ltr"><code>Review Status</code></span></td><td><span dir="ltr"><code>Reviewed</code></span></td></tr>
-</table>
-
-<hr>
-
-<h2>عیب‌یابی</h2>
-
-<h3>معاملات ثبت می‌شوند ولی Dashboard تغییر نمی‌کند</h3>
-
-<p>
-در نسخه <span dir="ltr"><code>5.8.2</code></span> Dashboard باید بعد از Live update به‌صورت خودکار Refresh شود.
-اگر این اتفاق نیفتاد موارد زیر را بررسی کن:
-</p>
-
-<ol>
-<li>حساب درست در <span dir="ltr"><code>ACCOUNT VIEW</code></span> انتخاب شده باشد.</li>
-<li>هر دو آدرس WebRequest اضافه شده باشند.</li>
-<li>آخرین نسخه Apps Script را Deploy کرده باشی.</li>
-<li>Expert از آدرس صحیح <span dir="ltr"><code>/exec</code></span> و API Secret درست استفاده کند.</li>
-</ol>
-
-<h3>Screenshot بیش از حد عریض است</h3>
-
-<p>
-مقدار زیر را روی حالت پیش‌فرض جدید نگه دار:
-</p>
-
-<pre dir="ltr"><code>InpUseActualChartSize = false</code></pre>
-
-<h3>Screenshot خالی یا ناقص است</h3>
-
-<p>
-اگر History یا کندل‌های بروکر هنوز کامل Load نشده باشند، گرفتن تصویر مناسب ممکن است با تأخیر انجام شود.
-این موضوع مخصوصاً در اینترنت ضعیف بروکر بیشتر دیده می‌شود.
-</p>
-
-<h3>متن Entry یا Exit وجود دارد ولی لینک باز نمی‌شود</h3>
-
-<p>از منوی JournalNevis این گزینه را اجرا کن:</p>
-
-<pre dir="ltr"><code>Repair Screenshot Links</code></pre>
-
-<h3>خطای AVX2 روی کامپیوتر دیگر</h3>
-
-<p>
-نسخه عمومی را با Target زیر کامپایل کن:
-</p>
-
-<pre dir="ltr"><code>X64 Regular</code></pre>
-
-<hr>
-
-<h2>حریم خصوصی</h2>
-
-<ul>
-<li>اسکریپت را خودت منتشر می‌کنی.</li>
-<li>فایل Google Sheet متعلق به خودت است.</li>
-<li>تصاویر داخل Google Drive خودت قرار می‌گیرند.</li>
-<li>API Secret تحت کنترل خودت است.</li>
-</ul>
-
-<p>
-در Workflow فعلی نیازی به ذخیره تاریخچه معاملات روی یک دیتابیس مرکزی JournalNevis وجود ندارد.
-</p>
-
-<hr>
-
-<h2>وضعیت پروژه</h2>
-
-<p>
-JournalNevis فعلاً رایگان منتشر می‌شود و مرحله‌به‌مرحله بر اساس تست واقعی و استفاده عملی توسعه پیدا می‌کند.
-</p>
-
-<hr>
-
-<h2>Roadmap</h2>
-
-<ul>
-<li>نصب آسان‌تر</li>
-<li>نام مستعار برای حساب‌ها</li>
-<li>نمای کلی چندحسابی</li>
-<li>تحلیل رفتاری بیشتر</li>
-<li>گزارش‌ها و نمودارهای بیشتر</li>
-<li>فرآیند به‌روزرسانی ساده‌تر</li>
-<li>مستندات کامل‌تر</li>
-<li>سایت <span dir="ltr"><code>JournalNevis.ir</code></span></li>
-<li>بررسی پشتیبانی از پلتفرم‌ها یا نسخه‌های معاملاتی دیگر</li>
-</ul>
-
-<hr>
-
-<h2>حمایت از پروژه</h2>
-
-<p>
-JournalNevis رایگان است.
-در آینده ممکن است امکان حمایت داوطلبانه برای کمک به توسعه، تست، مستندسازی و هزینه‌های پروژه اضافه شود.
-</p>
-
-<hr>
-
-<h2>سلب مسئولیت</h2>
-
-<p>
-JournalNevis یک ابزار ثبت و تحلیل معاملات است و توصیه سرمایه‌گذاری، سیگنال معاملاتی یا تضمین سود ارائه نمی‌کند.
-</p>
+تنظیمات پیش‌فرض جدید:
 
 </div>
 
----
-
-<div align="center">
-
-### JournalNevis
-
-**Trade automatically. Review intentionally.**
-
-`v5.8.2`
-
-</div>
-
----
-
-<a id="english"></a>
-
-# English
-
-## Overview
-
-**JournalNevis** is a free automated trading-journal project built to reduce the manual work involved in recording and reviewing trades.
-
-Version **5.8.2** keeps the multi-account architecture and adds two practical improvements: better screenshot capture defaults and automatic live Dashboard refresh. Multiple trading accounts can write into the same Google Sheet, while the Dashboard calculates and displays **one selected account at a time**.
-
-The current release connects a JournalNevis Expert Advisor to a Google Apps Script backend. Trade data is stored in Google Sheets, while entry and exit screenshots are stored in Google Drive and linked back to the corresponding trade.
-
-The goal is simple:
-
-> **Spend less time copying trade data and more time reviewing decisions, setups, mistakes, and performance.**
-
-JournalNevis can help answer questions such as:
-
-- Which symbols do I trade most?
-- What is my win rate by symbol?
-- How much am I paying in commissions?
-- What is my account drawdown?
-- Which setups perform better?
-- Do certain emotions or mistakes appear repeatedly?
-- What did the chart look like when I entered or exited?
-
-> [!IMPORTANT]
-> JournalNevis is a **journal and analytics tool**.  
-> It does **not** open, modify, or close trades.
-
----
-
-## Table of contents
-
-- [Features](#features)
-- [How JournalNevis works](#how-journalnevis-works)
-- [Installation](#installation)
-- [First setup](#first-setup)
-- [Using JournalNevis](#using-journalnevis)
-- [SYNC TODAY vs FULL SYNC](#sync-today-vs-full-sync)
-- [Screenshots and recovery](#screenshots-and-recovery)
-- [Screenshot-link repair](#screenshot-link-repair-carried-into-v582)
-- [Dashboard](#dashboard)
-- [Trades sheet](#trades-sheet)
-- [Manual review fields](#manual-review-fields)
-- [Privacy](#privacy)
-- [Project status](#project-status)
-- [Roadmap](#roadmap)
-- [Disclaimer](#disclaimer)
-
----
-
-## What's new in v5.8.2
-
-### Better screenshot capture
-
-Version **5.8.2** changes the default screenshot canvas so images are no longer excessively wide on large monitors.
-
-The new defaults are:
+<div dir="ltr" align="left">
 
 ```text
 InpUseActualChartSize = false
@@ -763,398 +76,527 @@ InpScreenshotFallbackWidth = 1440
 InpScreenshotFallbackHeight = 900
 ```
 
-This keeps candles and chart objects easier to read while keeping PNG files reasonably small for upload.
+</div>
 
-If you specifically want the exact current chart-window dimensions, you can set:
+<div dir="rtl" align="right">
+
+اگر بخواهی دقیقاً اندازه فعلی چارت روی مانیتور گرفته شود، می‌توانی مقدار زیر را فعال کنی:
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
 InpUseActualChartSize = true
 ```
 
-### Automatic live Dashboard refresh
+</div>
 
-In earlier builds, a trade could already be visible in the **Trades** sheet while the Dashboard still showed the previous values until a manual sync or refresh.
+<div dir="rtl" align="right">
 
-In **v5.8.2**, live trade/account updates automatically refresh the Dashboard for the currently selected account.
+### به‌روزرسانی خودکار داشبورد
 
-If only one account remains in the workbook, that account is selected automatically.
+در نسخه‌های قبلی ممکن بود معامله داخل برگه معاملات ثبت شود ولی داشبورد تا زمان Refresh یا Sync دستی تغییر نکند.
 
-### Screenshot-link persistence fix retained
+در نسخه 5.8.2، بعد از دریافت اطلاعات زنده معامله و حساب، داشبورد برای حساب انتخاب‌شده به‌صورت خودکار به‌روزرسانی می‌شود.
 
-The v5.8.1 link-persistence fix is included in v5.8.2. Existing `📷 Entry` and `📷 Exit` links are preserved during later sync and repair operations instead of being reduced to plain text.
+اگر فقط یک حساب داخل فایل باقی مانده باشد، همان حساب به‌صورت خودکار برای داشبورد استفاده می‌شود.
 
-### Multi-account Dashboard
+### حفظ لینک تصاویر
 
-The Dashboard now has an **ACCOUNT VIEW** selector. When you choose an account, JournalNevis recalculates the Dashboard only for that account.
+اصلاح نسخه 5.8.1 همچنان داخل نسخه 5.8.2 وجود دارد.
 
-The selected account controls:
-
-- Balance and Equity
-- Initial Capital
-- Net P/L
-- Win Rate
-- Profit Factor
-- Drawdown
-- Commission
-- Winning and losing streaks
-- Symbol Performance
-- Monthly P/L
-- Dashboard charts
-
-Data from other connected accounts is not mixed into the selected account's Dashboard.
-
-### Shared Trades sheet
-
-All connected accounts continue to use the same **Trades** sheet. Account Login, Server and trade identifiers keep trades from different accounts separated.
-
-### Account-scoped cash flow
-
-Deposits, withdrawals, Initial Capital, Running Cash Flow and balance-curve calculations are separated by account.
-
-### Account removal
-
-An account can be removed from the spreadsheet through:
-
-```text
-JournalNevis v5.8.2
-→ Advanced
-→ Delete Selected Account Data...
-```
-
-Google Drive screenshots are intentionally **not** deleted by this command.
-
-### Better CPU portability
-
-For a public `.ex5` intended to run on different x64 computers, compile `JournalNevis_v5_8_2.mq5` using:
-
-```text
-X64 Regular
-```
-
-This avoids requiring AVX2 on older compatible x64 systems.
+لینک‌های تصویر ورود و خروج بعد از مراحل بعدی Sync نباید به متن ساده بدون لینک تبدیل شوند.
 
 ---
 
-## Features
+## قابلیت‌های اصلی
 
-| Feature | What it does |
+- ثبت خودکار معاملات زنده
+- بازیابی تاریخچه حساب
+- ثبت چند حساب در یک فایل
+- انتخاب حساب برای داشبورد
+- ثبت تصویر ورود
+- ثبت تصویر خروج
+- ذخیره تصاویر در Google Drive
+- ثبت معاملات در Google Sheets
+- تحلیل عملکرد هر نماد
+- محاسبه سود و زیان
+- محاسبه افت سرمایه
+- ثبت کمیسیون، Swap و Fee
+- ثبت واریز و برداشت
+- ثبت روش ورود
+- ثبت دلیل ورود
+- ثبت احساس
+- ثبت اشتباه
+- ثبت یادداشت
+- وضعیت Review
+- بازیابی تصاویر قدیمی
+- تعمیر لینک تصاویر
+- Sync روزانه
+- Full Sync برای بازسازی کامل
+
+---
+
+## ساختار کلی پروژه
+
+برای جلوگیری از به‌هم‌ریختگی فارسی و انگلیسی در GitHub، ساختار پروژه را به‌صورت مرحله‌ای توضیح می‌دهیم:
+
+1. MetaTrader اطلاعات معامله را تشخیص می‌دهد.
+2. JournalNevis اطلاعات را به Google Apps Script می‌فرستد.
+3. Google Apps Script اطلاعات را داخل Google Sheets ثبت می‌کند.
+4. تصویرهای معامله داخل Google Drive ذخیره می‌شوند.
+5. لینک تصویرها به همان معامله در برگه معاملات متصل می‌شود.
+6. داشبورد برای حساب انتخاب‌شده محاسبه می‌شود.
+
+بخش‌های اصلی پروژه:
+
+| بخش | وظیفه |
 |---|---|
-| **Automatic trade logging** | Records live transactions and can rebuild trade history from the account. |
-| **Multi-account journal** | Multiple accounts can write to one spreadsheet. |
-| **Account-selected Dashboard** | Dashboard statistics are scoped to one selected account at a time. |
-| **Entry screenshots** | Captures the chart around trade entry. |
-| **Exit screenshots** | Captures the chart around trade exit. |
-| **Google Drive storage** | Stores trade screenshots in the user's own Drive. |
-| **Google Sheets journal** | Writes trade information into a structured journal. |
-| **Professional dashboard** | Shows P/L, drawdown, win rate, symbol statistics, streaks and charts. |
-| **Symbol performance** | Tracks results separately for each traded symbol. |
-| **Funding tracking** | Can track deposits, withdrawals and account-level cash events. |
-| **Screenshot recovery** | Can relink or re-upload previously saved screenshots. |
-| **SYNC TODAY** | Checks only today's relevant activity. |
-| **FULL SYNC** | Performs a full historical reconciliation. |
-| **Manual trade review** | Setup, Entry Reason, Emotion, Mistake, Notes and Review Status remain editable. |
-| **Local screenshot cache** | Existing screenshot files can be reused after rebuilding the cloud journal. |
+| Expert Advisor | خواندن معاملات و گرفتن Screenshot |
+| Google Apps Script | ارتباط بین MetaTrader و Google |
+| Google Sheets | معاملات، حساب‌ها و Dashboard |
+| Google Drive | ذخیره تصاویر ورود و خروج |
 
 ---
 
-## How JournalNevis works
+# آموزش نصب
 
-```text
-      Trading Account A ── JournalNevis ──┐
-                                          │
-      Trading Account B ── JournalNevis ──┼──► Google Apps Script
-                                          │            │
-      Trading Account C ── JournalNevis ──┘            │
-                                                       ├──► Google Sheets
-                                                       │    Trades
-                                                       │    Dashboard
-                                                       │    Accounts
-                                                       │
-                                                       └──► Google Drive
-                                                            Entry / Exit images
-```
+## مرحله 1 — ساخت Google Sheet
 
-The repository and future JournalNevis website are used for distribution and documentation.
+فایل قالب را داخل Google Drive آپلود کن:
 
-The normal journaling workflow does **not** require a central JournalNevis trade database.
+</div>
 
----
-
-# Multi-account design
-
-## Dashboard
-
-The Dashboard displays **one account at a time**.
-
-The selector uses an account key based on:
-
-```text
-Account Login | Server
-```
-
-Changing the account in **ACCOUNT VIEW** refreshes the Dashboard for that account only.
-
-A newly connected account is added to the selector without forcing a switch away from the account you are already viewing.
-
-## Trades
-
-All accounts share the same **Trades** sheet. JournalNevis keeps them separate internally using Account Login, Server, Position ID and Trade Key information.
-
-## Accounts
-
-The **Accounts** sheet stores the latest snapshot for each connected account, including items such as Balance, Equity, Currency, Floating P/L, Margin and Last Updated.
-
----
-
-# Installation
-
-## 1. Create your Google journal
-
-Upload:
+<div dir="ltr" align="left">
 
 ```text
 JournalNevis_v5_8_2_Template.xlsx
 ```
 
-to Google Drive and open it using **Google Sheets**.
+</div>
 
-The main visible sheets are:
+<div dir="rtl" align="right">
 
-- **Dashboard**
-- **Trades**
-- **Accounts**
-- **Settings**
-- **Help**
+بعد آن را با Google Sheets باز کن.
 
-Supporting calculation sheets may remain hidden.
+برگه‌های اصلی که کاربر می‌بیند:
+
+- Dashboard
+- Trades
+- Accounts
+- Settings
+- Help
+
+برگه‌های محاسباتی می‌توانند مخفی بمانند.
 
 ---
 
-## 2. Install the Google Apps Script backend
+## مرحله 2 — نصب Google Apps Script
 
-Inside the Google Sheet, open:
+داخل Google Sheet این منوها را به ترتیب باز کن:
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
-Extensions → Apps Script
+Extensions
+Apps Script
 ```
 
-Remove the default code and paste the contents of `JournalNevis_v5_8_2.gs`.
+</div>
 
-Save the project.
+<div dir="rtl" align="right">
 
-Then run:
+محتوای فایل زیر را داخل Apps Script قرار بده:
+
+</div>
+
+<div dir="ltr" align="left">
+
+```text
+JournalNevis_v5_8_2.gs
+```
+
+</div>
+
+<div dir="rtl" align="right">
+
+بعد فایل را Save کن.
+
+برای نصب اولیه، یک بار تابع زیر را Run کن:
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```javascript
 setupJournalNevis()
 ```
 
-once.
+</div>
 
-Google may ask you to authorize the script.
+<div dir="rtl" align="right">
+
+در اولین اجرا ممکن است Google برای دسترسی‌های موردنیاز درخواست Permission نمایش دهد.
 
 ---
 
-## 3. Deploy the Web App
+## مرحله 3 — Deploy کردن Web App
 
-In Apps Script:
+داخل Apps Script این گزینه‌ها را به ترتیب باز کن:
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
 Deploy
-→ New deployment
-→ Web app
+New deployment
+Web app
 ```
 
-Create the deployment and copy the production URL.
+</div>
 
-The URL used by JournalNevis should end with:
+<div dir="rtl" align="right">
+
+بعد از Deploy یک URL دریافت می‌کنی.
+
+URL مورد استفاده JournalNevis باید در انتها این مقدار را داشته باشد:
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
 /exec
 ```
 
-JournalNevis also uses an **API Secret** to protect requests between the Expert Advisor and the Google backend.
+</div>
 
-> [!CAUTION]
-> Never publish your personal API Secret in GitHub, screenshots, public `.set` files, forum posts, or tutorials.
+<div dir="rtl" align="right">
+
+همچنین JournalNevis از API Secret برای ارتباط امن بین Expert و Apps Script استفاده می‌کند.
+
+> **هشدار:** API Secret شخصی خودت را داخل GitHub، Screenshot عمومی، فایل تنظیمات عمومی یا آموزش‌ها منتشر نکن.
 
 ---
 
-## 4. Allow WebRequest
+## مرحله 4 — فعال‌کردن WebRequest
 
-In MetaTrader:
+داخل MetaTrader این قسمت‌ها را به ترتیب باز کن:
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
 Tools
-→ Options
-→ Expert Advisors
+Options
+Expert Advisors
 ```
 
-Enable:
+</div>
+
+<div dir="rtl" align="right">
+
+گزینه زیر را فعال کن:
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
 Allow WebRequest for listed URL
 ```
 
-Add **both** of these URLs to the allowed list:
+</div>
+
+<div dir="rtl" align="right">
+
+بعد **هر دو آدرس زیر** را به لیست اضافه کن:
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
 https://script.google.com
 https://script.googleusercontent.com
 ```
 
-Both entries are recommended because the Apps Script request/response flow can use Google redirect/content hosts.
+</div>
 
-Your settings should look like this:
+<div dir="rtl" align="right">
+
+هر دو آدرس توصیه می‌شوند چون ارتباط Google Apps Script می‌تواند از دامنه اصلی و دامنه محتوای Google استفاده کند.
+
+چیدمان این قسمت باید تقریباً این‌طور باشد:
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
 Experts
-☑ Allow algorithmic trading
-☑ Allow WebRequest for listed URL:
+
+[x] Allow algorithmic trading
+
+[x] Allow WebRequest for listed URL
 
 https://script.google.com
 https://script.googleusercontent.com
 ```
 
+</div>
+
+<div dir="rtl" align="right">
+
 ---
 
-## 5. Install JournalNevis
+## مرحله 5 — نصب Expert
 
-Copy:
+فایل اجرایی زیر را داخل پوشه Expert Advisors قرار بده:
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
 JournalNevis_v5_8_2.ex5
 ```
 
-to the appropriate Expert Advisors folder.
+</div>
 
-For the current MT5 integration:
+<div dir="rtl" align="right">
+
+برای MT5 مسیر معمول:
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
 MQL5/Experts
 ```
 
-Restart the terminal or refresh **Navigator → Expert Advisors**.
+</div>
 
-Attach JournalNevis to a dedicated chart and enter:
+<div dir="rtl" align="right">
 
-- Web App `/exec` URL
+بعد MetaTrader را Restart کن یا از بخش Navigator قسمت Expert Advisors را Refresh کن.
+
+برای استفاده از JournalNevis نیازی به فایل Source یا Compile کردن کد نیست.
+
+
+---
+
+# تنظیم Expert
+
+بعد از Attach کردن Expert به چارت، برای راه‌اندازی معمول فقط اطلاعات اتصال را وارد کن:
+
+- Web App URL
 - API Secret
-- Journal role/settings
 
-For the main account journal, use the **MASTER** role.
+بقیه تنظیمات می‌توانند روی مقدارهای پیش‌فرض باقی بمانند، مگر اینکه بخواهی رفتار Screenshot یا حالت چندچارتی را تغییر بدهی.
 
 ---
 
-# First setup
+# اولین Full Sync
 
-For a completely new journal:
+برای یک فایل جدید:
 
-1. Create/import the new Google Sheet.
-2. Install the Apps Script.
-3. Run `setupJournalNevis()`.
-4. Deploy the Web App.
-5. Add both `https://script.google.com` and `https://script.googleusercontent.com` to the terminal WebRequest allow-list.
-6. Attach JournalNevis.
-7. Confirm the connection.
-8. Run **FULL SYNC** once for the currently connected account.
-9. Repeat the initial FULL SYNC from each additional account you want to add.
+1. Google Sheet را آماده کن.
+2. Apps Script را نصب کن.
+3. تابع Setup را اجرا کن.
+4. Web App را Deploy کن.
+5. WebRequest را فعال کن.
+6. Expert را روی چارت Attach کن.
+7. اتصال را بررسی کن.
+8. برای حساب اول یک بار Full Sync بزن.
+9. اگر حساب دوم یا سوم داری، Full Sync اولیه را از Terminal همان حساب اجرا کن.
 
-The sync is processed in four stages:
+مراحل Full Sync:
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
-Stage 1/4  Account / funding
-Stage 2/4  Trades / executions
-Stage 3/4  Screenshots
-Stage 4/4  Dashboard / finalize
+Stage 1/4
+Account / Funding
+
+Stage 2/4
+Trades / Executions
+
+Stage 3/4
+Screenshots
+
+Stage 4/4
+Dashboard / Finalize
 ```
 
-After the initial rebuild, normal daily use usually does **not** require FULL SYNC again.
+</div>
+
+<div dir="rtl" align="right">
 
 ---
 
-# Using JournalNevis
+# تفاوت Sync Today و Full Sync
 
-## Live trades
+## Sync Today
 
-When a trade event is detected, JournalNevis can:
+برای استفاده روزانه است.
 
-1. identify the trade,
-2. capture the relevant chart screenshot,
-3. store trade information,
-4. upload the screenshot,
-5. link it to the correct trade,
-6. update the account journal.
+روی فعالیت همان روز تمرکز می‌کند و لازم نیست کل تاریخچه دوباره بررسی شود.
 
-Trade data and screenshots are handled separately so that a screenshot problem does not have to prevent the trade itself from being recorded.
+## Full Sync
+
+برای بازسازی کامل اطلاعات حساب است.
+
+مناسب برای:
+
+- نصب اولیه
+- اضافه‌کردن حساب جدید
+- بازیابی تاریخچه
+- بازسازی اطلاعات حذف‌شده
+- بازیابی تصاویر
+- Audit کامل حساب
+
+لازم نیست بعد از هر معامله Full Sync اجرا شود.
 
 ---
 
-## MASTER and screenshot charts
+# مدیریت چند حساب
 
-A MASTER instance is responsible for account-level journaling and reconciliation.
+## انتخاب حساب برای Dashboard
 
-If you want accurate screenshots for multiple symbols, you can use dedicated screenshot instances on those symbol charts.
+در بالای Dashboard بخش انتخاب حساب وجود دارد.
 
-Example:
+نام این بخش:
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
-XAUUSD chart → MASTER
-USDJPY chart → Screenshot Agent
-US30 chart   → Screenshot Agent
+ACCOUNT VIEW
 ```
 
-The trade can still be opened from another chart, another Expert Advisor, or another device.
+</div>
 
----
+<div dir="rtl" align="right">
 
-# SYNC TODAY vs FULL SYNC
+هر حساب با ترکیب شماره Login و Server شناخته می‌شود.
 
-## SYNC TODAY
+نمونه:
 
-Use **SYNC TODAY** for routine reconciliation.
+</div>
 
-It focuses on the current trading day rather than repeatedly scanning the entire account history.
-
-Typical use:
+<div dir="ltr" align="left">
 
 ```text
-Trade normally
-→ Live logging runs automatically
-→ Press SYNC TODAY when you want a daily reconciliation
+20279432 | WMMarkets-Demo
+58423981 | WMMarkets-Demo
 ```
 
-## FULL SYNC
+</div>
 
-Use **FULL SYNC** when you intentionally want a complete rebuild or audit for the account currently connected to that MetaTrader terminal.
+<div dir="rtl" align="right">
 
-Recommended situations:
+با انتخاب هر حساب:
 
-- first installation,
-- a new Google Sheet,
-- rebuilding deleted journal data,
-- repairing historical trades,
-- recovering old screenshot links,
-- checking the complete available account history.
+- Balance همان حساب نمایش داده می‌شود.
+- Equity همان حساب نمایش داده می‌شود.
+- Profit و Loss همان حساب محاسبه می‌شود.
+- Drawdown همان حساب محاسبه می‌شود.
+- Win Rate همان حساب نمایش داده می‌شود.
+- Symbol Performance همان حساب نمایش داده می‌شود.
+- نمودارهای داشبورد فقط برای همان حساب ساخته می‌شوند.
 
-> [!TIP]
-> FULL SYNC is a repair/rebuild tool, not a button that needs to be pressed after every trade.
+اگر فقط یک حساب وجود داشته باشد، همان حساب به‌صورت خودکار انتخاب می‌شود.
 
 ---
 
-# Screenshots and recovery
+## Trades
 
-JournalNevis supports entry and exit images.
+تمام حساب‌ها از یک برگه مشترک برای معاملات استفاده می‌کنند.
 
-Screenshots are:
+JournalNevis با استفاده از Account Login، Server، Position ID و Trade Key معاملات حساب‌های مختلف را از هم جدا نگه می‌دارد.
 
-1. captured from the dedicated chart,
-2. saved locally,
-3. uploaded to Google Drive,
-4. linked to the trade row.
+---
 
-The local cache is useful if the cloud journal is rebuilt later.
+## Accounts
 
-Supported screenshot generations currently include names beginning with:
+برگه Accounts آخرین Snapshot هر حساب را نگهداری می‌کند.
+
+اطلاعاتی مثل:
+
+- Account Login
+- Server
+- Broker
+- Currency
+- Balance
+- Equity
+- Credit
+- Floating P/L
+- Margin
+- Free Margin
+- Last Updated
+
+---
+
+# حذف اطلاعات یک حساب
+
+ابتدا حساب موردنظر را در Dashboard انتخاب کن.
+
+بعد منوی JournalNevis را باز کن و این گزینه‌ها را به ترتیب انتخاب کن:
+
+</div>
+
+<div dir="ltr" align="left">
+
+```text
+JournalNevis v5.8.2
+Advanced
+Delete Selected Account Data...
+```
+
+</div>
+
+<div dir="rtl" align="right">
+
+قبل از حذف، تأیید گرفته می‌شود.
+
+اطلاعات حساب از این بخش‌ها حذف می‌شوند:
+
+- Trades
+- Executions
+- Cash Flow
+- Accounts
+- Equity History
+
+> **مهم:** تصاویر Google Drive با این دستور حذف نمی‌شوند.
+
+---
+
+# Screenshotها
+
+برای هر معامله می‌توان تصویر ورود و خروج داشت.
+
+روند کلی:
+
+1. تصویر از چارت گرفته می‌شود.
+2. فایل ابتدا Local ذخیره می‌شود.
+3. فایل به Google Drive ارسال می‌شود.
+4. لینک تصویر به معامله مربوطه وصل می‌شود.
+
+نسخه 5.8.2 نام‌های قدیمی و جدید را برای Recovery در نظر می‌گیرد:
+
+</div>
+
+<div dir="ltr" align="left">
 
 ```text
 JN58_
@@ -1163,57 +605,53 @@ JN56_
 TJ5_
 ```
 
-This allows newer releases to recover images created by older versions.
+</div>
+
+<div dir="rtl" align="right">
 
 ---
 
-# Screenshot-link repair carried into v5.8.2
+# تعمیر لینک Screenshotها
 
-Version **5.7.1** addresses a specific situation discovered during testing:
+اگر تصویر داخل Google Drive وجود دارد ولی لینک آن داخل Trades کار نمی‌کند، منوی JournalNevis را باز کن و گزینه زیر را اجرا کن:
 
-> Screenshots were successfully present in Google Drive, and the journal recognized that the trades had screenshots, but the screenshot links were not added to the Trades sheet.
+</div>
 
-The repair improves the matching process by using multiple identifiers and searching the Drive screenshot structure more reliably.
-
-It can:
-
-- match by **Trade Key**,
-- fall back to **Position ID**,
-- inspect nested screenshot folders,
-- inspect `UNKNOWN` folders,
-- recognize `JN57_`, `JN56_`, and legacy `TJ5_` names,
-- preserve already-correct links,
-- restore missing Entry/Exit links without re-uploading images that already exist.
-
-After installing the v5.8.2 Apps Script, use:
+<div dir="ltr" align="left">
 
 ```text
-JournalNevis
-→ Repair Screenshot Links
+Repair Screenshot Links
 ```
 
-A repair report can show:
+</div>
 
-```text
-Links restored: 7
-Already linked: 12
-Unmatched image files: 0
-```
+<div dir="rtl" align="right">
+
+این بخش می‌تواند:
+
+- Trade Key را بررسی کند.
+- Position ID را بررسی کند.
+- پوشه‌های داخلی Drive را بگردد.
+- پوشه‌های UNKNOWN را هم بررسی کند.
+- لینک‌های سالم قبلی را حفظ کند.
+- لینک گم‌شده را بدون Upload مجدد تصویر برگرداند.
 
 ---
 
 # Dashboard
 
-The Dashboard is designed to provide a fast account-level overview.
+Dashboard برای حساب انتخاب‌شده می‌تواند این اطلاعات را نمایش دهد:
 
-### Account snapshot
+## اطلاعات حساب
+
 - Balance
 - Equity
 - Initial Capital
 - Floating P/L
 
-### Performance
-- Total Net Profit
+## عملکرد
+
+- Net Profit
 - Gross Profit
 - Gross Loss
 - Profit Factor
@@ -1222,14 +660,28 @@ The Dashboard is designed to provide a fast account-level overview.
 - Win Rate
 - Total Trades
 
-### Drawdown
+## Drawdown
+
 - Absolute Drawdown
 - Maximal Drawdown
-- Maximum Drawdown %
+- Maximum Drawdown Percentage
 - Relative Drawdown
 - Minimum Balance
 
-### Symbol performance
+## آمار معاملات
+
+- Largest Win
+- Largest Loss
+- Average Win
+- Average Loss
+- Maximum Consecutive Wins
+- Maximum Consecutive Losses
+- Maximal Consecutive Profit
+- Maximal Consecutive Loss
+- Pending Reviews
+
+## عملکرد هر نماد
+
 - Trades
 - Wins
 - Losses
@@ -1242,9 +694,11 @@ The Dashboard is designed to provide a fast account-level overview.
 - Worst Trade
 - Average Holding Time
 - Volume
-- Long / Short count
+- Long Count
+- Short Count
 
-### Charts
+## نمودارها
+
 - Balance Curve
 - Drawdown
 - Net P/L by Symbol
@@ -1254,64 +708,393 @@ The Dashboard is designed to provide a fast account-level overview.
 
 ---
 
-# Trades sheet
+# بخش دستی Review
 
-The Trades sheet combines automatically recorded trade information with manual review fields.
+ثبت خودکار نشان می‌دهد چه اتفاقی افتاده است.
 
-Typical automatic fields include:
+Review دستی کمک می‌کند دلیل تصمیم هم ثبت شود.
 
-- Symbol
-- Direction
-- Volume
-- Open / Close Time
-- Entry / Exit Price
-- Stop Loss
-- Take Profit
-- Exit Reason
-- Gross P/L
-- Commission
-- Swap
-- Fee
-- Net P/L
-- Holding Time
-- Source
-- Entry Screenshot
-- Exit Screenshot
-- Status
+| فیلد | نمونه |
+|---|---|
+| Setup | Pullback |
+| Entry Reason | ورود پس از Retest |
+| Emotion | FOMO |
+| Mistake | Early Entry |
+| Notes | ورود قبل از تأیید |
+| Review Status | Reviewed |
+
+بعضی از این بخش‌ها Dropdown دارند تا Review سریع‌تر انجام شود.
 
 ---
 
-# Manual review fields
+# عیب‌یابی
 
-Automation records **what happened**.  
-A good journal also records **why it happened**.
+## معاملات داخل Trades ثبت می‌شوند ولی Dashboard تغییر نمی‌کند
 
-| Field | Example |
-|---|---|
-| **Setup** | Pullback |
-| **Entry Reason** | Retest after breakout |
-| **Emotion** | Calm |
-| **Mistake** | Early Entry |
-| **Notes** | Entered before confirmation |
-| **Review Status** | Reviewed |
+در نسخه 5.8.2 باید Dashboard بعد از Live update به‌صورت خودکار Refresh شود.
 
-Several fields include dropdown choices to make reviews faster and more consistent.
+موارد زیر را بررسی کن:
+
+1. حساب درست در Dashboard انتخاب شده باشد.
+2. هر دو URL مربوط به WebRequest اضافه شده باشند.
+3. آخرین نسخه Apps Script Deploy شده باشد.
+4. Expert از URL صحیح استفاده کند.
+5. API Secret درست باشد.
+
+اگر لازم بود می‌توانی Dashboard را دستی هم Refresh کنی.
+
+---
+
+## Screenshot بیش از حد عریض است
+
+تنظیم زیر را روی حالت پیش‌فرض نگه دار:
+
+</div>
+
+<div dir="ltr" align="left">
+
+```text
+InpUseActualChartSize = false
+```
+
+</div>
+
+<div dir="rtl" align="right">
+
+---
+
+## Screenshot خالی یا ناقص است
+
+اگر کندل‌ها یا History بروکر هنوز Load نشده باشند، گرفتن تصویر مناسب ممکن است با تأخیر انجام شود.
+
+این موضوع در اینترنت ضعیف بروکر بیشتر دیده می‌شود.
+
+---
+
+## لینک Entry یا Exit وجود دارد ولی باز نمی‌شود
+
+گزینه زیر را اجرا کن:
+
+</div>
+
+<div dir="ltr" align="left">
+
+```text
+Repair Screenshot Links
+```
+
+</div>
+
+<div dir="rtl" align="right">
+
+---
+
+---
+
+# حریم خصوصی
+
+در معماری فعلی:
+
+- Apps Script را خودت Deploy می‌کنی.
+- Google Sheet متعلق به خودت است.
+- تصاویر داخل Google Drive خودت هستند.
+- API Secret تحت کنترل خودت است.
+
+JournalNevis برای این Workflow نیاز ندارد تاریخچه معاملات را داخل دیتابیس مرکزی خودش ذخیره کند.
+
+---
+
+# وضعیت پروژه
+
+JournalNevis فعلاً رایگان منتشر می‌شود.
+
+---
+
+# Roadmap
+
+مواردی که ممکن است در آینده بررسی شوند:
+
+- نصب آسان‌تر
+- Account Alias
+- Portfolio View
+- تحلیل رفتاری بیشتر
+- گزارش‌های بیشتر
+- نمودارهای بیشتر
+- Update ساده‌تر
+- مستندات کامل‌تر
+- JournalNevis.ir
+- پشتیبانی از پلتفرم‌های معاملاتی دیگر
+
+---
+
+# حمایت از پروژه
+
+JournalNevis رایگان است.
+
+در آینده ممکن است Donation اختیاری برای کمک به توسعه، تست، مستندسازی و هزینه‌های پروژه اضافه شود.
+
+دانلود اصلی پروژه قرار نیست به Donation وابسته باشد.
+
+---
+
+# سلب مسئولیت
+
+JournalNevis یک ابزار ثبت و تحلیل معاملات است.
+
+این پروژه توصیه سرمایه‌گذاری، سیگنال معاملاتی یا تضمین سود ارائه نمی‌کند.
+
+</div>
+
+---
+
+<a id="english"></a>
+
+# English
+
+## Overview
+
+**JournalNevis** is a free automated trading journal designed to reduce the manual work involved in recording and reviewing trades.
+
+Version **5.8.2** supports multi-account journaling, account-scoped dashboards, improved screenshots, persistent screenshot links, and automatic live Dashboard refresh.
+
+> [!IMPORTANT]
+> JournalNevis is a **journal and analytics tool**. It does **not** open, modify, or close trades.
+
+---
+
+## Main features
+
+- Automatic trade logging
+- Live transaction capture
+- Account-history recovery
+- Multi-account support
+- One selected account shown on Dashboard at a time
+- Entry screenshots
+- Exit screenshots
+- Google Drive screenshot storage
+- Google Sheets trade log
+- Account-specific Dashboard metrics
+- Symbol performance
+- Cash-flow tracking
+- Screenshot recovery and relinking
+- Manual Setup / Emotion / Mistake / Notes review fields
+- SYNC TODAY
+- FULL SYNC
+
+---
+
+## What's new in v5.8.2
+
+### Better screenshot defaults
+
+The default screenshot canvas is now less wide and more readable:
+
+```text
+InpUseActualChartSize = false
+InpScreenshotMaxWidth = 1440
+InpScreenshotMaxHeight = 960
+InpScreenshotFallbackWidth = 1440
+InpScreenshotFallbackHeight = 900
+```
+
+If you want the exact visible chart-window size, set:
+
+```text
+InpUseActualChartSize = true
+```
+
+### Automatic Dashboard refresh
+
+A live trade/account update now refreshes the Dashboard for the currently selected account.
+
+This removes the need to press SYNC TODAY only to refresh Dashboard numbers.
+
+### Screenshot-link persistence
+
+The v5.8.1 RichText hyperlink fix remains included in v5.8.2.
+
+---
+
+# Installation
+
+## 1. Google Sheet
+
+Upload:
+
+```text
+JournalNevis_v5_8_2_Template.xlsx
+```
+
+to Google Drive and open it with Google Sheets.
+
+Main visible sheets:
+
+- Dashboard
+- Trades
+- Accounts
+- Settings
+- Help
+
+---
+
+## 2. Google Apps Script
+
+Open:
+
+```text
+Extensions
+Apps Script
+```
+
+Replace the code with:
+
+```text
+JournalNevis_v5_8_2.gs
+```
+
+Run once:
+
+```javascript
+setupJournalNevis()
+```
+
+---
+
+## 3. Deploy Web App
+
+Open:
+
+```text
+Deploy
+New deployment
+Web app
+```
+
+Use the production URL ending in:
+
+```text
+/exec
+```
+
+Keep your API Secret private.
+
+---
+
+## 4. MetaTrader WebRequest
+
+Open:
+
+```text
+Tools
+Options
+Expert Advisors
+```
+
+Enable:
+
+```text
+Allow WebRequest for listed URL
+```
+
+Add both:
+
+```text
+https://script.google.com
+https://script.googleusercontent.com
+```
+
+---
+
+## 5. Install the Expert Advisor
+
+Copy:
+
+```text
+JournalNevis_v5_8_2.ex5
+```
+
+into:
+
+```text
+MQL5/Experts
+```
+
+Restart MetaTrader or refresh **Navigator → Expert Advisors**.
+
+Attach JournalNevis to a chart.
+
+For normal use, enter only:
+
+- Web App URL
+- API Secret
+
+No source file or local compilation is required for end users.
+
+
+---
+
+# First setup
+
+1. Prepare the Google Sheet.
+2. Install the Apps Script.
+3. Run setup.
+4. Deploy the Web App.
+5. Allow both WebRequest URLs.
+6. Attach the EA to a chart.
+7. Confirm the connection.
+8. Run FULL SYNC once for the first account.
+9. Repeat the initial FULL SYNC from each additional account you want to add.
+
+Sync stages:
+
+```text
+Stage 1/4  Account / Funding
+Stage 2/4  Trades / Executions
+Stage 3/4  Screenshots
+Stage 4/4  Dashboard / Finalize
+```
+
+---
+
+# Multi-account behavior
+
+## Dashboard
+
+The Dashboard shows one selected account at a time.
+
+Account identity is based on:
+
+```text
+Account Login | Server
+```
+
+Changing ACCOUNT VIEW recalculates the Dashboard for that account.
+
+If only one account remains, JournalNevis can use it automatically.
+
+## Trades
+
+All accounts share the same Trades sheet.
+
+JournalNevis separates accounts internally using account identity and trade identifiers.
+
+## Accounts
+
+The Accounts sheet keeps the latest snapshot of every connected account.
 
 ---
 
 # Removing an account
 
-First select the account in the Dashboard **ACCOUNT VIEW** dropdown.
-
-Then use:
+Select the account in ACCOUNT VIEW, then use:
 
 ```text
 JournalNevis v5.8.2
-→ Advanced
-→ Delete Selected Account Data...
+Advanced
+Delete Selected Account Data...
 ```
 
-After confirmation, JournalNevis removes that account from:
+The selected account is removed from:
 
 - Trades
 - Executions
@@ -1319,40 +1102,74 @@ After confirmation, JournalNevis removes that account from:
 - Accounts
 - Equity History
 
-> [!IMPORTANT]
-> Google Drive screenshots are **not deleted**.
+Google Drive screenshots are intentionally not deleted.
 
 ---
 
-# CPU compatibility / X64 Regular
+# Screenshot recovery
 
-If MetaTrader reports:
-
-```text
-your CPU architecture does not allow to run the file:
-AVX2 required, you have AVX only
-
-loading failed [568]
-```
-
-the `.ex5` was compiled for a CPU architecture that is not supported by that computer.
-
-For a portable public build:
+Supported screenshot generations include:
 
 ```text
-MetaEditor
-→ CPU architecture
-→ X64 Regular
-→ Compile
+JN58_
+JN57_
+JN56_
+TJ5_
 ```
 
-Verify that the build log reports:
+If screenshot files exist but their links are missing, use:
 
 ```text
-0 errors, 0 warnings
+Repair Screenshot Links
 ```
 
-An EX5 already compiled for AVX2 cannot be made compatible with an AVX-only CPU by changing an EA input. It must be recompiled from the source using a compatible target.
+---
+
+# Dashboard metrics
+
+JournalNevis can show, for the selected account:
+
+- Balance
+- Equity
+- Initial Capital
+- Floating P/L
+- Net Profit
+- Gross Profit
+- Gross Loss
+- Win Rate
+- Profit Factor
+- Expected Payoff
+- Recovery Factor
+- Drawdown
+- Largest Win
+- Largest Loss
+- Consecutive Wins / Losses
+- Symbol Performance
+- Monthly P/L
+
+Charts can include:
+
+- Balance Curve
+- Drawdown
+- Net P/L by Symbol
+- Win Rate by Symbol
+- Monthly P/L
+- Wins vs Losses
+
+---
+
+# Manual review
+
+The Trades sheet includes manual review fields such as:
+
+| Field | Example |
+|---|---|
+| Setup | Pullback |
+| Entry Reason | Retest after breakout |
+| Emotion | FOMO |
+| Mistake | Early Entry |
+| Notes | Entered before confirmation |
+| Review Status | Reviewed |
 
 ---
 
@@ -1360,16 +1177,13 @@ An EX5 already compiled for AVX2 cannot be made compatible with an AVX-only CPU 
 
 ## Trades update but Dashboard does not
 
-In v5.8.2 the Dashboard should refresh automatically after a live trade/account update.
-
 Check:
 
-1. The correct account is selected in **ACCOUNT VIEW**.
+1. The correct account is selected.
 2. Both WebRequest URLs are allowed.
-3. The Apps Script deployment is the latest version.
-4. The EA is using the current `/exec` URL and correct API Secret.
-
-You can still force a manual refresh from the JournalNevis menu when needed.
+3. The latest Apps Script deployment is active.
+4. The EA uses the correct `/exec` URL.
+5. The API Secret is correct.
 
 ## Screenshot is too wide
 
@@ -1379,85 +1193,32 @@ Keep:
 InpUseActualChartSize = false
 ```
 
-The v5.8.2 fixed canvas is designed specifically to avoid ultra-wide screenshots.
-
-## Screenshot is blank or incomplete
-
-This can happen if the broker/chart history is not loaded yet. JournalNevis waits for usable chart data before capture, but very poor connectivity can still delay a good screenshot.
-
-## Screenshot text exists but link is not clickable
+## Screenshot link is missing
 
 Use:
 
 ```text
-JournalNevis
-→ Repair Screenshot Links
+Repair Screenshot Links
 ```
-
-The v5.8.1/v5.8.2 link-persistence logic is designed to keep repaired links clickable after later sync operations.
-
-## EX5 fails on another computer with AVX2 error
-
-Compile the source using:
-
-```text
-X64 Regular
-```
-
-A file already compiled specifically for AVX2 must be recompiled for a compatible target.
 
 ---
 
 # Privacy
 
-In the current architecture:
+The current workflow keeps the journal inside the user's own Google account:
 
-- the Apps Script is deployed by **you**,
-- the spreadsheet belongs to **you**,
-- screenshots are stored in **your Google Drive**,
-- the API Secret remains under **your control**.
-
-JournalNevis does not require a central JournalNevis trade-history database for this workflow.
+- Apps Script is deployed by the user.
+- Google Sheet belongs to the user.
+- Screenshots stay in the user's Google Drive.
+- API Secret remains private.
 
 ---
 
 # Project status
 
-JournalNevis is currently provided **free of charge**.
+JournalNevis is currently free to use.
 
-The project is being developed iteratively based on real usage and testing.
-
-The public release can include compiled components without requiring the full source code of every component to be published.
-
----
-
-# Roadmap
-
-Ideas being considered include:
-
-- easier installation,
-- improved onboarding,
-- account aliases,
-- portfolio-level multi-account views,
-- more behavioral analytics,
-- more dashboard reports,
-- easier update workflow,
-- improved documentation,
-- JournalNevis.ir documentation portal,
-- additional trading-platform integrations.
-
-> [!NOTE]
-> Roadmap items are ideas under consideration, not guaranteed features.
-
----
-
-# Support the project
-
-JournalNevis is free.
-
-A voluntary donation/support option may be added later for users who want to help continued development, documentation, testing, and hosting.
-
-Core downloads are intended to remain accessible without requiring a donation.
+A voluntary support/donation option may be added later.
 
 ---
 
@@ -1468,3 +1229,13 @@ JournalNevis is a journaling and analytics tool.
 It does not provide investment advice, trading signals, profit guarantees, or protection from trading losses.
 
 ---
+
+<div align="center">
+
+### JournalNevis
+
+**Trade automatically. Review intentionally.**
+
+`v5.8.2`
+
+</div>
