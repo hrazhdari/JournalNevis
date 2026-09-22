@@ -340,29 +340,6 @@ https://script.googleusercontent.com</code></pre>
 https://script.google.com
 https://script.googleusercontent.com</code></pre>
 
-<h3>مرحله ۵ — کامپایل Expert</h3>
-
-<p>
-فایل
-<span dir="ltr"><code>JournalNevis_v5_8_2.mq5</code></span>
-را در MetaEditor باز کن.
-</p>
-
-<p>
-برای نسخه‌ای که قرار است روی کامپیوترهای مختلف اجرا شود، معماری پردازنده را روی گزینه زیر قرار بده:
-</p>
-
-<pre dir="ltr"><code>X64 Regular</code></pre>
-
-<p>بعد کامپایل کن و بررسی کن که گزارش ساخت مقدار زیر را نشان دهد:</p>
-
-<pre dir="ltr"><code>0 errors, 0 warnings</code></pre>
-
-<p>
-برای انتشار عمومی فقط فایل اجرایی ساخته‌شده با
-<span dir="ltr"><code>X64 Regular</code></span>
-را منتشر کن.
-</p>
 
 <hr>
 
