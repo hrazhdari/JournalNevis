@@ -4,7 +4,7 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="JournalNevis_Wordmark_Dark.svg">
     <source media="(prefers-color-scheme: light)" srcset="JournalNevis_Wordmark_Light.svg">
-    <img src="JournalNevis_Wordmark_Dark.svg" alt="JournalNevis" width="620">
+    <img src="JournalNevis_Wordmark_Dark.svg" alt="JournalNevis" width="520">
   </picture>
 </p>
 
@@ -35,6 +35,7 @@
 <a id="persian"></a>
 
 <div dir="rtl" align="right">
+<!-- RTL-safe Persian list formatting for GitHub -->
 
 # فارسی
 
@@ -46,11 +47,11 @@
 
 در نسخه فعلی:
 
-- اطلاعات معامله داخل فایل Google Sheets ثبت می‌شود.
-- تصاویر ورود و خروج داخل Google Drive ذخیره می‌شوند.
-- چند حساب می‌توانند از یک فایل مشترک استفاده کنند.
-- داشبورد فقط اطلاعات حساب انتخاب‌شده را نشان می‌دهد.
-- معاملات زنده می‌توانند داشبورد را بدون Sync دستی به‌روزرسانی کنند.
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; اطلاعات معامله داخل فایل Google Sheets ثبت می‌شود.</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; تصاویر ورود و خروج داخل Google Drive ذخیره می‌شوند.</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; چند حساب می‌توانند از یک فایل مشترک استفاده کنند.</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; داشبورد فقط اطلاعات حساب انتخاب‌شده را نشان می‌دهد.</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; معاملات زنده می‌توانند داشبورد را بدون Sync دستی به‌روزرسانی کنند.</p>
 
 > **نکته مهم:** JournalNevis فقط ابزار ژورنال و تحلیل است و خودش هیچ معامله‌ای را باز، بسته یا ویرایش نمی‌کند.
 
@@ -112,29 +113,29 @@ InpUseActualChartSize = true
 
 ## قابلیت‌های اصلی
 
-- ثبت خودکار معاملات زنده
-- بازیابی تاریخچه حساب
-- ثبت چند حساب در یک فایل
-- انتخاب حساب برای داشبورد
-- ثبت تصویر ورود
-- ثبت تصویر خروج
-- ذخیره تصاویر در Google Drive
-- ثبت معاملات در Google Sheets
-- تحلیل عملکرد هر نماد
-- محاسبه سود و زیان
-- محاسبه افت سرمایه
-- ثبت کمیسیون، Swap و Fee
-- ثبت واریز و برداشت
-- ثبت روش ورود
-- ثبت دلیل ورود
-- ثبت احساس
-- ثبت اشتباه
-- ثبت یادداشت
-- وضعیت Review
-- بازیابی تصاویر قدیمی
-- تعمیر لینک تصاویر
-- Sync روزانه
-- Full Sync برای بازسازی کامل
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; ثبت خودکار معاملات زنده</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; بازیابی تاریخچه حساب</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; ثبت چند حساب در یک فایل</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; انتخاب حساب برای داشبورد</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; ثبت تصویر ورود</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; ثبت تصویر خروج</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; ذخیره تصاویر در Google Drive</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; ثبت معاملات در Google Sheets</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; تحلیل عملکرد هر نماد</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; محاسبه سود و زیان</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; محاسبه افت سرمایه</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; ثبت کمیسیون، Swap و Fee</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; ثبت واریز و برداشت</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; ثبت روش ورود</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; ثبت دلیل ورود</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; ثبت احساس</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; ثبت اشتباه</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; ثبت یادداشت</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; وضعیت Review</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; بازیابی تصاویر قدیمی</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; تعمیر لینک تصاویر</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Sync روزانه</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Full Sync برای بازسازی کامل</p>
 
 ---
 
@@ -142,12 +143,12 @@ InpUseActualChartSize = true
 
 برای جلوگیری از به‌هم‌ریختگی فارسی و انگلیسی در GitHub، ساختار پروژه را به‌صورت مرحله‌ای توضیح می‌دهیم:
 
-1. MetaTrader اطلاعات معامله را تشخیص می‌دهد.
-2. JournalNevis اطلاعات را به Google Apps Script می‌فرستد.
-3. Google Apps Script اطلاعات را داخل Google Sheets ثبت می‌کند.
-4. تصویرهای معامله داخل Google Drive ذخیره می‌شوند.
-5. لینک تصویرها به همان معامله در برگه معاملات متصل می‌شود.
-6. داشبورد برای حساب انتخاب‌شده محاسبه می‌شود.
+<p dir="rtl" align="right"><strong>۱.</strong>&nbsp; MetaTrader اطلاعات معامله را تشخیص می‌دهد.</p>
+<p dir="rtl" align="right"><strong>۲.</strong>&nbsp; JournalNevis اطلاعات را به Google Apps Script می‌فرستد.</p>
+<p dir="rtl" align="right"><strong>۳.</strong>&nbsp; Google Apps Script اطلاعات را داخل Google Sheets ثبت می‌کند.</p>
+<p dir="rtl" align="right"><strong>۴.</strong>&nbsp; تصویرهای معامله داخل Google Drive ذخیره می‌شوند.</p>
+<p dir="rtl" align="right"><strong>۵.</strong>&nbsp; لینک تصویرها به همان معامله در برگه معاملات متصل می‌شود.</p>
+<p dir="rtl" align="right"><strong>۶.</strong>&nbsp; داشبورد برای حساب انتخاب‌شده محاسبه می‌شود.</p>
 
 بخش‌های اصلی پروژه:
 
@@ -182,11 +183,11 @@ JournalNevis_v5_8_2_Template.xlsx
 
 برگه‌های اصلی که کاربر می‌بیند:
 
-- Dashboard
-- Trades
-- Accounts
-- Settings
-- Help
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Dashboard</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Trades</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Accounts</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Settings</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Help</p>
 
 برگه‌های محاسباتی می‌توانند مخفی بمانند.
 
@@ -396,8 +397,8 @@ MQL5/Experts
 
 بعد از Attach کردن Expert به چارت، برای راه‌اندازی معمول فقط اطلاعات اتصال را وارد کن:
 
-- Web App URL
-- API Secret
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Web App URL</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; API Secret</p>
 
 بقیه تنظیمات می‌توانند روی مقدارهای پیش‌فرض باقی بمانند، مگر اینکه بخواهی رفتار Screenshot یا حالت چندچارتی را تغییر بدهی.
 
@@ -407,15 +408,15 @@ MQL5/Experts
 
 برای یک فایل جدید:
 
-1. Google Sheet را آماده کن.
-2. Apps Script را نصب کن.
-3. تابع Setup را اجرا کن.
-4. Web App را Deploy کن.
-5. WebRequest را فعال کن.
-6. Expert را روی چارت Attach کن.
-7. اتصال را بررسی کن.
-8. برای حساب اول یک بار Full Sync بزن.
-9. اگر حساب دوم یا سوم داری، Full Sync اولیه را از Terminal همان حساب اجرا کن.
+<p dir="rtl" align="right"><strong>۱.</strong>&nbsp; Google Sheet را آماده کن.</p>
+<p dir="rtl" align="right"><strong>۲.</strong>&nbsp; Apps Script را نصب کن.</p>
+<p dir="rtl" align="right"><strong>۳.</strong>&nbsp; تابع Setup را اجرا کن.</p>
+<p dir="rtl" align="right"><strong>۴.</strong>&nbsp; Web App را Deploy کن.</p>
+<p dir="rtl" align="right"><strong>۵.</strong>&nbsp; WebRequest را فعال کن.</p>
+<p dir="rtl" align="right"><strong>۶.</strong>&nbsp; Expert را روی چارت Attach کن.</p>
+<p dir="rtl" align="right"><strong>۷.</strong>&nbsp; اتصال را بررسی کن.</p>
+<p dir="rtl" align="right"><strong>۸.</strong>&nbsp; برای حساب اول یک بار Full Sync بزن.</p>
+<p dir="rtl" align="right"><strong>۹.</strong>&nbsp; اگر حساب دوم یا سوم داری، Full Sync اولیه را از Terminal همان حساب اجرا کن.</p>
 
 مراحل Full Sync:
 
@@ -457,12 +458,12 @@ Dashboard / Finalize
 
 مناسب برای:
 
-- نصب اولیه
-- اضافه‌کردن حساب جدید
-- بازیابی تاریخچه
-- بازسازی اطلاعات حذف‌شده
-- بازیابی تصاویر
-- Audit کامل حساب
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; نصب اولیه</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; اضافه‌کردن حساب جدید</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; بازیابی تاریخچه</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; بازسازی اطلاعات حذف‌شده</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; بازیابی تصاویر</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Audit کامل حساب</p>
 
 لازم نیست بعد از هر معامله Full Sync اجرا شود.
 
@@ -507,13 +508,13 @@ ACCOUNT VIEW
 
 با انتخاب هر حساب:
 
-- Balance همان حساب نمایش داده می‌شود.
-- Equity همان حساب نمایش داده می‌شود.
-- Profit و Loss همان حساب محاسبه می‌شود.
-- Drawdown همان حساب محاسبه می‌شود.
-- Win Rate همان حساب نمایش داده می‌شود.
-- Symbol Performance همان حساب نمایش داده می‌شود.
-- نمودارهای داشبورد فقط برای همان حساب ساخته می‌شوند.
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Balance همان حساب نمایش داده می‌شود.</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Equity همان حساب نمایش داده می‌شود.</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Profit و Loss همان حساب محاسبه می‌شود.</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Drawdown همان حساب محاسبه می‌شود.</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Win Rate همان حساب نمایش داده می‌شود.</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Symbol Performance همان حساب نمایش داده می‌شود.</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; نمودارهای داشبورد فقط برای همان حساب ساخته می‌شوند.</p>
 
 اگر فقط یک حساب وجود داشته باشد، همان حساب به‌صورت خودکار انتخاب می‌شود.
 
@@ -533,17 +534,17 @@ JournalNevis با استفاده از Account Login، Server، Position ID و Tr
 
 اطلاعاتی مثل:
 
-- Account Login
-- Server
-- Broker
-- Currency
-- Balance
-- Equity
-- Credit
-- Floating P/L
-- Margin
-- Free Margin
-- Last Updated
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Account Login</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Server</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Broker</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Currency</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Balance</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Equity</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Credit</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Floating P/L</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Margin</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Free Margin</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Last Updated</p>
 
 ---
 
@@ -571,11 +572,11 @@ Delete Selected Account Data...
 
 اطلاعات حساب از این بخش‌ها حذف می‌شوند:
 
-- Trades
-- Executions
-- Cash Flow
-- Accounts
-- Equity History
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Trades</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Executions</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Cash Flow</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Accounts</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Equity History</p>
 
 > **مهم:** تصاویر Google Drive با این دستور حذف نمی‌شوند.
 
@@ -587,10 +588,10 @@ Delete Selected Account Data...
 
 روند کلی:
 
-1. تصویر از چارت گرفته می‌شود.
-2. فایل ابتدا Local ذخیره می‌شود.
-3. فایل به Google Drive ارسال می‌شود.
-4. لینک تصویر به معامله مربوطه وصل می‌شود.
+<p dir="rtl" align="right"><strong>۱.</strong>&nbsp; تصویر از چارت گرفته می‌شود.</p>
+<p dir="rtl" align="right"><strong>۲.</strong>&nbsp; فایل ابتدا Local ذخیره می‌شود.</p>
+<p dir="rtl" align="right"><strong>۳.</strong>&nbsp; فایل به Google Drive ارسال می‌شود.</p>
+<p dir="rtl" align="right"><strong>۴.</strong>&nbsp; لینک تصویر به معامله مربوطه وصل می‌شود.</p>
 
 نسخه 5.8.2 نام‌های قدیمی و جدید را برای Recovery در نظر می‌گیرد:
 
@@ -629,12 +630,12 @@ Repair Screenshot Links
 
 این بخش می‌تواند:
 
-- Trade Key را بررسی کند.
-- Position ID را بررسی کند.
-- پوشه‌های داخلی Drive را بگردد.
-- پوشه‌های UNKNOWN را هم بررسی کند.
-- لینک‌های سالم قبلی را حفظ کند.
-- لینک گم‌شده را بدون Upload مجدد تصویر برگرداند.
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Trade Key را بررسی کند.</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Position ID را بررسی کند.</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; پوشه‌های داخلی Drive را بگردد.</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; پوشه‌های UNKNOWN را هم بررسی کند.</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; لینک‌های سالم قبلی را حفظ کند.</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; لینک گم‌شده را بدون Upload مجدد تصویر برگرداند.</p>
 
 ---
 
@@ -644,67 +645,67 @@ Dashboard برای حساب انتخاب‌شده می‌تواند این اط�
 
 ## اطلاعات حساب
 
-- Balance
-- Equity
-- Initial Capital
-- Floating P/L
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Balance</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Equity</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Initial Capital</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Floating P/L</p>
 
 ## عملکرد
 
-- Net Profit
-- Gross Profit
-- Gross Loss
-- Profit Factor
-- Expected Payoff
-- Recovery Factor
-- Win Rate
-- Total Trades
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Net Profit</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Gross Profit</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Gross Loss</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Profit Factor</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Expected Payoff</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Recovery Factor</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Win Rate</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Total Trades</p>
 
 ## Drawdown
 
-- Absolute Drawdown
-- Maximal Drawdown
-- Maximum Drawdown Percentage
-- Relative Drawdown
-- Minimum Balance
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Absolute Drawdown</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Maximal Drawdown</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Maximum Drawdown Percentage</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Relative Drawdown</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Minimum Balance</p>
 
 ## آمار معاملات
 
-- Largest Win
-- Largest Loss
-- Average Win
-- Average Loss
-- Maximum Consecutive Wins
-- Maximum Consecutive Losses
-- Maximal Consecutive Profit
-- Maximal Consecutive Loss
-- Pending Reviews
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Largest Win</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Largest Loss</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Average Win</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Average Loss</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Maximum Consecutive Wins</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Maximum Consecutive Losses</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Maximal Consecutive Profit</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Maximal Consecutive Loss</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Pending Reviews</p>
 
 ## عملکرد هر نماد
 
-- Trades
-- Wins
-- Losses
-- Win Rate
-- Net P/L
-- Profit Factor
-- Commission
-- Average Trade
-- Best Trade
-- Worst Trade
-- Average Holding Time
-- Volume
-- Long Count
-- Short Count
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Trades</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Wins</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Losses</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Win Rate</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Net P/L</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Profit Factor</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Commission</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Average Trade</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Best Trade</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Worst Trade</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Average Holding Time</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Volume</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Long Count</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Short Count</p>
 
 ## نمودارها
 
-- Balance Curve
-- Drawdown
-- Net P/L by Symbol
-- Win Rate by Symbol
-- Monthly P/L
-- Wins vs Losses
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Balance Curve</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Drawdown</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Net P/L by Symbol</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Win Rate by Symbol</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Monthly P/L</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Wins vs Losses</p>
 
 ---
 
@@ -735,11 +736,11 @@ Review دستی کمک می‌کند دلیل تصمیم هم ثبت شود.
 
 موارد زیر را بررسی کن:
 
-1. حساب درست در Dashboard انتخاب شده باشد.
-2. هر دو URL مربوط به WebRequest اضافه شده باشند.
-3. آخرین نسخه Apps Script Deploy شده باشد.
-4. Expert از URL صحیح استفاده کند.
-5. API Secret درست باشد.
+<p dir="rtl" align="right"><strong>۱.</strong>&nbsp; حساب درست در Dashboard انتخاب شده باشد.</p>
+<p dir="rtl" align="right"><strong>۲.</strong>&nbsp; هر دو URL مربوط به WebRequest اضافه شده باشند.</p>
+<p dir="rtl" align="right"><strong>۳.</strong>&nbsp; آخرین نسخه Apps Script Deploy شده باشد.</p>
+<p dir="rtl" align="right"><strong>۴.</strong>&nbsp; Expert از URL صحیح استفاده کند.</p>
+<p dir="rtl" align="right"><strong>۵.</strong>&nbsp; API Secret درست باشد.</p>
 
 اگر لازم بود می‌توانی Dashboard را دستی هم Refresh کنی.
 
@@ -795,10 +796,10 @@ Repair Screenshot Links
 
 در معماری فعلی:
 
-- Apps Script را خودت Deploy می‌کنی.
-- Google Sheet متعلق به خودت است.
-- تصاویر داخل Google Drive خودت هستند.
-- API Secret تحت کنترل خودت است.
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Apps Script را خودت Deploy می‌کنی.</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Google Sheet متعلق به خودت است.</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; تصاویر داخل Google Drive خودت هستند.</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; API Secret تحت کنترل خودت است.</p>
 
 JournalNevis برای این Workflow نیاز ندارد تاریخچه معاملات را داخل دیتابیس مرکزی خودش ذخیره کند.
 
@@ -814,16 +815,16 @@ JournalNevis فعلاً رایگان منتشر می‌شود.
 
 مواردی که ممکن است در آینده بررسی شوند:
 
-- نصب آسان‌تر
-- Account Alias
-- Portfolio View
-- تحلیل رفتاری بیشتر
-- گزارش‌های بیشتر
-- نمودارهای بیشتر
-- Update ساده‌تر
-- مستندات کامل‌تر
-- JournalNevis.ir
-- پشتیبانی از پلتفرم‌های معاملاتی دیگر
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; نصب آسان‌تر</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Account Alias</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Portfolio View</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; تحلیل رفتاری بیشتر</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; گزارش‌های بیشتر</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; نمودارهای بیشتر</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; Update ساده‌تر</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; مستندات کامل‌تر</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; JournalNevis.ir</p>
+<p dir="rtl" align="right"><strong>•</strong>&nbsp; پشتیبانی از پلتفرم‌های معاملاتی دیگر</p>
 
 ---
 
